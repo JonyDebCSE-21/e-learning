@@ -38,6 +38,12 @@ const Header = () => {
             <h2 className="text-lg mb-0">Classroom</h2>
           </Link>
         </div>
+        <div className="flex items-center mb-2">
+          <Link href="OrderPage" className="text-white flex items-center">
+            <SiGoogleclassroom className="text-lg mr-2" />
+            <h2 className="text-lg mb-0">Order</h2>
+          </Link>
+        </div>
 
         <div className="relative">
           <div className="dropdown dropdown-end h-12 rounded-full bg-white w-12 cursor-pointer transition-transform transform hover:scale-105">
@@ -57,17 +63,17 @@ const Header = () => {
                     <Link href="/course">Home</Link>
                   </li>
                   <hr />
+                  {/* <li className="hover:bg-blue-700">
+                    <Link href="/webstore/order">Oder</Link>
+                  </li> */}
                   <li className="hover:bg-blue-700">
-                    <Link href="/webstore">Webstore</Link>
+                    <Link
+                      href="webstore"
+                      className="text-white flex items-center">
+                      <FaShoppingCart className="text-lg mr-2" />
+                      <h2 className="text-lg mb-0">Webstore</h2>
+                    </Link>
                   </li>
-
-                  {/*                   
-          <Link href="webstore" className="text-white flex items-center">
-            <FaShoppingCart className="text-lg mr-2" />
-            <h2 className="text-lg mb-0">Webstore</h2>
-          </Link>
-         */}
-
                   <hr />
                   <li className="hover:bg-blue-700">
                     <Link href="/newsflash">Newsflash</Link>
