@@ -4,7 +4,7 @@ const Investor = () => {
   return (
     <div class="container mx-auto mt-2 p-6 bg-white rounded shadow-md">
       <h2 class="text-2xl font-bold mb-6">
-        Investor Perspective on E-Learning & E-Commerce Website{" "}
+        Investor Perspective on EduQuanta{" "}
       </h2>
       <p className="text-justify mb-4">
         In the dynamic landscape of digital business, investors keenly assess

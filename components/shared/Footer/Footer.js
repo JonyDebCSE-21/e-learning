@@ -57,21 +57,21 @@ const Footer = () => {
               <ul className="mb-4 space-y-2">
                 <li>
                   <a
-                    href="/Footer/privacy"
+                    href="/footerPage/privacypolicy"
                     className="text-sm font-medium hover:text-green transition-all duration-300 ease-in-out">
                     Privacy Policy
                   </a>
                 </li>
                 <li>
                   <a
-                    href="/Footer/condition"
+                    href="/footerPage/"
                     className="text-sm font-medium hover:text-green transition-all duration-300 ease-in-out">
                     Terms & Conditions
                   </a>
                 </li>
                 <li>
                   <a
-                    href="/Footer/refund"
+                    href="/footerPage/refundpolicy"
                     className="text-sm font-medium hover:text-green transition-all duration-300 ease-in-out">
                     Refund Policy
                   </a>
