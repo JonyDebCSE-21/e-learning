@@ -64,7 +64,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="/footerPage/"
+                    href="/footerPage/terms&condition"
                     className="text-sm font-medium hover:text-green transition-all duration-300 ease-in-out">
                     Terms & Conditions
                   </a>
