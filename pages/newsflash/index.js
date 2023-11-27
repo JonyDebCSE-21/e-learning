@@ -174,7 +174,10 @@ const Newsflash = () => {
     <div className="flex-basis-47 bg-gray-200">
       <div className="w-full bg-white rounded p-5 text-gray-700">
         <div className="flex items-center">
-          <img src="#" className="w-12 h-12 rounded-full mr-2" />
+          <img
+            src="/images/profile-pic.jpg"
+            className="w-12 h-12 rounded-full mr-2"
+          />
           <div>
             <p className="font-semibold mb-0 text-gray-700">Username</p>
             <small className="text-xs">
@@ -235,7 +238,7 @@ const Newsflash = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <img
-              src="profile pic.jpg"
+              src="/images/profile-pic.jpg"
               className="w-10 h-10 rounded-full mr-2"
             />
             <div>
@@ -285,7 +288,10 @@ const Newsflash = () => {
             </div>
           </div>
           <div className="flex items-center">
-            <img src="profile pic.jpg" className="w-5 h-5 rounded-full mr-2" />
+            <img
+              src="/images/profile-pic.jpg"
+              className="w-5 h-5 rounded-full mr-2"
+            />
             <i className="fa-solid fa-caret-down"></i>
           </div>
         </div>
