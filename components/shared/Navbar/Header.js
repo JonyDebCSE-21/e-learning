@@ -1,7 +1,7 @@
 import React from "react";
 import Input from "../Input";
 import Link from "next/link";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { SiGoogleclassroom } from "react-icons/si";
 import { CgMenuGridO } from "react-icons/cg";
 
@@ -10,9 +10,9 @@ const Header = () => {
     <div className="nav flex items-center justify-between bg-blue-500 px-5 py-1 sticky top-0 z-50">
       <div className="flex justify-between items-center container mx-auto">
         <div className="flex items-center">
-          <a href="/components/course/Course.js" className="flex items-center">
+          <Link href="/" className="flex items-center">
             <img
-              src="/images/EQ logo.png"
+              src="/images/EQ-logo.png"
               alt="Logo"
               p
               className="h-12 w-auto"
@@ -20,7 +20,7 @@ const Header = () => {
             <p className="text-white text-xs ml-2">
               A hassle-free learning boundary
             </p>
-          </a>
+          </Link>
         </div>
 
         <Input />
@@ -47,9 +47,12 @@ const Header = () => {
 
         <div className="relative">
           <div className="dropdown dropdown-end h-12 rounded-full bg-white w-12 cursor-pointer transition-transform transform hover:scale-105">
-            <label tabIndex={0} className="text-center text-black">
-              Menu
-              <CgMenuGridO className="flex items-center justify-center text-lg mr-2" />
+            <label
+              tabIndex={0}
+              className="text-center text-black flex justify-center items-center h-full">
+              <p className="text-2xl">
+                <CgMenuGridO />
+              </p>
             </label>
             <ul
               tabIndex={0}
@@ -100,8 +103,10 @@ const Header = () => {
         </div>
         <div className="relative">
           <div className="dropdown dropdown-end h-12 rounded-full bg-white w-12 cursor-pointer transition-transform transform hover:scale-105">
-            <label tabIndex={0} className="text-center text-black">
-              Profile
+            <label
+              tabIndex={0}
+              className="text-center cursor-pointer text-black h-full flex justify-center items-center">
+              <FaUser />
             </label>
             <ul
               tabIndex={0}

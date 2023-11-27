@@ -1,15 +1,16 @@
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
   return (
-    <div className="bg-[#0284c7]">
-      <footer className="footer footer-center p-5 text-base-content rounded flex flex-col pt-5 md:flex-row">
+    <div className="bg-[#0284c7] ">
+      <footer className="container mx-auto footer footer-center p-5 text-base-content rounded flex flex-col pt-5 md:flex-row">
         <div className="text-center">
           <a href="/" className="mb-4 flex items-center justify-left">
-            <p className="font-bold text-black hover:text-green transition-all duration-300 ease-in-out">
+            <p className="font-bold text-black hover:text-green transition-all duration-300 ease-in-out whitespace-nowrap">
               Copyright 2024 - All rights reserved by
               <img
-                src="images/EQ logo.png"
+                src="/images/EQ-logo.png"
                 alt="Logo"
                 className="h-10 w-full ml-2"
               />
@@ -26,11 +27,11 @@ const Footer = () => {
               </h3>
               <ul className="mb-4 space-y-2">
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    href="/footerPage/career"
                     className="text-sm font-medium hover:text-green transition-all duration-300 ease-in-out">
                     Career
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a
@@ -40,11 +41,11 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="/Footer/investor"
+                  <Link
+                    href="/footerPage/investor"
                     className="text-sm font-medium hover:text-green transition-all duration-300 ease-in-out">
                     Become an Investor
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

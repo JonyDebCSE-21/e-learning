@@ -49,7 +49,7 @@ const Classroom = () => {
   return (
     <div className="classroom-container p-8">
       <img
-        src="images/feed image.png"
+        src="/images/feed-image.png"
         className="bg-gray-200 w-full h-44 rounded-md mb-14"
         alt="Classroom Cover"
       />
@@ -58,7 +58,7 @@ const Classroom = () => {
         <div className="pd-left">
           <div className="pd-row flex items-start">
             <img
-              src="your-profile-image-url.jpg"
+              src="/images/profile-pic.jpg"
               className="pd-image w-20 mr-5 rounded-md"
               alt="User Profile"
             />
