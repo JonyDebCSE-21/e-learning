@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
 import Course from "@/components/course/Course";
 import OverviewSlider from "@/components/course/OverviewSlider";
+import { useDispatch, useSelector } from "react-redux";
+import { decrement, increment } from "@/redux/slice/counterSlice/counterSlice";
 const courses = [
   {
     id: 1,
@@ -34,7 +36,6 @@ export default function Home() {
   return (
     <main>
       <OverviewSlider></OverviewSlider>
-
       <div className="mx-4 md:mx-0 bg-gray-200 grid grid-cols-2 md:grid-cols-3 gap-3">
         {courses.map((course) => (
           <div key={course.id}>
