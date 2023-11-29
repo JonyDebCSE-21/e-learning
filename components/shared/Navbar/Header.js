@@ -57,11 +57,11 @@ const Header = () => {
             <ul
               tabIndex={0}
               className="dropdown-content z-40 menu p-2 mt-1 shadow bg-black rounded-box w-52 text-white">
-              <div class="settings-menu">
+              <div className="settings-menu">
                 <div id="dark-btn">
                   <span></span>
                 </div>
-                <div class="settings-menu-inner">
+                <div className="settings-menu-inner">
                   <li className="hover:bg-blue-700">
                     <Link href="/course">Home</Link>
                   </li>
@@ -111,11 +111,11 @@ const Header = () => {
             <ul
               tabIndex={0}
               className="dropdown-content z-40 menu p-2 mt-1 shadow bg-black rounded-box w-52 text-white">
-              <div class="settings-menu">
+              <div className="settings-menu">
                 <div id="dark-btn">
                   <span></span>
                 </div>
-                <div class="settings-menu-inner">
+                <div className="settings-menu-inner">
                   <li className="hover:bg-blue-700">
                     <Link href="/dashboard">Your Dashboard</Link>
                   </li>

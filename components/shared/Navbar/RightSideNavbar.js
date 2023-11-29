@@ -25,7 +25,7 @@ const RightSideNavbar = () => {
           <h4 className="text-base font-bold">Programming Fest</h4>
           <p>
             <MdLocationPin className="text-lg mr-2" />
-            <span class="text-lg mr-2"> Mirpur, Dhaka</span>
+            <span className="text-lg mr-2"> Mirpur, Dhaka</span>
           </p>
           <a href="#" className="text-blue-500 hover:underline">
             More Info
@@ -44,7 +44,7 @@ const RightSideNavbar = () => {
           <h4 className="text-base font-bold">Book Fair</h4>
           <p>
             <MdLocationPin className="text-lg mr-2" />
-            <span class="text-lg mr-2">Shilpokola Academy, Chattogram</span>
+            <span className="text-lg mr-2">Shilpokola Academy, Chattogram</span>
           </p>
           <a href="#" className="text-blue-500 hover:underline">
             More Info
