@@ -75,10 +75,10 @@ const products = [
     image: "/images/storeimage/pencil.jpg",
   },
 ];
-export default function Home() {
+export default function WebStore() {
   const router = useRouter();
   return (
-    <main>
+    <>
       <OverviewSlider></OverviewSlider>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-gray-200">
@@ -90,6 +90,6 @@ export default function Home() {
           );
         })}
       </div>
-    </main>
+    </>
   );
 }

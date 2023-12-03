@@ -5,6 +5,8 @@ import Course from "@/components/course/Course";
 import OverviewSlider from "@/components/course/OverviewSlider";
 import { useDispatch, useSelector } from "react-redux";
 import { decrement, increment } from "@/redux/slice/counterSlice/counterSlice";
+import { useEffect } from "react";
+import { setUser } from "@/redux/slice/userSlice/userSlice";
 const courses = [
   {
     id: 1,
@@ -32,7 +34,21 @@ const courses = [
   },
 ];
 export default function Home() {
-  const router = useRouter();
+  const dispatch = useDispatch();
+  // if (!localStorage) return;
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      // Perform localStorage action
+      // const item = localStorage.getItem("key");
+      return;
+    }
+    const user = localStorage.getItem("user");
+    if (user) {
+      dispatch(setUser(JSON.parse(user)));
+    }
+  }, []);
+
   return (
     <main>
       <OverviewSlider></OverviewSlider>

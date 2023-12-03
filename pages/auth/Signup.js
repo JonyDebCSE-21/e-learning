@@ -3,9 +3,12 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/redux/slice/userSlice/userSlice";
 
 const Signup = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -35,8 +38,7 @@ const Signup = () => {
         })
         .then((res) => {
           if (res.data.user) {
-            // SetCookies("user", res.data.user);
-            // dispatch(setUser(res.data.user));
+            dispatch(setUser(res.data.user));
             localStorage.setItem("user", JSON.stringify(res.data.user));
             setLoading(false);
             router.push("/");

@@ -4,8 +4,18 @@ import Link from "next/link";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { SiGoogleclassroom } from "react-icons/si";
 import { CgMenuGridO } from "react-icons/cg";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "@/redux/slice/userSlice/userSlice";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.userReducer.user);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    dispatch(setUser(null));
+  };
+
   return (
     <div className="nav flex items-center justify-between bg-blue-500 px-5 py-1 sticky top-0 z-50">
       <div className="flex justify-between items-center container mx-auto">
@@ -139,18 +149,27 @@ const Header = () => {
                     <Link href="/feedback">Give Feedback</Link>
                   </li>
                   <hr />
-                  <li className="hover:bg-blue-700">
-                    <Link href="/auth/Signin">Sign in</Link>
-                  </li>
-
-                  <hr />
-                  <li className="hover:bg-blue-700">
-                    <Link href="/auth/Signup">Sign up</Link>
-                  </li>
-                  <hr />
-                  <li className="hover:bg-blue-700">
-                    <Link href="#">Log out</Link>
-                  </li>
+                  {!user && (
+                    <>
+                      <li className="hover:bg-blue-700">
+                        <Link href="/auth/Signin">Sign in</Link>
+                      </li>
+                      <hr />
+                      <li className="hover:bg-blue-700">
+                        <Link href="/auth/Signup">Sign up</Link>
+                      </li>
+                    </>
+                  )}
+                  {user && (
+                    <>
+                      <hr />
+                      <li
+                        onClick={handleLogout}
+                        className="hover:bg-blue-700 px-4 py-2">
+                        Log out
+                      </li>
+                    </>
+                  )}
                 </div>
               </div>
             </ul>
