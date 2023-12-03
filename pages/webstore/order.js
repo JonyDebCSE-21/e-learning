@@ -1,12 +1,12 @@
+import Link from "next/link";
 import React, { useState } from "react";
 
 const OrderPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    mobile: +880,
     address: "",
-    quantity: 1, // You can set a default quantity or let the user choose
-    // Add more fields as needed
   });
 
   const handleChange = (e) => {
@@ -19,13 +19,11 @@ const OrderPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add logic here to submit the order, e.g., send data to a server, update database, etc.
     console.log("Order submitted:", formData);
-    // You may redirect the user to a confirmation page or show a success message
   };
 
   return (
-    <div className="container mx-auto mt-8">
+    <div className="container mx-auto my-8 p-8 bg-white shadow-md rounded-md">
       <h2 className="text-2xl font-semibold mb-4">Order Your Product</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -62,6 +60,22 @@ const OrderPage = () => {
         </div>
         <div className="mb-4">
           <label
+            htmlFor="mobile"
+            className="block text-sm font-medium text-gray-600">
+            Mobile
+          </label>
+          <input
+            type="number"
+            id="mobile"
+            name="mobile"
+            value={formData.mobile}
+            onChange={handleChange}
+            required
+            className="mt-1 p-2 w-full border rounded-md"
+          />
+        </div>
+        <div className="mb-4">
+          <label
             htmlFor="address"
             className="block text-sm font-medium text-gray-600">
             Shipping Address
@@ -76,28 +90,33 @@ const OrderPage = () => {
             className="mt-1 p-2 w-full border rounded-md"
           />
         </div>
-        <div className="mb-4">
+
+        <div>
           <label
-            htmlFor="quantity"
-            className="block text-sm font-medium text-gray-600">
-            Quantity
+            htmlFor="order"
+            className="btn bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+            Place Order
           </label>
-          <input
-            type="number"
-            id="quantity"
-            name="quantity"
-            value={formData.quantity}
-            onChange={handleChange}
-            min="1"
-            className="mt-1 p-2 w-full border rounded-md"
-          />
+          <input type="checkbox" id="order" className="modal-toggle hidden" />
+          <div className="modal" role="dialog">
+            <div className="modal-box bg-black text-white">
+              <h3 className="font-bold text-center text-lg">
+                Congratulations!
+              </h3>
+              <p className="py-4">
+                Your order has been successfully received on our website. You
+                will receive your product within the next 5 working days. Thank
+                you.
+              </p>
+
+              <div className="modal-action">
+                <label htmlFor="order" className="btn">
+                  Close!
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
-        {/* Add more fields as needed for your specific product/order details */}
-        <button
-          type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
-          Place Order
-        </button>
       </form>
     </div>
   );

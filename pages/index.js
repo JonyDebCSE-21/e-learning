@@ -9,7 +9,7 @@ const courses = [
     title:
       "Online batch admission is going on for class 6 to 12. Get ready for the upcoming interactive courses.",
     price: "1000",
-    promoCode: "JS2023",
+    courseCode: "JS2023",
     image: "/images/Admission.jpg",
   },
   {
@@ -17,7 +17,7 @@ const courses = [
     title: "Collect more interactive notes for your child.",
 
     price: "1000",
-    promoCode: "JS2023",
+    courseCode: "JS2023",
     image: "/images/children.jpg",
   },
   {
@@ -25,7 +25,7 @@ const courses = [
     title:
       "Join in our regular skill development courses and grow your future.",
     price: "1000",
-    promoCode: "JS2023",
+    courseCode: "JS2023",
     image: "/images/skills.webp",
   },
 ];

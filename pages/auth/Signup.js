@@ -109,7 +109,7 @@ const Signup = () => {
                     I accept the{" "}
                     <a
                       className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                      href="#">
+                      href="/footerPage/terms&condition">
                       Terms and Conditions
                     </a>
                   </label>
