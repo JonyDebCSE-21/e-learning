@@ -4,6 +4,8 @@ import Link from "next/link";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { SiGoogleclassroom } from "react-icons/si";
 import { CgMenuGridO } from "react-icons/cg";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "@/redux/slice/userSlice/userSlice";
 import { BiNews } from "react-icons/bi";
 import { HiHome } from "react-icons/hi2";
 import { GoVideo } from "react-icons/go";
@@ -18,21 +20,13 @@ import { CgLogOut } from "react-icons/cg";
 import { MdNotificationImportant } from "react-icons/md";
 
 const Header = () => {
-  // const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [isNotificationOpen, setIsNotificationOpen] = useState(false);
-  // const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.userReducer.user);
 
-  // const toggleMenu = () => {
-  //   setIsMenuOpen(!isMenuOpen);
-  // };
-
-  // const toggleNotification = () => {
-  //   setIsNotificationOpen(!isNotificationOpen);
-  // };
-
-  // const toggleUserMenu = () => {
-  //   setIsUserMenuOpen(!isUserMenuOpen);
-  // };
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    dispatch(setUser(null));
+  };
 
   return (
     <div className="nav flex items-center justify-between bg-blue-700 px-5 py-1 sticky top-0 z-50">
@@ -85,11 +79,11 @@ const Header = () => {
             <ul
               tabIndex={0}
               className="dropdown-content z-40 menu p-2 mt-1 shadow bg-black rounded-box w-52 text-white">
-              <div class="settings-menu">
+              <div className="settings-menu">
                 <div id="dark-btn">
                   <span></span>
                 </div>
-                <div class="settings-menu-inner">
+                <div className="settings-menu-inner">
                   <li className="hover:bg-blue-700">
                     <Link href="/" className="text-white flex items-center">
                       <HiHome className="text-lg mr-1" />
@@ -174,11 +168,11 @@ const Header = () => {
             <ul
               tabIndex={0}
               className="dropdown-content z-40 menu p-2 mt-1 shadow bg-black rounded-box w-52 text-white">
-              <div class="settings-menu">
+              <div className="settings-menu">
                 <div id="dark-btn">
                   <span></span>
                 </div>
-                <div class="settings-menu-inner">
+                <div className="settings-menu-inner">
                   <li className="hover:bg-blue-700">
                     <Link
                       href="/dashboard"
@@ -216,30 +210,49 @@ const Header = () => {
                     </Link>
                   </li>
                   <hr />
-                  <li className="hover:bg-blue-700">
-                    <Link
-                      href="/auth/Signin"
-                      className="text-white flex items-center">
-                      <PiSignInBold className="text-lg mr-1" />
-                      <h2 className="text-sm mb-0">Sign in</h2>
-                    </Link>
-                  </li>
+
+                  {!user && (
+                    <>
+                      {" "}
+                      <li className="hover:bg-blue-700">
+                        <Link
+                          href="/auth/Signin"
+                          className="text-white flex items-center">
+                          <PiSignInBold className="text-lg mr-1" />
+                          <h2 className="text-sm mb-0">Sign in</h2>
+                        </Link>
+                      </li>
+                      <hr />
+                      <li className="hover:bg-blue-700">
+                        <Link
+                          href="/auth/Signup"
+                          className="text-white flex items-center">
+                          <IoIosCreate className="text-lg mr-1" />
+                          <h2 className="text-sm mb-0">Sign Up</h2>
+                        </Link>
+                      </li>
+                    </>
+                  )}
                   <hr />
-                  <li className="hover:bg-blue-700">
-                    <Link
-                      href="/auth/Signup"
-                      className="text-white flex items-center">
-                      <IoIosCreate className="text-lg mr-1" />
-                      <h2 className="text-sm mb-0">Sign Up</h2>
-                    </Link>
-                  </li>
-                  <hr />
-                  <li className="hover:bg-blue-700">
+                  {/* <li className="hover:bg-blue-700">
                     <Link href="#" className="text-white flex items-center">
                       <CgLogOut className="text-lg mr-1" />
                       <h2 className="text-sm mb-0">Log Out</h2>
                     </Link>
-                  </li>
+                  </li> */}
+                  {user && (
+                    <>
+                      <hr />
+                      <li
+                        onClick={handleLogout}
+                        className="hover:bg-blue-700 px-4 py-2">
+                        <p href="#" className="text-white flex items-center">
+                          <CgLogOut className="text-lg mr-1" />
+                          <p className="text-sm mb-0">Log Out</p>
+                        </p>
+                      </li>
+                    </>
+                  )}
                 </div>
               </div>
             </ul>

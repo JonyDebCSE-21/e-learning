@@ -2,17 +2,17 @@ import React from "react";
 
 const condition = () => {
   return (
-    <div class="container mx-auto mt-6 p-6 bg-white rounded shadow-md">
+    <div className="container mx-auto mt-6 p-6 bg-white rounded shadow-md">
       <h2 className="text-2xl font-bold mb-6">1. Acceptance of Terms</h2>
 
-      <p class=" text-justify mb-4">
+      <p className=" text-justify mb-4">
         By accessing or using EduQuanta, you agree to comply with and be bound
         by these Terms and Conditions. If you do not agree with these terms,
         please refrain from using the Website.
       </p>
       <h2 className="text-2xl font-bold mb-6">2. User Accounts</h2>
 
-      <p class=" text-justify mb-4">
+      <p className=" text-justify mb-4">
         a. To access certain features of the Website, you may be required to
         register for an account. You agree to provide accurate and complete
         information during the registration process and to update such

@@ -51,44 +51,44 @@ const Newsflash = () => {
             placeholder="Share your thoughts, with your community"
             className="w-full border-0 outline-none border-b border-gray-500  bg-transparent resize-none"></textarea>
 
-          <div class="add-post-links flex">
+          <div className="add-post-links flex">
             <label
               for="video-upload"
-              class="flex items-center text-gray-700 mr-6 cursor-pointer">
+              className="flex items-center text-gray-700 mr-6 cursor-pointer">
               <input
                 type="file"
                 id="video-upload"
-                class="hidden"
+                className="hidden"
                 accept="video/*"
               />
               <PiVideoFill className="text-lg mr-2" />
-              <span class="text-lg mr-2">Videos</span>
+              <span className="text-lg mr-2">Videos</span>
             </label>
 
             <label
               for="photo-upload"
-              class="flex items-center text-gray-700 mr-6 cursor-pointer">
+              className="flex items-center text-gray-700 mr-6 cursor-pointer">
               <input
                 type="file"
                 id="photo-upload"
-                class="hidden"
+                className="hidden"
                 accept="image/*"
               />
               <MdPhotoCamera className="text-lg mr-2" />
-              <span class="text-lg mr-2">Photos</span>
+              <span className="text-lg mr-2">Photos</span>
             </label>
 
             <label
               for="document-upload"
-              class="flex items-center text-gray-700 cursor-pointer">
+              className="flex items-center text-gray-700 cursor-pointer">
               <input
                 type="file"
                 id="document-upload"
-                class="hidden"
+                className="hidden"
                 accept=".pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx"
               />
               <HiMiniDocumentPlus className="text-lg mr-2" />
-              <span class="text-lg mr-2">Documents</span>
+              <span className="text-lg mr-2">Documents</span>
             </label>
           </div>
         </div>

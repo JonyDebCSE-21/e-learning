@@ -2,8 +2,8 @@ import React from "react";
 
 const Investor = () => {
   return (
-    <div class="container mx-auto mt-2 p-6 bg-white rounded shadow-md">
-      <h2 class="text-2xl font-bold mb-6">
+    <div className="container mx-auto mt-2 p-6 bg-white rounded shadow-md">
+      <h2 className="text-2xl font-bold mb-6">
         Investor Perspective on EduQuanta{" "}
       </h2>
       <p className="text-justify mb-4">
@@ -12,7 +12,7 @@ const Investor = () => {
         E-learning and e-commerce websites have emerged as particularly
         promising ventures, attracting attention from discerning investors.
       </p>
-      <h2 class="text-2xl font-bold mb-6"> 1. Market Potential:</h2>
+      <h2 className="text-2xl font-bold mb-6"> 1. Market Potential:</h2>
       <p className="text-justify mb-4">
         Investors are drawn to the vast market potential of e-learning and
         e-commerce platforms. The global shift towards online education and
@@ -21,7 +21,7 @@ const Investor = () => {
         coupled with the rising trend of online shopping, positions these
         platforms at the forefront of market trends.
       </p>
-      <h2 class="text-2xl font-bold mb-6"> 2. Scalability and Reach: </h2>
+      <h2 className="text-2xl font-bold mb-6"> 2. Scalability and Reach: </h2>
       <p className="text-justify mb-4">
         {" "}
         E-learning and e-commerce websites offer inherent scalability, allowing
@@ -31,7 +31,10 @@ const Investor = () => {
         higher returns as the platform expands its user base and product
         offerings.
       </p>
-      <h2 class="text-2xl font-bold mb-6"> 3. Technological Innovation: </h2>
+      <h2 className="text-2xl font-bold mb-6">
+        {" "}
+        3. Technological Innovation:{" "}
+      </h2>
       <p className="text-justify mb-4">
         {" "}
         Investors favor platforms that demonstrate a commitment to technological
@@ -41,7 +44,7 @@ const Investor = () => {
         recommendations, and efficient logistics solutions, stand out in the
         competitive landscape.{" "}
       </p>
-      <h2 class="text-2xl font-bold mb-6">
+      <h2 className="text-2xl font-bold mb-6">
         {" "}
         4. Data Analytics and Personalization:{" "}
       </h2>
@@ -53,7 +56,7 @@ const Investor = () => {
         satisfaction but also contributes to effective marketing and business
         decision-making.
       </p>
-      <h2 class="text-2xl font-bold mb-6">5. Monetization Strategies: </h2>
+      <h2 className="text-2xl font-bold mb-6">5. Monetization Strategies: </h2>
       <p className="text-justify mb-4">
         {" "}
         A clear and sustainable monetization strategy is vital for investor
@@ -63,7 +66,7 @@ const Investor = () => {
         well-defined and adaptable monetization strategy demonstrates long-term
         viability.
       </p>
-      <h2 class="text-2xl font-bold mb-6"> 6. Regulatory Compliance:</h2>
+      <h2 className="text-2xl font-bold mb-6"> 6. Regulatory Compliance:</h2>
       <p className="text-justify mb-4">
         Investors prioritize platforms that adhere to legal and regulatory
         frameworks. Compliance with data protection laws, educational standards,
@@ -71,7 +74,7 @@ const Investor = () => {
         risks. A robust legal and compliance framework is essential for
         long-term sustainability and investor confidence.{" "}
       </p>
-      <h2 class="text-2xl font-bold mb-6"> 7. Competitive Advantage:</h2>
+      <h2 className="text-2xl font-bold mb-6"> 7. Competitive Advantage:</h2>
       <p className="text-justify mb-4">
         Demonstrating a competitive edge is crucial in attracting investors.
         This could be achieved through exclusive content partnerships,
