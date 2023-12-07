@@ -1,17 +1,20 @@
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { useForm } from "react-hook-form";
-
+import toast, { Toaster } from "react-hot-toast";
 const imgStorageApi = "3f67787d6399449802b3d820607b790d";
 const imgUploadUrl = `https://api.imgbb.com/1/upload?key=${imgStorageApi}`;
 
 const Dashboard = ({ children }) => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     watch,
     setError,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -39,8 +42,15 @@ const Dashboard = ({ children }) => {
             })
             .then((res) => {
               console.log(res.data);
+              reset();
+              toast.success("Succesfully added course", {
+                duration: 3000,
+              });
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+              console.log(err);
+              reset();
+            });
         }
       });
     }
@@ -197,6 +207,7 @@ const Dashboard = ({ children }) => {
         </div>
       </div>
       {/* </div> */}
+      <Toaster position="bottom-right" />
     </div>
   );
 };
