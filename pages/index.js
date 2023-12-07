@@ -5,35 +5,37 @@ import Course from "@/components/course/Course";
 import OverviewSlider from "@/components/course/OverviewSlider";
 import { useDispatch, useSelector } from "react-redux";
 import { decrement, increment } from "@/redux/slice/counterSlice/counterSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { setUser } from "@/redux/slice/userSlice/userSlice";
-const courses = [
-  {
-    id: 1,
-    title:
-      "Online batch admission is going on for class 6 to 12. Get ready for the upcoming interactive courses.",
-    price: "1000",
-    courseCode: "JS2023",
-    image: "/images/Admission.jpg",
-  },
-  {
-    id: 2,
-    title: "Collect more interactive notes for your child.",
+import axios from "axios";
+// const courses = [
+//   {
+//     id: 1,
+//     title:
+//       "Online batch admission is going on for class 6 to 12. Get ready for the upcoming interactive courses.",
+//     price: "1000",
+//     courseCode: "JS2023",
+//     image: "/images/Admission.jpg",
+//   },
+//   {
+//     id: 2,
+//     title: "Collect more interactive notes for your child.",
 
-    price: "1000",
-    courseCode: "JS2023",
-    image: "/images/children.jpg",
-  },
-  {
-    id: 3,
-    title:
-      "Join in our regular skill development courses and grow your future.",
-    price: "1000",
-    courseCode: "JS2023",
-    image: "/images/skills.webp",
-  },
-];
+//     price: "1000",
+//     courseCode: "JS2023",
+//     image: "/images/children.jpg",
+//   },
+//   {
+//     id: 3,
+//     title:
+//       "Join in our regular skill development courses and grow your future.",
+//     price: "1000",
+//     courseCode: "JS2023",
+//     image: "/images/skills.webp",
+//   },
+// ];
 export default function Home() {
+  const [courses, setCourses] = useState([]);
   const dispatch = useDispatch();
   // if (!localStorage) return;
 
@@ -47,6 +49,10 @@ export default function Home() {
     if (user) {
       dispatch(setUser(JSON.parse(user)));
     }
+  }, []);
+
+  useEffect(() => {
+    axios.get("/api/user/course").then((res) => setCourses(res.data.course));
   }, []);
 
   return (

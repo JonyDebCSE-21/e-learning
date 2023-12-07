@@ -1,34 +1,202 @@
+import axios from "axios";
 import Link from "next/link";
 import React from "react";
+import { useForm } from "react-hook-form";
+
+const imgStorageApi = "3f67787d6399449802b3d820607b790d";
+const imgUploadUrl = `https://api.imgbb.com/1/upload?key=${imgStorageApi}`;
 
 const Dashboard = ({ children }) => {
-  //   const [user] = useAuthState(auth);
-  //   const [admin] = useAdmin(user);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setError,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    // console.log(data);
+
+    // const file = data.thumbnail[0];
+
+    // console.log(file);
+
+    if (data.thumbnail[0]) {
+      const formData = new FormData();
+      formData.append("image", data.thumbnail[0]);
+      axios.post(imgUploadUrl, formData).then((res) => {
+        if (res.data) {
+          axios
+            .post("/api/admin/course", {
+              title: data.title,
+              duration: data.duration,
+              thumbnail: res.data.data.display_url,
+              instructor: data.instructor,
+              price: data.price,
+              details: data.details,
+              video: data.video,
+            })
+            .then((res) => {
+              console.log(res.data);
+            })
+            .catch((err) => console.log(err));
+        }
+      });
+    }
+
+    // const result = await response.json();
+
+    // console.log(response);
+  };
+
   return (
-    <div className="drawer lg:drawer-open">
-      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col items-center justify-center">
-        {/* Page content here */}
-        Welcome to your dashboarddddd
-        <label
-          htmlFor="my-drawer-2"
-          className="btn btn-primary drawer-button lg:hidden">
-          Open drawer
-        </label>
+    <div className="bg-blue-900 p-5 m-1 rounded-sm">
+      <span className="text-2xl font-bolder text-white">Add Your Course</span>
+
+      <div className="w-[70%]">
+        <div className="p-6 space-y-2 md:space-y-4 sm:p-8">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="space-y-2 md:space-y-4">
+            {/* title */}
+            <div>
+              <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                Title
+              </label>
+              <input
+                {...register("title", {
+                  required: { value: true, message: "Name is required" },
+                })}
+                type="text"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Enter Course Title"
+              />
+              {/* {errors.name && (
+                <p className="text-red-500">{errors.name.message}</p>
+              )} */}
+            </div>
+            {/* duration */}
+            <div>
+              <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                Course Duration
+              </label>
+              <input
+                {...register("duration", {
+                  required: { value: true, message: "Email is required" },
+                })}
+                type="text"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Enter COurse Duration"
+              />
+              {/* {errors.email && (
+                <p className="text-red-500">{errors.email.message}</p>
+              )} */}
+            </div>
+
+            {/* Thumbnail */}
+            <div>
+              <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                Add Thumbnail
+              </label>
+              <input
+                type="file"
+                {...register("thumbnail")}
+                // name="thumbnail"
+                placeholder=""
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              />
+              {/* {errors.password && (
+                <p className="text-red-500">{errors.password.message}</p>
+              )} */}
+            </div>
+
+            <div>
+              <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                Course Instructor
+              </label>
+              <input
+                type="text"
+                {...register("instructor", {
+                  required: {
+                    value: true,
+                    message: "Confirm password is required",
+                  },
+                })}
+                placeholder="Enter course instructor name"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              />
+              {/* {errors.confirmPassword && (
+                <p className="text-red-500">{errors.confirmPassword.message}</p>
+              )} */}
+            </div>
+            <div>
+              <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                Price
+              </label>
+              <input
+                type="text"
+                {...register("price", {
+                  required: {
+                    value: true,
+                    message: "Confirm password is required",
+                  },
+                })}
+                placeholder="Enter course price"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              />
+              {/* {errors.confirmPassword && (
+                <p className="text-red-500">{errors.confirmPassword.message}</p>
+              )} */}
+            </div>
+            <div>
+              <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                Course Details
+              </label>
+              <input
+                type="text"
+                {...register("details", {
+                  required: {
+                    value: true,
+                    message: "Confirm password is required",
+                  },
+                })}
+                placeholder="Enter course details"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              />
+              {/* {errors.confirmPassword && (
+                <p className="text-red-500">{errors.confirmPassword.message}</p>
+              )} */}
+            </div>
+            <div>
+              <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                Video Link
+              </label>
+              <input
+                type="text"
+                {...register("video", {
+                  required: {
+                    value: true,
+                    message: "Confirm password is required",
+                  },
+                })}
+                placeholder="Enter course video link"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              />
+              {/* {errors.confirmPassword && (
+                <p className="text-red-500">{errors.confirmPassword.message}</p>
+              )} */}
+            </div>
+
+            <input
+              type="submit"
+              value="Add New Course"
+              className="inline-flex justify-center rounded-lg text-sm font-semibold py-2 px-4 bg-slate-900 text-white hover:bg-slate-700 w-full"
+            />
+          </form>
+        </div>
       </div>
-      <div className="drawer-side">
-        <label
-          htmlFor="my-drawer-2"
-          aria-label="close sidebar"
-          className="drawer-overlay"></label>
-        <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-          {/* Sidebar content here */}
-          <Link href="/dashboard/profile">My Profile</Link>
-          <li>
-            <a>Sidebar Item 2</a>
-          </li>
-        </ul>
-      </div>
+      {/* </div> */}
     </div>
   );
 };

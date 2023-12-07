@@ -11,7 +11,7 @@ const Course = ({ course, onAddToCart }) => {
     <div className="relative w-full max-w-[15rem] h-[20rem] rounded overflow-hidden shadow-lg ml-3">
       <img
         className="w-full h-40 object-cover mb-2 cursor-pointer"
-        src={course?.image}
+        src={course?.thumbnail}
         alt={course?.title}
         onClick={() => setModalOpen(true)}
       />
