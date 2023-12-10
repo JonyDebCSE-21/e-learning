@@ -48,6 +48,12 @@ const Header = () => {
         <Input />
 
         <div className="flex items-center mb-2">
+          <Link href="/cart" className="text-white flex items-center">
+            <FaShoppingCart className="text-lg mr-1" />
+            <h2 className="text-lg mb-0">Cart</h2>
+          </Link>
+        </div>
+        <div className="flex items-center mb-2">
           <Link href="/webstore" className="text-white flex items-center">
             <FaShoppingCart className="text-lg mr-1" />
             <h2 className="text-lg mb-0">Webstore</h2>
@@ -175,7 +181,7 @@ const Header = () => {
                 <div className="settings-menu-inner">
                   <li className="hover:bg-blue-700">
                     <Link
-                      href="/dashboard"
+                      href="/dashboard/profile"
                       className="text-white flex items-center">
                       <MdDashboard className="text-lg mr-1" />
                       <h2 className="text-sm mb-0">Your Dashboard</h2>

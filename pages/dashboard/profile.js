@@ -16,6 +16,7 @@ import { MdPhotoCamera } from "react-icons/md";
 import { HiMiniDocumentPlus } from "react-icons/hi2";
 import { SiGoogleclassroom } from "react-icons/si";
 import { FaUserFriends } from "react-icons/fa";
+import DashboardLayout from "@/components/layout/DashboardLayout";
 
 const Profile = () => {
   const [likeCount, setLikeCount] = useState(120);
@@ -39,288 +40,295 @@ const Profile = () => {
     setShareCount((prevCount) => prevCount + 1);
   };
   return (
-    <div className="bg-gray-200 top-0">
-      <h2 className="text-3xl font-bold text-primary text-center my-5">
-        Welcome to your Dashboard
-      </h2>
-      <div className="grid grid-cols-2 sm:grid-cols-2 gap-8 p-8">
-        <div className="text-center bg-gray-100 p-8 rounded-lg">
-          <div className="avatar mb-4">
-            <div className="w-40 h-40 rounded-full overflow-hidden mx-auto">
-              <img src="#" alt="" className="w-full h-full object-cover" />
+    <DashboardLayout>
+      {" "}
+      <div className="bg-gray-200 top-0">
+        <h2 className="text-3xl font-bold text-primary text-center my-5">
+          Welcome to your Dashboard
+        </h2>
+        <div className="grid grid-cols-2 sm:grid-cols-2 gap-8 p-8">
+          <div className="text-center bg-gray-100 p-8 rounded-lg">
+            <div className="avatar mb-4">
+              <div className="w-40 h-40 rounded-full overflow-hidden mx-auto">
+                <img src="#" alt="" className="w-full h-full object-cover" />
+              </div>
             </div>
-          </div>
-          <h2 className="text-2xl font-bold mb-2">Name: </h2>
+            <h2 className="text-2xl font-bold mb-2">Name: </h2>
 
-          <div className="flex items-center mb-2">
-            <MdEmail className="text-lg mr-2" />
-            <h2 className="text-lg">Email: </h2>
-          </div>
-          <div className="flex items-center mb-2">
-            <FaLocationDot className="text-lg mr-2" />
-            <h2 className="text-lg mb-2">Address: </h2>
-          </div>
-          <div className="flex items-center mb-2">
-            <BiSolidPhoneCall className="text-lg mr-2" />
-            <h2 className="text-lg mb-2">Phone: </h2>
-          </div>
-          <div className="flex items-center mb-2">
-            <HiAcademicCap className="text-lg mr-2" />
-            <h2 className="text-lg mb-2">Education: </h2>
-          </div>
-          <div className="flex items-center mb-2">
-            <GrUserWorker className="text-lg mr-2" />
-            <h2 className="text-lg mb-2">Workplace: </h2>
-          </div>
-          <div className="flex items-center mb-2">
-            <FaLinkedin className="text-lg mr-2" />
-            <h2 className="text-lg mb-2">LinkedIn: </h2>
-          </div>
-        </div>
-        <div className="bg-white p-8 rounded-lg shadow-md">
-          <form>
-            <div className="mb-2">
-              <label className="block text-sm font-medium text-gray-700">
-                Mobile Number
-              </label>
-              <input
-                type="number"
-                placeholder="Enter Your Number"
-                className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-                name="phone"
-              />
+            <div className="flex items-center mb-2">
+              <MdEmail className="text-lg mr-2" />
+              <h2 className="text-lg">Email: </h2>
             </div>
-            <div className="mb-2">
-              <label className="block text-sm font-medium text-gray-700">
-                Location
-              </label>
-              <input
-                type="text"
-                placeholder="Your Address"
-                className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-                name="address"
-              />
+            <div className="flex items-center mb-2">
+              <FaLocationDot className="text-lg mr-2" />
+              <h2 className="text-lg mb-2">Address: </h2>
             </div>
-            <div className="mb-2">
-              <label className="block text-sm font-medium text-gray-700">
-                Education
-              </label>
-              <input
-                type="text"
-                placeholder="Your Last Education"
-                className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-                name="education"
-              />
+            <div className="flex items-center mb-2">
+              <BiSolidPhoneCall className="text-lg mr-2" />
+              <h2 className="text-lg mb-2">Phone: </h2>
             </div>
-            <div className="mb-2">
-              <label className="block text-sm font-medium text-gray-700">
-                Workplace
-              </label>
-              <input
-                type="text"
-                placeholder="Your Rcent Job"
-                className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-                name="Job"
-              />
+            <div className="flex items-center mb-2">
+              <HiAcademicCap className="text-lg mr-2" />
+              <h2 className="text-lg mb-2">Education: </h2>
             </div>
-            <div className="mb-2">
-              <label className="block text-sm font-medium text-gray-700">
-                LinkedIn
-              </label>
-              <input
-                type="text"
-                placeholder="Your LinkedIn ID Link"
-                className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-                name="linkedin"
-              />
+            <div className="flex items-center mb-2">
+              <GrUserWorker className="text-lg mr-2" />
+              <h2 className="text-lg mb-2">Workplace: </h2>
             </div>
-            <div className="mb-2">
-              <label className="block text-sm font-medium text-gray-700">
-                Photo
-              </label>
-              <input
-                type="file"
-                className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-                name="image"
-              />
-            </div>
-            <button
-              className="btn w-full max-w-xs bg-blue-500 text-white hover:bg-blue-700"
-              type="submit">
-              UPDATE PROFILE
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <div className=" bg-white p-2 rounded-md flex items-start justify-between">
-        <div className="pd-left">
-          <div className="pd-row flex items-start">
-            <img
-              src="/images/profile-pic.jpg"
-              className=" pd-image w-20 mr-5 rounded-md"
-              alt="User Profile"
-            />
-            <div>
-              <h3 className="text-lg mt-4 font-semibold">Username</h3>
-              <p className="text-sm">120 Friends</p>
+            <div className="flex items-center mb-2">
+              <FaLinkedin className="text-lg mr-2" />
+              <h2 className="text-lg mb-2">LinkedIn: </h2>
             </div>
           </div>
-        </div>
-
-        <div className="pd-right">
-          <div className="classroom-actions mt-16">
-            <button
-              type="button"
-              className="bg-blue-700 text-white border-0 outline-0 px-4 py-2 inline-flex items-center rounded-md cursor-pointer">
-              <FaUserFriends className="text-lg mr-1" />
-              Friends
-            </button>
-
-            <button className=" mb-2 text-white border-0 outline-0 px-4 py-2 ml-2 inline-flex items-center rounded-md cursor-pointer bg-blue-700 ">
-              <Link href="/Classroom" className="text-white flex items-center">
-                <SiGoogleclassroom className="text-lg mr-1" />
-                Your Classroom
-              </Link>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex-basis-47 bg-gray-200 mt-4">
-        <div className="w-full bg-white rounded p-5 text-gray-700">
-          <div className="flex items-center">
-            <img
-              src="/images/profile-pic.jpg"
-              className="w-12 h-12 rounded-full mr-2"
-            />
-            <div>
-              <p className="font-semibold mb-0 text-gray-700">Username</p>
-              <small className="text-xs">
-                Public <i className="fas fa-caret-down"></i>
-              </small>
-            </div>
-          </div>
-
-          <div className="pl-14 pt-2">
-            <textarea
-              rows="2"
-              placeholder="Share your thoughts, with your community"
-              className="w-full border-0 outline-none border-b border-gray-500 bg-transparent resize-none"></textarea>
-
-            <div class="add-post-links flex">
-              <label
-                for="video-upload"
-                class="flex items-center text-gray-700 mr-6 cursor-pointer">
+          <div className="bg-white p-8 rounded-lg shadow-md">
+            <form>
+              <div className="mb-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  Mobile Number
+                </label>
+                <input
+                  type="number"
+                  placeholder="Enter Your Number"
+                  className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
+                  name="phone"
+                />
+              </div>
+              <div className="mb-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  Location
+                </label>
+                <input
+                  type="text"
+                  placeholder="Your Address"
+                  className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
+                  name="address"
+                />
+              </div>
+              <div className="mb-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  Education
+                </label>
+                <input
+                  type="text"
+                  placeholder="Your Last Education"
+                  className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
+                  name="education"
+                />
+              </div>
+              <div className="mb-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  Workplace
+                </label>
+                <input
+                  type="text"
+                  placeholder="Your Rcent Job"
+                  className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
+                  name="Job"
+                />
+              </div>
+              <div className="mb-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  LinkedIn
+                </label>
+                <input
+                  type="text"
+                  placeholder="Your LinkedIn ID Link"
+                  className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
+                  name="linkedin"
+                />
+              </div>
+              <div className="mb-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  Photo
+                </label>
                 <input
                   type="file"
-                  id="video-upload"
-                  class="hidden"
-                  accept="video/*"
+                  className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
+                  name="image"
                 />
-                <PiVideoFill className="text-lg mr-2" />
-                <span class="text-lg mr-2">Videos</span>
-              </label>
+              </div>
+              <button
+                className="btn w-full max-w-xs bg-blue-500 text-white hover:bg-blue-700"
+                type="submit">
+                UPDATE PROFILE
+              </button>
+            </form>
+          </div>
+        </div>
 
-              <label
-                for="photo-upload"
-                class="flex items-center text-gray-700 mr-6 cursor-pointer">
-                <input
-                  type="file"
-                  id="photo-upload"
-                  class="hidden"
-                  accept="image/*"
-                />
-                <MdPhotoCamera className="text-lg mr-2" />
-                <span class="text-lg mr-2">Photos</span>
-              </label>
+        <div className=" bg-white p-2 rounded-md flex items-start justify-between">
+          <div className="pd-left">
+            <div className="pd-row flex items-start">
+              <img
+                src="/images/profile-pic.jpg"
+                className=" pd-image w-20 mr-5 rounded-md"
+                alt="User Profile"
+              />
+              <div>
+                <h3 className="text-lg mt-4 font-semibold">Username</h3>
+                <p className="text-sm">120 Friends</p>
+              </div>
+            </div>
+          </div>
 
-              <label
-                for="document-upload"
-                class="flex items-center text-gray-700 cursor-pointer">
-                <input
-                  type="file"
-                  id="document-upload"
-                  class="hidden"
-                  accept=".pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx"
-                />
-                <HiMiniDocumentPlus className="text-lg mr-2" />
-                <span class="text-lg mr-2">Documents</span>
-              </label>
+          <div className="pd-right">
+            <div className="classroom-actions mt-16">
+              <button
+                type="button"
+                className="bg-blue-700 text-white border-0 outline-0 px-4 py-2 inline-flex items-center rounded-md cursor-pointer">
+                <FaUserFriends className="text-lg mr-1" />
+                Friends
+              </button>
+
+              <button className=" mb-2 text-white border-0 outline-0 px-4 py-2 ml-2 inline-flex items-center rounded-md cursor-pointer bg-blue-700 ">
+                <Link
+                  href="/Classroom"
+                  className="text-white flex items-center">
+                  <SiGoogleclassroom className="text-lg mr-1" />
+                  Your Classroom
+                </Link>
+              </button>
             </div>
           </div>
         </div>
-        <div className="bg-white rounded p-4 my-5">
-          <div className="flex items-center justify-between">
+
+        <div className="flex-basis-47 bg-gray-200 mt-4">
+          <div className="w-full bg-white rounded p-5 text-gray-700">
             <div className="flex items-center">
               <img
                 src="/images/profile-pic.jpg"
-                className="w-10 h-10 rounded-full mr-2"
+                className="w-12 h-12 rounded-full mr-2"
               />
               <div>
                 <p className="font-semibold mb-0 text-gray-700">Username</p>
-                <span className="text-xs text-gray-500">
-                  September 22, 2023, 23:19 pm
-                </span>
+                <small className="text-xs">
+                  Public <i className="fas fa-caret-down"></i>
+                </small>
               </div>
             </div>
-            <a href="#" className="text-gray-700">
-              <i className="fas fa-ellipsis-v"></i>
-            </a>
+
+            <div className="pl-14 pt-2">
+              <textarea
+                rows="2"
+                placeholder="Share your thoughts, with your community"
+                className="w-full border-0 outline-none border-b border-gray-500 bg-transparent resize-none"></textarea>
+
+              <div class="add-post-links flex">
+                <label
+                  for="video-upload"
+                  class="flex items-center text-gray-700 mr-6 cursor-pointer">
+                  <input
+                    type="file"
+                    id="video-upload"
+                    class="hidden"
+                    accept="video/*"
+                  />
+                  <PiVideoFill className="text-lg mr-2" />
+                  <span class="text-lg mr-2">Videos</span>
+                </label>
+
+                <label
+                  for="photo-upload"
+                  class="flex items-center text-gray-700 mr-6 cursor-pointer">
+                  <input
+                    type="file"
+                    id="photo-upload"
+                    class="hidden"
+                    accept="image/*"
+                  />
+                  <MdPhotoCamera className="text-lg mr-2" />
+                  <span class="text-lg mr-2">Photos</span>
+                </label>
+
+                <label
+                  for="document-upload"
+                  class="flex items-center text-gray-700 cursor-pointer">
+                  <input
+                    type="file"
+                    id="document-upload"
+                    class="hidden"
+                    accept=".pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx"
+                  />
+                  <HiMiniDocumentPlus className="text-lg mr-2" />
+                  <span class="text-lg mr-2">Documents</span>
+                </label>
+              </div>
+            </div>
           </div>
-          <p className="text-gray-500 text-lg mb-5">
-            Welcome to our open learning platform{" "}
-            <span className="text-gray-700 font-semibold">EduQuanta</span>
-            Spread your thoughts to our community.
-            <a href="#" className="text-blue-500">
-              #Easy Tutorials
-            </a>
-            <a href="#" className="text-blue-500">
-              #e-learning platform
-            </a>
-          </p>
-          <img src="/images/feed-image.png" className="w-full rounded mb-2" />
-          <div className=" flex items-center justify-between">
-            <div className="flex space-x-20 ">
-              <div className="flex items-center mr-5 mb-2" onClick={handleLike}>
-                <BiSolidLike className="text-lg mr-2" />
-                {likeCount}
+          <div className="bg-white rounded p-4 my-5">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <img
+                  src="/images/profile-pic.jpg"
+                  className="w-10 h-10 rounded-full mr-2"
+                />
+                <div>
+                  <p className="font-semibold mb-0 text-gray-700">Username</p>
+                  <span className="text-xs text-gray-500">
+                    September 22, 2023, 23:19 pm
+                  </span>
+                </div>
               </div>
-              <div
-                className="flex items-center mr-5 mb-2"
-                onClick={handleDislike}>
-                <BiSolidDislike className="text-lg mr-2" />
-                {dislikeCount}
-              </div>
-              <div
-                className="flex items-center mr-5 mb-2"
-                onClick={handleComment}>
-                <FaCommentAlt className="text-lg mr-2" />
-                {commentCount}
-              </div>
-              <div
-                className="flex items-center mr-5 mb-2"
-                onClick={handleShare}>
-                <FaShare className="text-lg mr-2" />
-                {shareCount}
-              </div>
+              <a href="#" className="text-gray-700">
+                <i className="fas fa-ellipsis-v"></i>
+              </a>
             </div>
-            <div className="flex items-center">
-              <img
-                src="/images/profile-pic.jpg"
-                className="w-5 h-5 rounded-full mr-2"
-              />
-              <i className="fa-solid fa-caret-down"></i>
+            <p className="text-gray-500 text-lg mb-5">
+              Welcome to our open learning platform{" "}
+              <span className="text-gray-700 font-semibold">EduQuanta</span>
+              Spread your thoughts to our community.
+              <a href="#" className="text-blue-500">
+                #Easy Tutorials
+              </a>
+              <a href="#" className="text-blue-500">
+                #e-learning platform
+              </a>
+            </p>
+            <img src="/images/feed-image.png" className="w-full rounded mb-2" />
+            <div className=" flex items-center justify-between">
+              <div className="flex space-x-20 ">
+                <div
+                  className="flex items-center mr-5 mb-2"
+                  onClick={handleLike}>
+                  <BiSolidLike className="text-lg mr-2" />
+                  {likeCount}
+                </div>
+                <div
+                  className="flex items-center mr-5 mb-2"
+                  onClick={handleDislike}>
+                  <BiSolidDislike className="text-lg mr-2" />
+                  {dislikeCount}
+                </div>
+                <div
+                  className="flex items-center mr-5 mb-2"
+                  onClick={handleComment}>
+                  <FaCommentAlt className="text-lg mr-2" />
+                  {commentCount}
+                </div>
+                <div
+                  className="flex items-center mr-5 mb-2"
+                  onClick={handleShare}>
+                  <FaShare className="text-lg mr-2" />
+                  {shareCount}
+                </div>
+              </div>
+              <div className="flex items-center">
+                <img
+                  src="/images/profile-pic.jpg"
+                  className="w-5 h-5 rounded-full mr-2"
+                />
+                <i className="fa-solid fa-caret-down"></i>
+              </div>
             </div>
           </div>
+          <button
+            type="button"
+            className="load-more-btn bg-blue-500 text-white p-2 rounded">
+            Load More
+          </button>
         </div>
-        <button
-          type="button"
-          className="load-more-btn bg-blue-500 text-white p-2 rounded">
-          Load More
-        </button>
       </div>
-    </div>
+    </DashboardLayout>
   );
 };
 

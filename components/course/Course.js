@@ -1,10 +1,21 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { RxCrossCircled } from "react-icons/rx";
+import { useSelector } from "react-redux";
+
 const Course = ({ course, onAddToCart }) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const user = useSelector((state) => state.userReducer.user);
 
   const handleAddToCart = () => {
-    onAddToCart(course);
+    //
+    axios
+      .put("/api/user/cart", {
+        userId: user._id,
+        courseId: course._id,
+        quantity: 1,
+      })
+      .then((res) => console.log(res.data));
   };
 
   return (

@@ -8,6 +8,7 @@ import { decrement, increment } from "@/redux/slice/counterSlice/counterSlice";
 import { useEffect, useState } from "react";
 import { setUser } from "@/redux/slice/userSlice/userSlice";
 import axios from "axios";
+import Layout from "@/components/layout/Layout";
 // const courses = [
 //   {
 //     id: 1,
@@ -57,14 +58,16 @@ export default function Home() {
 
   return (
     <main>
-      <OverviewSlider></OverviewSlider>
-      <div className="mx-4 md:mx-0 bg-gray-200 grid grid-cols-2 md:grid-cols-3 gap-3">
-        {courses.map((course) => (
-          <div key={course.id}>
-            <Course course={course} />
-          </div>
-        ))}
-      </div>
+      <Layout>
+        <OverviewSlider></OverviewSlider>
+        <div className="mx-4 md:mx-0 bg-gray-200 grid grid-cols-2 md:grid-cols-3 gap-3">
+          {courses.map((course) => (
+            <div key={course.id}>
+              <Course course={course} />
+            </div>
+          ))}
+        </div>
+      </Layout>
     </main>
   );
 }
