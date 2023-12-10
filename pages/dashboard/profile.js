@@ -16,6 +16,8 @@ import { MdPhotoCamera } from "react-icons/md";
 import { HiMiniDocumentPlus } from "react-icons/hi2";
 import { SiGoogleclassroom } from "react-icons/si";
 import { FaUserFriends } from "react-icons/fa";
+import profilePic from "@/public/images/propic.jpg";
+import UpdateUserForm from "@/components/form/UpdateUserForm";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 
 const Profile = () => {
@@ -41,7 +43,6 @@ const Profile = () => {
   };
   return (
     <DashboardLayout>
-      {" "}
       <div className="bg-gray-200 top-0">
         <h2 className="text-3xl font-bold text-primary text-center my-5">
           Welcome to your Dashboard
@@ -50,10 +51,14 @@ const Profile = () => {
           <div className="text-center bg-gray-100 p-8 rounded-lg">
             <div className="avatar mb-4">
               <div className="w-40 h-40 rounded-full overflow-hidden mx-auto">
-                <img src="#" alt="" className="w-full h-full object-cover" />
+                <img
+                  src="/imgaes/children.jpg"
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
-            <h2 className="text-2xl font-bold mb-2">Name: </h2>
+            <h2 className="text-2xl font-bold mb-2">Name: Jony</h2>
 
             <div className="flex items-center mb-2">
               <MdEmail className="text-lg mr-2" />
@@ -81,78 +86,7 @@ const Profile = () => {
             </div>
           </div>
           <div className="bg-white p-8 rounded-lg shadow-md">
-            <form>
-              <div className="mb-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Mobile Number
-                </label>
-                <input
-                  type="number"
-                  placeholder="Enter Your Number"
-                  className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-                  name="phone"
-                />
-              </div>
-              <div className="mb-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Location
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your Address"
-                  className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-                  name="address"
-                />
-              </div>
-              <div className="mb-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Education
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your Last Education"
-                  className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-                  name="education"
-                />
-              </div>
-              <div className="mb-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Workplace
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your Rcent Job"
-                  className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-                  name="Job"
-                />
-              </div>
-              <div className="mb-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  LinkedIn
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your LinkedIn ID Link"
-                  className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-                  name="linkedin"
-                />
-              </div>
-              <div className="mb-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Photo
-                </label>
-                <input
-                  type="file"
-                  className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-                  name="image"
-                />
-              </div>
-              <button
-                className="btn w-full max-w-xs bg-blue-500 text-white hover:bg-blue-700"
-                type="submit">
-                UPDATE PROFILE
-              </button>
-            </form>
+            <UpdateUserForm />
           </div>
         </div>
 
