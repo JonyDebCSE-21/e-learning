@@ -36,4 +36,15 @@ export default async function handler(req, res) {
       message: "User Profile Updated successfully",
     });
   }
+
+  if (req?.method == "GET") {
+    const { userEmail } = req.query;
+
+    const UserDoc = await UserProfile.findOne({ userEmail });
+
+    return res.status(200).send({
+      error: false,
+      user: UserDoc,
+    });
+  }
 }

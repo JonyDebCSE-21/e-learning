@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../shared/Navbar/Header";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/redux/slice/userSlice/userSlice";
 
 const DashboardLayout = ({ children }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    dispatch(setUser(JSON.parse(user)));
+  }, []);
   return (
     <>
       <Header />

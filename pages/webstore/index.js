@@ -81,7 +81,7 @@ export default function WebStore() {
     <>
       <OverviewSlider></OverviewSlider>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-gray-200">
+      {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-gray-200">
         {products.map((product) => {
           return (
             <div key={product.id}>
@@ -89,7 +89,7 @@ export default function WebStore() {
             </div>
           );
         })}
-      </div>
+      </div> */}
     </>
   );
 }

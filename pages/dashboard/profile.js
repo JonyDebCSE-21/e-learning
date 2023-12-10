@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { MdEmail } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
@@ -19,12 +19,18 @@ import { FaUserFriends } from "react-icons/fa";
 import profilePic from "@/public/images/propic.jpg";
 import UpdateUserForm from "@/components/form/UpdateUserForm";
 import DashboardLayout from "@/components/layout/DashboardLayout";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const Profile = () => {
   const [likeCount, setLikeCount] = useState(120);
   const [dislikeCount, setDislikeCount] = useState(20);
   const [commentCount, setCommentCount] = useState(80);
   const [shareCount, setShareCount] = useState(30);
+  const [userProfile, setUserProfile] = useState({});
+  const user = useSelector((state) => state.userReducer.user);
+
+  console.log("user", user);
 
   const handleLike = () => {
     setLikeCount((prevCount) => prevCount + 1);
@@ -41,6 +47,15 @@ const Profile = () => {
   const handleShare = () => {
     setShareCount((prevCount) => prevCount + 1);
   };
+
+  useEffect(() => {
+    if (user?.email) {
+      axios
+        .get(`/api/user/userProfile?userEmail=${user.email}`)
+        .then((res) => setUserProfile(res.data.user));
+    }
+  }, [user]);
+
   return (
     <DashboardLayout>
       <div className="bg-gray-200 top-0">
@@ -58,31 +73,43 @@ const Profile = () => {
                 />
               </div>
             </div>
-            <h2 className="text-2xl font-bold mb-2">Name: Jony</h2>
+            <h2 className="text-2xl font-bold mb-2">
+              Name: {userProfile?.userName}
+            </h2>
 
             <div className="flex items-center mb-2">
               <MdEmail className="text-lg mr-2" />
-              <h2 className="text-lg">Email: </h2>
+              <h2 className="text-lg">Email: {userProfile?.userEmail} </h2>
             </div>
             <div className="flex items-center mb-2">
               <FaLocationDot className="text-lg mr-2" />
-              <h2 className="text-lg mb-2">Address: </h2>
+              <h2 className="text-lg mb-2">
+                Address: {userProfile?.location}{" "}
+              </h2>
             </div>
             <div className="flex items-center mb-2">
               <BiSolidPhoneCall className="text-lg mr-2" />
-              <h2 className="text-lg mb-2">Phone: </h2>
+              <h2 className="text-lg mb-2">
+                Phone: {userProfile?.mobileNumber}{" "}
+              </h2>
             </div>
             <div className="flex items-center mb-2">
               <HiAcademicCap className="text-lg mr-2" />
-              <h2 className="text-lg mb-2">Education: </h2>
+              <h2 className="text-lg mb-2">
+                Education: {userProfile?.education}{" "}
+              </h2>
             </div>
             <div className="flex items-center mb-2">
               <GrUserWorker className="text-lg mr-2" />
-              <h2 className="text-lg mb-2">Workplace: </h2>
+              <h2 className="text-lg mb-2">
+                Workplace: {userProfile?.recentJob}{" "}
+              </h2>
             </div>
             <div className="flex items-center mb-2">
               <FaLinkedin className="text-lg mr-2" />
-              <h2 className="text-lg mb-2">LinkedIn: </h2>
+              <h2 className="text-lg mb-2">
+                LinkedIn: {userProfile?.linkedIn}{" "}
+              </h2>
             </div>
           </div>
           <div className="bg-white p-8 rounded-lg shadow-md">

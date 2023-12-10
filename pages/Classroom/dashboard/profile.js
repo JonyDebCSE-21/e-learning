@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MdEmail } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import { BiSolidPhoneCall } from "react-icons/bi";
@@ -13,6 +13,8 @@ import { FaShare } from "react-icons/fa6";
 import { PiVideoFill } from "react-icons/pi";
 import { MdPhotoCamera } from "react-icons/md";
 import { HiMiniDocumentPlus } from "react-icons/hi2";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
   return (
