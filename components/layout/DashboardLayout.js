@@ -14,16 +14,16 @@ const DashboardLayout = ({ children }) => {
   return (
     <>
       <Header />
-      <div className="drawer lg:drawer-open">
+      <div className="drawer lg:drawer-open my-2">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col items-center justify-center">
+        <div className="drawer-content flex flex-col  bg-blue-700 py-5 px-16 ">
           {/* Page content here */}
           <label
             htmlFor="my-drawer-2"
             className="btn btn-primary drawer-button lg:hidden">
             Open drawer
           </label>
-          <p>Welcome to your Dashboard</p>
+
           {children}
         </div>
         <div className="drawer-side bg-slate-400">
