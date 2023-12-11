@@ -18,7 +18,7 @@ const DashboardLayout = ({ children }) => {
           <p>Welcome to your Dashboard</p>
           {children}
         </div>
-        <div className="drawer-side">
+        <div className="drawer-side bg-slate-400">
           <label
             htmlFor="my-drawer-2"
             aria-label="close sidebar"
@@ -27,13 +27,18 @@ const DashboardLayout = ({ children }) => {
             {/* Sidebar content here */}
             <Link
               className="hover:bg-common-button px-2 py-3"
+              href="/dashboard/profile">
+              Profile
+            </Link>
+            <Link
+              className="hover:bg-common-button px-2 py-3"
               href="/dashboard/addCourse">
               Add Course
             </Link>
             <Link
               className="hover:bg-common-button px-2 py-3"
-              href="/dashboard/profile">
-              Profile
+              href="/dashboard/addProduct">
+              Add Product
             </Link>
           </ul>
         </div>
