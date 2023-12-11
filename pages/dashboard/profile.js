@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { MdEmail } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
@@ -16,13 +16,21 @@ import { MdPhotoCamera } from "react-icons/md";
 import { HiMiniDocumentPlus } from "react-icons/hi2";
 import { SiGoogleclassroom } from "react-icons/si";
 import { FaUserFriends } from "react-icons/fa";
+import profilePic from "@/public/images/propic.jpg";
+import UpdateUserForm from "@/components/form/UpdateUserForm";
 import DashboardLayout from "@/components/layout/DashboardLayout";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const Profile = () => {
   const [likeCount, setLikeCount] = useState(120);
   const [dislikeCount, setDislikeCount] = useState(20);
   const [commentCount, setCommentCount] = useState(80);
   const [shareCount, setShareCount] = useState(30);
+  const [userProfile, setUserProfile] = useState({});
+  const user = useSelector((state) => state.userReducer.user);
+
+  console.log("user", user);
 
   const handleLike = () => {
     setLikeCount((prevCount) => prevCount + 1);
@@ -39,9 +47,17 @@ const Profile = () => {
   const handleShare = () => {
     setShareCount((prevCount) => prevCount + 1);
   };
+
+  useEffect(() => {
+    if (user?.email) {
+      axios
+        .get(`/api/user/userProfile?userEmail=${user.email}`)
+        .then((res) => setUserProfile(res.data.user));
+    }
+  }, [user]);
+
   return (
     <DashboardLayout>
-      {" "}
       <div className="bg-gray-200 top-0">
         <h2 className="text-3xl font-bold text-primary text-center my-5">
           Welcome to your Dashboard
@@ -50,109 +66,54 @@ const Profile = () => {
           <div className="text-center bg-gray-100 p-8 rounded-lg">
             <div className="avatar mb-4">
               <div className="w-40 h-40 rounded-full overflow-hidden mx-auto">
-                <img src="#" alt="" className="w-full h-full object-cover" />
+                <img
+                  src="/imgaes/children.jpg"
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
-            <h2 className="text-2xl font-bold mb-2">Name: </h2>
+            <h2 className="text-2xl font-bold mb-2">
+              Name: {userProfile?.userName}
+            </h2>
 
             <div className="flex items-center mb-2">
               <MdEmail className="text-lg mr-2" />
-              <h2 className="text-lg">Email: </h2>
+              <h2 className="text-lg">Email: {userProfile?.userEmail} </h2>
             </div>
             <div className="flex items-center mb-2">
               <FaLocationDot className="text-lg mr-2" />
-              <h2 className="text-lg mb-2">Address: </h2>
+              <h2 className="text-lg mb-2">
+                Address: {userProfile?.location}{" "}
+              </h2>
             </div>
             <div className="flex items-center mb-2">
               <BiSolidPhoneCall className="text-lg mr-2" />
-              <h2 className="text-lg mb-2">Phone: </h2>
+              <h2 className="text-lg mb-2">
+                Phone: {userProfile?.mobileNumber}{" "}
+              </h2>
             </div>
             <div className="flex items-center mb-2">
               <HiAcademicCap className="text-lg mr-2" />
-              <h2 className="text-lg mb-2">Education: </h2>
+              <h2 className="text-lg mb-2">
+                Education: {userProfile?.education}{" "}
+              </h2>
             </div>
             <div className="flex items-center mb-2">
               <GrUserWorker className="text-lg mr-2" />
-              <h2 className="text-lg mb-2">Workplace: </h2>
+              <h2 className="text-lg mb-2">
+                Workplace: {userProfile?.recentJob}{" "}
+              </h2>
             </div>
             <div className="flex items-center mb-2">
               <FaLinkedin className="text-lg mr-2" />
-              <h2 className="text-lg mb-2">LinkedIn: </h2>
+              <h2 className="text-lg mb-2">
+                LinkedIn: {userProfile?.linkedIn}{" "}
+              </h2>
             </div>
           </div>
           <div className="bg-white p-8 rounded-lg shadow-md">
-            <form>
-              <div className="mb-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Mobile Number
-                </label>
-                <input
-                  type="number"
-                  placeholder="Enter Your Number"
-                  className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-                  name="phone"
-                />
-              </div>
-              <div className="mb-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Location
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your Address"
-                  className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-                  name="address"
-                />
-              </div>
-              <div className="mb-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Education
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your Last Education"
-                  className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-                  name="education"
-                />
-              </div>
-              <div className="mb-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Workplace
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your Rcent Job"
-                  className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-                  name="Job"
-                />
-              </div>
-              <div className="mb-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  LinkedIn
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your LinkedIn ID Link"
-                  className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-                  name="linkedin"
-                />
-              </div>
-              <div className="mb-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Photo
-                </label>
-                <input
-                  type="file"
-                  className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-                  name="image"
-                />
-              </div>
-              <button
-                className="btn w-full max-w-xs bg-blue-500 text-white hover:bg-blue-700"
-                type="submit">
-                UPDATE PROFILE
-              </button>
-            </form>
+            <UpdateUserForm />
           </div>
         </div>
 
