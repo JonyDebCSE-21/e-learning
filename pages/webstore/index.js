@@ -77,7 +77,6 @@ import axios from "axios";
 // ];
 export default function WebStore() {
   const [products, setProducts] = useState([]);
-<<<<<<< HEAD
   useEffect(() => {
     axios
       .get("/api/user/product")
@@ -97,29 +96,5 @@ export default function WebStore() {
         })}
       </div>
     </Layout>
-=======
-  const router = useRouter();
-  useEffect(() => {
-    axios
-      .get("/api/user/product/")
-      .then((res) => setProducts(res.data.products));
-  }, []);
-  return (
-    <>
-      <Layout>
-        <OverviewSlider></OverviewSlider>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-gray-200">
-          {products.map((product) => {
-            return (
-              <div key={product.id}>
-                <Product product={product} />
-              </div>
-            );
-          })}
-        </div>
-      </Layout>
-    </>
->>>>>>> 5943200 (webstore product added)
   );
 }

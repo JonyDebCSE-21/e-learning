@@ -67,7 +67,7 @@ const Profile = () => {
             <div className="avatar mb-4">
               <div className="w-40 h-40 rounded-full overflow-hidden mx-auto">
                 <img
-                  src={userProfile.profilePic}
+                  src="/imgaes/children.jpg"
                   alt=""
                   className="w-full h-full object-cover"
                 />
