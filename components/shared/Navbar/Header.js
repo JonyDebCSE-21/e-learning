@@ -179,24 +179,28 @@ const Header = () => {
                   <span></span>
                 </div>
                 <div className="settings-menu-inner">
-                  <li className="hover:bg-blue-700">
-                    <Link
-                      href="/dashboard/profile"
-                      className="text-white flex items-center">
-                      <MdDashboard className="text-lg mr-1" />
-                      <h2 className="text-sm mb-0">Your Dashboard</h2>
-                    </Link>
-                  </li>
-                  <hr />
-                  <li className="hover:bg-blue-700">
-                    <Link
-                      href="/dashboard/profile"
-                      className="text-white flex items-center">
-                      <CgProfile className="text-lg mr-1" />
-                      <h2 className="text-sm mb-0">See Your Profile</h2>
-                    </Link>
-                  </li>
-                  <hr />
+                  {user && (
+                    <>
+                      <li className="hover:bg-blue-700">
+                        <Link
+                          href="/dashboard/profile"
+                          className="text-white flex items-center">
+                          <MdDashboard className="text-lg mr-1" />
+                          <h2 className="text-sm mb-0">Your Dashboard</h2>
+                        </Link>
+                      </li>
+                      <hr />
+                      <li className="hover:bg-blue-700">
+                        <Link
+                          href="/dashboard/profile"
+                          className="text-white flex items-center">
+                          <CgProfile className="text-lg mr-1" />
+                          <h2 className="text-sm mb-0">See Your Profile</h2>
+                        </Link>
+                      </li>
+                      <hr />
+                    </>
+                  )}
                   <li className="hover:bg-blue-700">
                     <Link
                       href="/settings&privacy"
@@ -239,7 +243,6 @@ const Header = () => {
                       </li>
                     </>
                   )}
-                  <hr />
                   {/* <li className="hover:bg-blue-700">
                     <Link href="#" className="text-white flex items-center">
                       <CgLogOut className="text-lg mr-1" />
