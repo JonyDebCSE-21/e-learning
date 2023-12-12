@@ -6,8 +6,14 @@ const cartSchema = new Schema({
     required: true,
   },
   productId: { type: mongoose.Schema.Types.ObjectId },
+  courseId: { type: mongoose.Schema.Types.ObjectId },
   quantity: { type: Number },
   productList: [
+    {
+      type: Object,
+    },
+  ],
+  courseList: [
     {
       type: Object,
     },

@@ -1,14 +1,24 @@
 import React, { useState } from "react";
 import { RxCrossCircled } from "react-icons/rx";
 import Link from "next/link";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Product = ({ product, onAddToCart }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [quantityLimitMessage, setQuantityLimitMessage] = useState("");
+  const user = useSelector((state) => state.userReducer.user);
 
   const handleAddToCart = () => {
-    onAddToCart(product, quantity);
+    //
+    axios
+      .put("/api/user/cart", {
+        userId: user._id,
+        productId: product._id,
+        quantity: 1,
+      })
+      .then((res) => console.log(res.data));
   };
 
   const incrementQuantity = () => {
