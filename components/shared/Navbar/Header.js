@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Input from "../Input";
 import Link from "next/link";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
@@ -18,15 +18,30 @@ import { PiSignInBold } from "react-icons/pi";
 import { IoIosCreate } from "react-icons/io";
 import { CgLogOut } from "react-icons/cg";
 import { MdNotificationImportant } from "react-icons/md";
+import { setCart } from "@/redux/slice/cartSlice/cartSlice";
+import axios from "axios";
 
 const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userReducer.user);
+  const cart = useSelector((state) => state.cartReducer.cart);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
     dispatch(setUser(null));
   };
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    dispatch(setUser(JSON.parse(user)));
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      axios.get(`/api/user/cart?id=${user._id}`).then((res) => {
+        dispatch(setCart(res.data.cart));
+      });
+    }
+  }, [user]);
 
   return (
     <div className="nav flex items-center justify-between bg-blue-700 px-5 py-1 sticky top-0 z-50">
@@ -50,7 +65,12 @@ const Header = () => {
         <div className="flex items-center mb-2">
           <Link href="/cart" className="text-white flex items-center">
             <FaShoppingCart className="text-lg mr-1" />
-            <h2 className="text-lg mb-0">Cart</h2>
+            <div className="relative ">
+              <h2 className="text-lg mb-0">Cart</h2>
+              <span className="absolute top-[-10px] right-[-10px] text-black ">
+                {cart && cart[0]?.totalQuantity ? cart[0].totalQuantity : "0"}
+              </span>
+            </div>
           </Link>
         </div>
         <div className="flex items-center mb-2">

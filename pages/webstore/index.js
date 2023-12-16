@@ -3,6 +3,8 @@ import Product from "@/pages/webstore/Product";
 import Layout from "@/components/layout/Layout";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/redux/slice/userSlice/userSlice";
 // const products = [
 //   {
 //     id: 1,
@@ -77,6 +79,11 @@ import axios from "axios";
 // ];
 export default function WebStore() {
   const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    dispatch(setUser(JSON.parse(user)));
+  }, []);
   useEffect(() => {
     axios
       .get("/api/user/product")

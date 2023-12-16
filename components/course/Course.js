@@ -1,10 +1,12 @@
+import { setCart } from "@/redux/slice/cartSlice/cartSlice";
 import axios from "axios";
 import React, { useState } from "react";
 import { RxCrossCircled } from "react-icons/rx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Course = ({ course, onAddToCart }) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.userReducer.user);
 
   const handleAddToCart = () => {
@@ -15,7 +17,7 @@ const Course = ({ course, onAddToCart }) => {
         courseId: course._id,
         quantity: 1,
       })
-      .then((res) => console.log(res.data));
+      .then((res) => dispatch(setCart(res.data.cart)));
   };
 
   return (

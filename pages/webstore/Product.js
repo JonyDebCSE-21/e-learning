@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { RxCrossCircled } from "react-icons/rx";
 import Link from "next/link";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setCart } from "@/redux/slice/cartSlice/cartSlice";
 
 const Product = ({ product, onAddToCart }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [quantityLimitMessage, setQuantityLimitMessage] = useState("");
   const user = useSelector((state) => state.userReducer.user);
+  const dispatch = useDispatch();
 
   const handleAddToCart = () => {
     //
@@ -18,7 +20,7 @@ const Product = ({ product, onAddToCart }) => {
         productId: product._id,
         quantity: 1,
       })
-      .then((res) => console.log(res.data));
+      .then((res) => dispatch(setCart(res.data.cart)));
   };
 
   const incrementQuantity = () => {

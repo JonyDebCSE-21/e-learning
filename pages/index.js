@@ -1,49 +1,17 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import { useRouter } from "next/router";
 import Course from "@/components/course/Course";
 import OverviewSlider from "@/components/course/OverviewSlider";
-import { useDispatch, useSelector } from "react-redux";
-import { decrement, increment } from "@/redux/slice/counterSlice/counterSlice";
+import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { setUser } from "@/redux/slice/userSlice/userSlice";
 import axios from "axios";
 import Layout from "@/components/layout/Layout";
-// const courses = [
-//   {
-//     id: 1,
-//     title:
-//       "Online batch admission is going on for class 6 to 12. Get ready for the upcoming interactive courses.",
-//     price: "1000",
-//     courseCode: "JS2023",
-//     image: "/images/Admission.jpg",
-//   },
-//   {
-//     id: 2,
-//     title: "Collect more interactive notes for your child.",
 
-//     price: "1000",
-//     courseCode: "JS2023",
-//     image: "/images/children.jpg",
-//   },
-//   {
-//     id: 3,
-//     title:
-//       "Join in our regular skill development courses and grow your future.",
-//     price: "1000",
-//     courseCode: "JS2023",
-//     image: "/images/skills.webp",
-//   },
-// ];
 export default function Home() {
   const [courses, setCourses] = useState([]);
   const dispatch = useDispatch();
-  // if (!localStorage) return;
 
   useEffect(() => {
     if (typeof window === "undefined") {
-      // Perform localStorage action
-      // const item = localStorage.getItem("key");
       return;
     }
     const user = localStorage.getItem("user");

@@ -30,8 +30,6 @@ const Profile = () => {
   const [userProfile, setUserProfile] = useState({});
   const user = useSelector((state) => state.userReducer.user);
 
-  console.log("user", user);
-
   const handleLike = () => {
     setLikeCount((prevCount) => prevCount + 1);
   };
@@ -67,7 +65,11 @@ const Profile = () => {
             <div className="avatar mb-4">
               <div className="w-40 h-40 rounded-full overflow-hidden mx-auto">
                 <img
-                  src="/imgaes/children.jpg"
+                  src={
+                    userProfile.profilePic
+                      ? userProfile.profilePic
+                      : "/imgaes/children.jpg"
+                  }
                   alt=""
                   className="w-full h-full object-cover"
                 />
