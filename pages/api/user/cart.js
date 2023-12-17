@@ -35,7 +35,7 @@ export default async function handler(req, res) {
                 instructor: course.instructor,
                 video: course.video,
                 price: item.price,
-                itemQuantity: item.quantity,
+                quantity: item.quantity,
               };
               courses.push(courseData);
             })
@@ -52,7 +52,7 @@ export default async function handler(req, res) {
                 description: product.description,
                 image: product.image,
                 price: item.price,
-                itemQuantity: item.quantity,
+                quantity: item.quantity,
               };
               products.push(productData);
             })
@@ -169,7 +169,7 @@ export default async function handler(req, res) {
           //         url: product.url,
           //         shopId: product.shopId,
           //         itemTotal: item.price,
-          //         itemQuantity: item.quantity,
+          //         quantity: item.quantity,
           //         quantity: product.quantity,
           //       };
           //       products.push(productData);
@@ -221,7 +221,7 @@ export default async function handler(req, res) {
                 instructor: course.instructor,
                 video: course.video,
                 price: item.price,
-                itemQuantity: item.quantity,
+                quantity: item.quantity,
               };
               courses.push(courseData);
             })
@@ -238,7 +238,7 @@ export default async function handler(req, res) {
                 description: product.description,
                 image: product.image,
                 price: item.price,
-                itemQuantity: item.quantity,
+                quantity: item.quantity,
               };
               products.push(productData);
             })
@@ -301,7 +301,7 @@ export default async function handler(req, res) {
       //           url: product.url,
       //           shopId: product.shopId,
       //           itemTotal: item.price,
-      //           itemQuantity: item.quantity,
+      //           quantity: item.quantity,
       //           quantity: product.quantity,
       //         };
       //         courses.push(productData);
@@ -347,7 +347,7 @@ export default async function handler(req, res) {
       //           url: product.url,
       //           shopId: product.shopId,
       //           itemTotal: item.price,
-      //           itemQuantity: item.quantity,
+      //           quantity: item.quantity,
       //           quantity: product.quantity,
       //         };
       //         courses.push(productData);
@@ -388,7 +388,7 @@ export default async function handler(req, res) {
                 instructor: course.instructor,
                 video: course.video,
                 price: item.price,
-                itemQuantity: item.quantity,
+                quantity: item.quantity,
               };
               courses.push(courseData);
             })
@@ -400,7 +400,7 @@ export default async function handler(req, res) {
             //     description: product.description,
             //     image: product.image,
             //     price: item.price,
-            //     itemQuantity: item.quantity,
+            //     quantity: item.quantity,
             //   };
             //   products.push(productData);
             // })
@@ -442,7 +442,7 @@ export default async function handler(req, res) {
             //     instructor: course.instructor,
             //     video: course.video,
             //     price: item.price,
-            //     itemQuantity: item.quantity,
+            //     quantity: item.quantity,
             //   };
             //   courses.push(courseData);
             // })
@@ -454,7 +454,7 @@ export default async function handler(req, res) {
                 description: product.description,
                 image: product.image,
                 price: item.price,
-                itemQuantity: item.quantity,
+                quantity: item.quantity,
               };
               products.push(productData);
             })
@@ -482,7 +482,7 @@ export default async function handler(req, res) {
     const userCart = await Cart.deleteOne({ _id: cartId });
     return res.status(200).send({
       error: false,
-      data: userCart,
+      cart: null,
       message: "All product removed",
     });
   }

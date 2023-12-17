@@ -1,5 +1,5 @@
 import Layout from "@/components/layout/Layout";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
@@ -7,9 +7,12 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { setCart } from "@/redux/slice/cartSlice/cartSlice";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -18,7 +21,6 @@ const Cart = () => {
   } = useForm();
   const cart = useSelector((state) => state.cartReducer.cart);
   const user = useSelector((state) => state.userReducer.user);
-  console.log(cart);
   const handleClearAll = () => {};
 
   const handleIncreaseItem = (item) => {
@@ -58,7 +60,42 @@ const Cart = () => {
       });
   };
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    axios
+      .post("/api/user/order", {
+        name: data.name,
+        city: data.city,
+        email: data.email,
+        postalCode: data.postalCode,
+        streetAddress: data.streetAddress,
+        phone: data.phone,
+        cart: cart[0],
+      })
+      .then((res) => {
+        if (res.data.url) {
+          window.location = res.data.url;
+        }
+        console.log(res.data);
+      });
+  };
+
+  // const url = router.asPath;
+  // useEffect(() => {
+  //   if (typeof window == "undefined") {
+  //     return;
+  //   }
+  //   if (window?.location?.href?.includes("sucess")) {
+  //     console.log(url, "Url");
+  //     axios.delete(`/api/user/cart?cartId=${cart[0]._id}`).then((res) => {
+  //       console.log(res.data.cart, "Response");
+  //       dispatch(setCart(res.data.cart));
+  //     });
+  //   }
+  //   // if (url && cart) {
+  //   //
+  //   // }
+  // }, [url]);
+
   return (
     <Layout>
       <div className="container mx-auto grid grid-cols-2 gap-10 mt-10">
@@ -235,7 +272,7 @@ const Cart = () => {
                 <input
                   type="text"
                   placeholder="Your Name"
-                  register={register("name", {
+                  {...register("name", {
                     required: {
                       value: true,
                       message: "Name is required",
@@ -248,14 +285,14 @@ const Cart = () => {
                   placeholder="Your Email"
                   value={user?.email}
                   readOnly
-                  register={register("email")}
+                  {...register("email")}
                   className="w-full mb-3 block px-4 py-2 border border-[#86868b] rounded-md focus:outline-none focus:ring focus:border-[#0071e3] placeholder-gray-400"
                 />
                 <div className="grid grid-cols-2 gap-4">
                   <input
                     type="text"
                     placeholder="City"
-                    register={register("city", {
+                    {...register("city", {
                       required: { value: true, message: "City is required" },
                     })}
                     className="w-full mb-3 col-span-1 block px-4 py-2 border border-[#86868b] rounded-md focus:outline-none focus:ring focus:border-[#0071e3] placeholder-gray-400"
@@ -263,7 +300,7 @@ const Cart = () => {
                   <input
                     type="text"
                     placeholder="Postal Code"
-                    register={register("postalCode", {
+                    {...register("postalCode", {
                       required: {
                         value: true,
                         message: "Postal Code is required",
@@ -275,7 +312,7 @@ const Cart = () => {
                 <input
                   type="text"
                   placeholder="Street Address"
-                  register={register("streetAddress", {
+                  {...register("streetAddress", {
                     required: {
                       value: true,
                       message: "Street address is required",
@@ -286,7 +323,7 @@ const Cart = () => {
                 <input
                   type="text"
                   placeholder="Phone Number"
-                  register={register("phone", {
+                  {...register("phone", {
                     required: {
                       value: true,
                       message: "Phone number is required",
