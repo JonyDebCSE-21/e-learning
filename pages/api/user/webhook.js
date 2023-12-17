@@ -46,12 +46,13 @@ export default async function handler(req, res) {
     case "checkout.session.completed":
       const data = event.data.object;
       const orderId = data.metadata.orderId;
+      const cartId = data.metadata.cartId;
       const paid = data.payment_status === "paid";
-      console.log(data, "Paid Status");
       if (orderId && paid) {
         await Order.findByIdAndUpdate(orderId, {
           paid: true,
         });
+        await Cart.findByIdAndDelete({ _id: cartId });
       }
       break;
 

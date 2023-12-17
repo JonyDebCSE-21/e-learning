@@ -79,23 +79,6 @@ const Cart = () => {
       });
   };
 
-  // const url = router.asPath;
-  // useEffect(() => {
-  //   if (typeof window == "undefined") {
-  //     return;
-  //   }
-  //   if (window?.location?.href?.includes("sucess")) {
-  //     console.log(url, "Url");
-  //     axios.delete(`/api/user/cart?cartId=${cart[0]._id}`).then((res) => {
-  //       console.log(res.data.cart, "Response");
-  //       dispatch(setCart(res.data.cart));
-  //     });
-  //   }
-  //   // if (url && cart) {
-  //   //
-  //   // }
-  // }, [url]);
-
   return (
     <Layout>
       <div className="container mx-auto grid grid-cols-2 gap-10 mt-10">
