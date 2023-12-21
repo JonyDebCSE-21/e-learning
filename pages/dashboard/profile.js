@@ -23,11 +23,13 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 const Profile = () => {
+  const [status, setStatus] = useState("");
   const [likeCount, setLikeCount] = useState(120);
   const [dislikeCount, setDislikeCount] = useState(20);
   const [commentCount, setCommentCount] = useState(80);
   const [shareCount, setShareCount] = useState(30);
   const [userProfile, setUserProfile] = useState({});
+
   const user = useSelector((state) => state.userReducer.user);
 
   const handleLike = () => {
@@ -47,12 +49,24 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    if (user?.email) {
-      axios
-        .get(`/api/user/userProfile?userEmail=${user.email}`)
-        .then((res) => setUserProfile(res.data.user));
-    }
+    // if (user?.email) {
+    //   axios
+    //     .get(`/api/user/userProfile?userEmail=${user.email}`)
+    //     .then((res) => setUserProfile(res.data.user));
+    // }
   }, [user]);
+
+  const handleStatusPost = () => {
+    // const data = {
+    //   userEmail: user?.email,
+    //   posts: {
+    //     status: status,
+    //   },
+    // };
+    // axios
+    //   .put("api/user/userProfile", data)
+    //   .then((res) => console.log(res.data));
+  };
 
   return (
     <DashboardLayout>
@@ -66,52 +80,38 @@ const Profile = () => {
               <div className="w-40 h-40 rounded-full overflow-hidden mx-auto">
                 <img
                   src={
-                    userProfile.profilePic
-                      ? userProfile.profilePic
-                      : "/imgaes/children.jpg"
+                    user?.profilePic ? user.profilePic : "/imgaes/children.jpg"
                   }
                   alt=""
                   className="w-full h-full object-cover"
                 />
               </div>
             </div>
-            <h2 className="text-2xl font-bold mb-2">
-              Name: {userProfile?.userName}
-            </h2>
+            <h2 className="text-2xl font-bold mb-2">Name: {user?.name}</h2>
 
             <div className="flex items-center mb-2">
               <MdEmail className="text-lg mr-2" />
-              <h2 className="text-lg">Email: {userProfile?.userEmail} </h2>
+              <h2 className="text-lg">Email: {user?.email} </h2>
             </div>
             <div className="flex items-center mb-2">
               <FaLocationDot className="text-lg mr-2" />
-              <h2 className="text-lg mb-2">
-                Address: {userProfile?.location}{" "}
-              </h2>
+              <h2 className="text-lg mb-2">Address: {user?.location} </h2>
             </div>
             <div className="flex items-center mb-2">
               <BiSolidPhoneCall className="text-lg mr-2" />
-              <h2 className="text-lg mb-2">
-                Phone: {userProfile?.mobileNumber}{" "}
-              </h2>
+              <h2 className="text-lg mb-2">Phone: {user?.mobileNumber} </h2>
             </div>
             <div className="flex items-center mb-2">
               <HiAcademicCap className="text-lg mr-2" />
-              <h2 className="text-lg mb-2">
-                Education: {userProfile?.education}{" "}
-              </h2>
+              <h2 className="text-lg mb-2">Education: {user?.education} </h2>
             </div>
             <div className="flex items-center mb-2">
               <GrUserWorker className="text-lg mr-2" />
-              <h2 className="text-lg mb-2">
-                Workplace: {userProfile?.recentJob}{" "}
-              </h2>
+              <h2 className="text-lg mb-2">Workplace: {user?.recentJob} </h2>
             </div>
             <div className="flex items-center mb-2">
               <FaLinkedin className="text-lg mr-2" />
-              <h2 className="text-lg mb-2">
-                LinkedIn: {userProfile?.linkedIn}{" "}
-              </h2>
+              <h2 className="text-lg mb-2">LinkedIn: {user?.linkedIn} </h2>
             </div>
           </div>
           <div className="bg-white p-8 rounded-lg shadow-md">
@@ -173,6 +173,7 @@ const Profile = () => {
             <div className="pl-14 pt-2">
               <textarea
                 rows="2"
+                onChange={(e) => setStatus(e.target.value)}
                 placeholder="Share your thoughts, with your community"
                 className="w-full border-0 outline-none border-b border-gray-500 bg-transparent resize-none"></textarea>
 
@@ -216,6 +217,11 @@ const Profile = () => {
                   <span class="text-lg mr-2">Documents</span>
                 </label>
               </div>
+              <button
+                onClick={handleStatusPost}
+                className="bg-blue-700 px-5 py-2 mt-2 rounded text-white">
+                Post
+              </button>
             </div>
           </div>
           <div className="bg-white rounded p-4 my-5">

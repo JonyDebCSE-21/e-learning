@@ -143,11 +143,13 @@ const Profile = () => {
             </div>
           </div>
 
+          {/* Status post area */}
           <div className="pl-14 pt-5">
             <textarea
               rows="3"
               placeholder="Share your thoughts, with your community"
-              className="w-full border-0 outline-none border-b border-gray-300 bg-transparent resize-none"></textarea>
+              className="w-full border-0 outline-none border-b border-gray-300 bg-transparent resize-none"
+            />
 
             <div className="add-post-links mt-2 flex">
               <label

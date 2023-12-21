@@ -1,9 +1,15 @@
+import { setUser } from "@/redux/slice/userSlice/userSlice";
 import axios from "axios";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 
 const imgStorageApi = "3f67787d6399449802b3d820607b790d";
 const imgUploadUrl = `https://api.imgbb.com/1/upload?key=${imgStorageApi}`;
 const UpdateUserForm = () => {
+  const user = useSelector((state) => state.userReducer.user);
+  const dispatch = useDispatch();
+
   const [mobileNumber, setMobileNumber] = useState("");
   const [location, setLocation] = useState("");
   const [education, setEducation] = useState("");
@@ -36,11 +42,8 @@ const UpdateUserForm = () => {
         console.log(data?.data);
         if (data?.data) {
           axios
-            .post("/api/user/userProfile", {
+            .put("/api/user/user", {
               userId: user._id,
-              userName: user.name,
-              userEmail: user.email,
-              userRole: user.role,
               mobileNumber,
               location,
               education,
@@ -49,7 +52,10 @@ const UpdateUserForm = () => {
               profilePic: data?.data.display_url,
             })
             .then((res) => {
-              console.log(res.data.userProfile);
+              console.log(res.data.user);
+              dispatch(setUser(res.data.user));
+              localStorage.setItem("user", JSON.stringify(res.data.user));
+              toast.success("User Updated Successfully");
             });
         }
       });

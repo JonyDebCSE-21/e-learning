@@ -90,6 +90,7 @@ const Newsflash = () => {
               <HiMiniDocumentPlus className="text-lg mr-2" />
               <span className="text-lg mr-2">Documents</span>
             </label>
+            <button>Post</button>
           </div>
         </div>
       </div>
