@@ -21,6 +21,10 @@ import UpdateUserForm from "@/components/form/UpdateUserForm";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import toast from "react-hot-toast";
+
+const imgStorageApi = "3f67787d6399449802b3d820607b790d";
+const imgUploadUrl = `https://api.imgbb.com/1/upload?key=${imgStorageApi}`;
 
 const Profile = () => {
   const [status, setStatus] = useState("");
@@ -29,6 +33,9 @@ const Profile = () => {
   const [commentCount, setCommentCount] = useState(80);
   const [shareCount, setShareCount] = useState(30);
   const [userProfile, setUserProfile] = useState({});
+  const [file, setFile] = useState(null);
+  const [filePreview, setFilePreview] = useState(null);
+  const [userPosts, setUserPosts] = useState([]);
 
   const user = useSelector((state) => state.userReducer.user);
 
@@ -67,7 +74,46 @@ const Profile = () => {
     //   .put("api/user/userProfile", data)
     //   .then((res) => console.log(res.data));
   };
+  const handlePostSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", file);
 
+    fetch(imgUploadUrl, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.data) {
+          axios
+            .post("/api/user/post", {
+              userId: user._id,
+              caption: status,
+              photos: data?.data.display_url,
+            })
+            .then((res) => {
+              setUserPosts([...userPosts, res.data.post]);
+              // dispatch(setUser(res.data.user));
+              // localStorage.setItem("user", JSON.stringify(res.data.user));
+              toast.success(res.data.message);
+              setFilePreview(null);
+              setStatus("");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      });
+  };
+
+  useEffect(() => {
+    if (user) {
+      axios.get(`/api/user/post?id=${user._id}`).then((res) => {
+        setUserPosts(res.data.post);
+      });
+    }
+  }, [user]);
   return (
     <DashboardLayout>
       <div className="bg-gray-200 top-0">
@@ -80,7 +126,7 @@ const Profile = () => {
               <div className="w-40 h-40 rounded-full overflow-hidden mx-auto">
                 <img
                   src={
-                    user?.profilePic ? user.profilePic : "/imgaes/children.jpg"
+                    user?.profilePic ? user.profilePic : "/images/children.jpg"
                   }
                   alt=""
                   className="w-full h-full object-cover"
@@ -121,14 +167,16 @@ const Profile = () => {
 
         <div className=" bg-white p-2 rounded-md flex items-start justify-between">
           <div className="pd-left">
-            <div className="pd-row flex items-start">
+            <div className="pd-row flex justify-center items-center">
               <img
-                src="/images/profile-pic.jpg"
+                src={
+                  user?.profilePic ? user.profilePic : "/images/children.jpg"
+                }
                 className=" pd-image w-20 mr-5 rounded-md"
                 alt="User Profile"
               />
               <div>
-                <h3 className="text-lg mt-4 font-semibold">Username</h3>
+                <h3 className="text-lg mt-4 font-semibold">{user?.name}</h3>
                 <p className="text-sm">120 Friends</p>
               </div>
             </div>
@@ -159,24 +207,39 @@ const Profile = () => {
           <div className="w-full bg-white rounded p-5 text-gray-700">
             <div className="flex items-center">
               <img
-                src="/images/profile-pic.jpg"
+                src={
+                  user?.profilePic ? user.profilePic : "/images/children.jpg"
+                }
                 className="w-12 h-12 rounded-full mr-2"
               />
               <div>
-                <p className="font-semibold mb-0 text-gray-700">Username</p>
+                <p className="font-semibold mb-0 text-gray-700">{user?.name}</p>
                 <small className="text-xs">
                   Public <i className="fas fa-caret-down"></i>
                 </small>
               </div>
             </div>
 
-            <div className="pl-14 pt-2">
+            <form onSubmit={handlePostSubmit} className="pl-14 pt-2">
               <textarea
                 rows="2"
                 onChange={(e) => setStatus(e.target.value)}
                 placeholder="Share your thoughts, with your community"
                 className="w-full border-0 outline-none border-b border-gray-500 bg-transparent resize-none"></textarea>
-
+              {filePreview && (
+                <div className="relative">
+                  <img
+                    src={filePreview}
+                    alt=""
+                    className="w-[200px] h-[200px]"
+                  />
+                  <button
+                    onClick={() => setFilePreview(null)}
+                    className="absolute top-0 left-[190px]">
+                    X
+                  </button>
+                </div>
+              )}
               <div class="add-post-links flex">
                 <label
                   for="video-upload"
@@ -199,6 +262,11 @@ const Profile = () => {
                     id="photo-upload"
                     class="hidden"
                     accept="image/*"
+                    onChange={(e) => {
+                      const url = URL.createObjectURL(e.target.files[0]);
+                      setFilePreview(url);
+                      setFile(e.target.files[0]);
+                    }}
                   />
                   <MdPhotoCamera className="text-lg mr-2" />
                   <span class="text-lg mr-2">Photos</span>
@@ -222,74 +290,85 @@ const Profile = () => {
                 className="bg-blue-700 px-5 py-2 mt-2 rounded text-white">
                 Post
               </button>
-            </div>
+            </form>
           </div>
-          <div className="bg-white rounded p-4 my-5">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <img
-                  src="/images/profile-pic.jpg"
-                  className="w-10 h-10 rounded-full mr-2"
-                />
-                <div>
-                  <p className="font-semibold mb-0 text-gray-700">Username</p>
-                  <span className="text-xs text-gray-500">
-                    September 22, 2023, 23:19 pm
-                  </span>
-                </div>
-              </div>
-              <a href="#" className="text-gray-700">
-                <i className="fas fa-ellipsis-v"></i>
-              </a>
-            </div>
-            <p className="text-gray-500 text-lg mb-5">
-              Welcome to our open learning platform{" "}
-              <span className="text-gray-700 font-semibold">EduQuanta</span>
-              Spread your thoughts to our community.
-              <a href="#" className="text-blue-500">
-                #Easy Tutorials
-              </a>
-              <a href="#" className="text-blue-500">
-                #e-learning platform
-              </a>
-            </p>
-            <img src="/images/feed-image.png" className="w-full rounded mb-2" />
-            <div className=" flex items-center justify-between">
-              <div className="flex space-x-20 ">
-                <div
-                  className="flex items-center mr-5 mb-2"
-                  onClick={handleLike}>
-                  <BiSolidLike className="text-lg mr-2" />
-                  {likeCount}
-                </div>
-                <div
-                  className="flex items-center mr-5 mb-2"
-                  onClick={handleDislike}>
-                  <BiSolidDislike className="text-lg mr-2" />
-                  {dislikeCount}
-                </div>
-                <div
-                  className="flex items-center mr-5 mb-2"
-                  onClick={handleComment}>
-                  <FaCommentAlt className="text-lg mr-2" />
-                  {commentCount}
-                </div>
-                <div
-                  className="flex items-center mr-5 mb-2"
-                  onClick={handleShare}>
-                  <FaShare className="text-lg mr-2" />
-                  {shareCount}
-                </div>
-              </div>
-              <div className="flex items-center">
-                <img
-                  src="/images/profile-pic.jpg"
-                  className="w-5 h-5 rounded-full mr-2"
-                />
-                <i className="fa-solid fa-caret-down"></i>
-              </div>
-            </div>
-          </div>
+
+          {userPosts.length > 0
+            ? userPosts.map((post) => {
+                return (
+                  <div className="bg-white rounded p-4 my-5">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center">
+                        <img
+                          src={
+                            user?.profilePic
+                              ? user.profilePic
+                              : "/images/children.jpg"
+                          }
+                          className="w-10 h-10 rounded-full mr-2"
+                        />
+                        <div>
+                          <p className="font-semibold mb-0 text-gray-700">
+                            {user?.name}
+                          </p>
+                          <span className="text-xs text-gray-500">
+                            {/* September 22, 2023, 23:19 pm */}
+                            {post.createdAt}
+                          </span>
+                        </div>
+                      </div>
+                      <a href="#" className="text-gray-700">
+                        <i className="fas fa-ellipsis-v"></i>
+                      </a>
+                    </div>
+                    <p className="text-gray-500 text-lg mb-5">{post.caption}</p>
+                    <img
+                      src={post.photos}
+                      className=" rounded mb-2 w-[300px]"
+                    />
+                    <div className=" flex items-center justify-between">
+                      <div className="flex space-x-20 ">
+                        <div
+                          className="flex items-center mr-5 mb-2"
+                          onClick={handleLike}>
+                          <BiSolidLike className="text-lg mr-2" />
+                          {likeCount}
+                        </div>
+                        <div
+                          className="flex items-center mr-5 mb-2"
+                          onClick={handleDislike}>
+                          <BiSolidDislike className="text-lg mr-2" />
+                          {dislikeCount}
+                        </div>
+                        <div
+                          className="flex items-center mr-5 mb-2"
+                          onClick={handleComment}>
+                          <FaCommentAlt className="text-lg mr-2" />
+                          {commentCount}
+                        </div>
+                        <div
+                          className="flex items-center mr-5 mb-2"
+                          onClick={handleShare}>
+                          <FaShare className="text-lg mr-2" />
+                          {shareCount}
+                        </div>
+                      </div>
+                      <div className="flex items-center">
+                        <img
+                          src={
+                            user?.profilePic
+                              ? user.profilePic
+                              : "/images/children.jpg"
+                          }
+                          className="w-5 h-5 rounded-full mr-2"
+                        />
+                        <i className="fa-solid fa-caret-down"></i>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            : "No post"}
           <button
             type="button"
             className="load-more-btn bg-blue-500 text-white p-2 rounded">

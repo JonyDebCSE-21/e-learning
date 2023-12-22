@@ -12,7 +12,6 @@ export default async function handler(req, res) {
       recentJob,
       linkedIn,
       profilePic,
-      posts,
     } = req.body;
 
     const userProfileDoc = await User.updateOne(
@@ -24,7 +23,6 @@ export default async function handler(req, res) {
         recentJob,
         linkedIn,
         profilePic,
-        posts,
       }
     );
 
@@ -43,7 +41,6 @@ export default async function handler(req, res) {
         recentJod: user.recentJob,
         linkedIn: user.linkedIn,
         profilePic: user.profilePic,
-        posts: user.posts,
       },
       message: "User Profile Updated successfully",
     });

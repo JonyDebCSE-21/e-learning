@@ -36,31 +36,6 @@ const userSchema = new Schema({
   profilePic: {
     type: String,
   },
-  posts: [
-    {
-      caption: String,
-      videos: String,
-      photos: String,
-      like: [
-        {
-          userId: { type: mongoose.Schema.Types.ObjectId },
-          like: Number,
-        },
-      ],
-      unlike: [
-        {
-          userId: { type: mongoose.Schema.Types.ObjectId },
-          unlike: Number,
-        },
-      ],
-      comments: [
-        {
-          userId: { type: mongoose.Schema.Types.ObjectId },
-          comment: String,
-        },
-      ],
-    },
-  ],
 });
 
 export const User = models?.User || mongoose.model("User", userSchema);

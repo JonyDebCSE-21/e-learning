@@ -26,9 +26,7 @@ const UpdateUserForm = () => {
       recentJob,
       linkedIn,
     };
-    console.log("up form  image", ev.target.images.files[0]);
     const user = JSON.parse(localStorage.getItem("user"));
-    console.log("user", user);
     const file = ev.target.images.files[0];
     const formData = new FormData();
     formData.append("image", file);
@@ -39,7 +37,6 @@ const UpdateUserForm = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data?.data);
         if (data?.data) {
           axios
             .put("/api/user/user", {
@@ -52,7 +49,6 @@ const UpdateUserForm = () => {
               profilePic: data?.data.display_url,
             })
             .then((res) => {
-              console.log(res.data.user);
               dispatch(setUser(res.data.user));
               localStorage.setItem("user", JSON.stringify(res.data.user));
               toast.success("User Updated Successfully");
