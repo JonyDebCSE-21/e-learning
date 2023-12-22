@@ -204,7 +204,7 @@ const Cart = () => {
                                 className="cursor-pointer px-2 bg-[#9e9e9e] text-base">
                                 -
                               </button>
-                              <p>{item?.itemQuantity}</p>
+                              <p>{item?.quantity}</p>
                               <button
                                 onClick={() => item && handleIncreaseItem(item)}
                                 className="cursor-pointer px-2 bg-[#9e9e9e] text-base">

@@ -8,6 +8,7 @@ const ProductSchema = new Schema(
     image: { type: String, required: true },
     quantity: { type: Number, required: true },
     totalOrders: { type: Number },
+    reviews: [{ type: String }],
   },
   {
     timestamps: true,

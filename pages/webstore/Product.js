@@ -41,26 +41,28 @@ const Product = ({ product, onAddToCart }) => {
     }
   };
   return (
-    <div className="relative w-full max-w-[15rem] h-[20rem] rounded overflow-hidden shadow-lg ml-3">
-      <img
-        className="w-full h-40 object-cover mb-2 cursor-pointer"
-        src={product?.image}
-        alt={product?.title}
-        onClick={() => setModalOpen(true)}
-      />
-      <div className="px-6 py-2 bg-gray-800 text-white transition duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-600">
-        <div className="font-semibold text-center text-lg mb-2 truncate">
-          {product?.title}
+    <div className="relative w-[80%] h-[20rem] rounded overflow-hidden shadow-lg ml-3">
+      <Link href={`webstore/product/${product?._id}`}>
+        <img
+          className="w-full h-40 object-cover mb-2 cursor-pointer"
+          src={product?.image}
+          alt={product?.title}
+          // onClick={() => setModalOpen(true)}
+        />
+        <div className="px-6 py-2 bg-gray-800 text-white transition duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-600">
+          <div className="font-semibold text-center text-lg mb-2 truncate">
+            {product?.title}
+          </div>
+          <p className="text-center text-base h-12">
+            Price: {product?.price} BDT
+          </p>
+          <button
+            onClick={handleAddToCart}
+            className="w-full inline-flex justify-center rounded-lg text-sm font-semibold py-2.5 px-4 bg-white text-black hover:bg-blue-500">
+            Add To Cart
+          </button>
         </div>
-        <p className="text-center text-base h-12">
-          Price: {product?.price} BDT
-        </p>
-        <button
-          onClick={handleAddToCart}
-          className="w-full inline-flex justify-center rounded-lg text-sm font-semibold py-2.5 px-4 bg-white text-black hover:bg-blue-500">
-          Add To Cart
-        </button>
-      </div>
+      </Link>
 
       {modalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
