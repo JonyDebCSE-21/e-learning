@@ -231,7 +231,7 @@ const Header = () => {
                   )}
                   <li className="hover:bg-blue-700">
                     <Link
-                      href="/settings&privacy"
+                      href="/dashboard/settings&privacy"
                       className="text-white flex items-center">
                       <IoSettingsSharp className="text-lg mr-1" />
                       <h2 className="text-sm mb-0">Settings & Privacy</h2>

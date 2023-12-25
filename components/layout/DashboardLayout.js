@@ -76,6 +76,11 @@ const DashboardLayout = ({ children }) => {
             </Link>
             <Link
               className="hover:bg-common-button px-2 py-3"
+              href="/dashboard/profile">
+              Your Course
+            </Link>
+            <Link
+              className="hover:bg-common-button px-2 py-3"
               href="/dashboard/addCourse">
               Add Course
             </Link>
@@ -83,6 +88,16 @@ const DashboardLayout = ({ children }) => {
               className="hover:bg-common-button px-2 py-3"
               href="/dashboard/addProduct">
               Add Product
+            </Link>
+            <Link
+              className="hover:bg-common-button px-2 py-3"
+              href="/dashboard/settings&privacy">
+              Settings & Privacy
+            </Link>
+            <Link
+              className="hover:bg-common-button px-2 py-3"
+              href="/dashboard/settings&privacy">
+              User Feedback
             </Link>
           </ul>
         </div>
