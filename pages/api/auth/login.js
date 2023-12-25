@@ -45,7 +45,7 @@ export default async function handler(req, res) {
               linkedIn: user.linkedIn,
               profilePic: user.profilePic,
               friends: user.friends,
-              friendRequestSent: user.friendRequests,
+              friendRequestSent: user.friendRequestSent,
               friendRequestRecieved: user.friendRequestRecieved,
             },
             message: "Log in successfull",
