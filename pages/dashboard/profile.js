@@ -185,7 +185,7 @@ const Profile = () => {
           <div className="pd-right">
             <div className="classroom-actions mt-16">
               <Link
-                href={`/dashboard/friends/${user._id}`}
+                href={`/dashboard/friends/${user?._id}`}
                 className="bg-blue-700 text-white border-0 outline-0 px-4 py-2 inline-flex items-center rounded-md cursor-pointer">
                 <FaUserFriends className="text-lg mr-1" />
                 Friends
