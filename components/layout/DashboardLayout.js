@@ -1,16 +1,53 @@
 import React, { useEffect } from "react";
 import Header from "../shared/Navbar/Header";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/redux/slice/userSlice/userSlice";
+import axios from "axios";
 
 const DashboardLayout = ({ children }) => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.userReducer.user);
 
   useEffect(() => {
     const user = localStorage.getItem("user");
     dispatch(setUser(JSON.parse(user)));
   }, []);
+
+  // useEffect(() => {
+  //   // const user = localStorage.getItem("user");
+  //   // console.log(user);
+  //   // if (user) {
+  //   //   axios.get(`/api/user/user?id=${user._id}`).then((res) => {
+  //   //     dispatch(setUser(res.data.user));
+  //   //   });
+  //   // }
+  //   const fetchData = async () => {
+  //     axios.get(`/api/user/user?id=${user._id}`).then((res) => {
+  //       dispatch(setUser(res.data.user));
+  //     });
+  //   };
+  //   // if (user) {
+  //   //   setInterval(function () {
+  //   //     axios.get(`/api/user/user?id=${user._id}`).then((res) => {
+  //   //       dispatch(setUser(res.data.user));
+  //   //     });
+  //   //   }, 5000);
+  //   // }
+  //   fetchData();
+  //   const intervalId = setInterval(fetchData, 10000);
+
+  //   // Clean up the interval when the component unmounts
+  //   return () => clearInterval(intervalId);
+  // }, []);
+  // if (user) {
+  //   setInterval(function () {
+  //     axios.get(`/api/user/user?id=${user._id}`).then((res) => {
+  //       dispatch(setUser(res.data.user));
+  //     });
+  //   }, 5000);
+  // }
+
   return (
     <>
       <Header />
@@ -23,7 +60,6 @@ const DashboardLayout = ({ children }) => {
             className="btn btn-primary drawer-button lg:hidden">
             Open drawer
           </label>
-          <p>Welcome to your Dashboard</p>
           {children}
         </div>
         <div className="drawer-side bg-slate-400">

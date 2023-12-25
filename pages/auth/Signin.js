@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { setUser } from "@/redux/slice/userSlice/userSlice";
 import axios from "axios";
 import Layout from "@/components/layout/Layout";
+import toast from "react-hot-toast";
 
 const Signin = () => {
   const dispatch = useDispatch();
@@ -32,10 +33,12 @@ const Signin = () => {
             dispatch(setUser(res.data.user));
             localStorage.setItem("user", JSON.stringify(res.data.user));
             setLoading(false);
+            toast.success(res.data.message);
             router.push("/");
           }
         })
         .catch((err) => {
+          toast.error(err.response.data.message);
           setLoading(false);
           // toast.error(`${err.response.data.message}`);
         });

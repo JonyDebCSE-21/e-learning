@@ -35,13 +35,21 @@ const Header = () => {
     dispatch(setUser(JSON.parse(user)));
   }, []);
 
-  useEffect(() => {
-    if (user) {
-      axios.get(`/api/user/cart?id=${user._id}`).then((res) => {
-        dispatch(setCart(res.data.cart));
-      });
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     axios.get(`/api/user/cart?id=${user._id}`).then((res) => {
+  //       dispatch(setCart(res.data.cart));
+  //     });
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   if (user) {
+  //     axios.get(`/api/user/user?id=${user._id}`).then((res) => {
+  //       dispatch(setUser(res.data.user));
+  //     });
+  //   }
+  // }, []);
 
   return (
     <div className="nav flex items-center justify-between bg-blue-700 px-5 py-1 sticky top-0 z-50">

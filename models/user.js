@@ -36,6 +36,11 @@ const userSchema = new Schema({
   profilePic: {
     type: String,
   },
+  friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  friendRequestSent: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  friendRequestRecieved: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  ],
 });
 
 export const User = models?.User || mongoose.model("User", userSchema);

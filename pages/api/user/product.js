@@ -9,7 +9,6 @@ export default async function handler(req, res) {
     if (id) {
       const product = await Product.findOne({ _id: id });
 
-      console.log(product);
       return res.status(200).send({
         error: false,
         product: product,

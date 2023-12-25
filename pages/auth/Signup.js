@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/redux/slice/userSlice/userSlice";
 import Layout from "@/components/layout/Layout";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const router = useRouter();
@@ -42,12 +43,13 @@ const Signup = () => {
             dispatch(setUser(res.data.user));
             localStorage.setItem("user", JSON.stringify(res.data.user));
             setLoading(false);
+            toast.success(res.data.message);
             router.push("/");
           }
         })
         .catch((err) => {
           setLoading(false);
-          // toast.error(`${err.response.data.message}`);
+          toast.error(err.response.data.message);
         });
     }
   };

@@ -6,6 +6,8 @@ import { FaShare } from "react-icons/fa6";
 import { PiVideoFill } from "react-icons/pi";
 import { MdPhotoCamera } from "react-icons/md";
 import { HiMiniDocumentPlus } from "react-icons/hi2";
+import Header from "@/components/shared/Navbar/Header";
+import Layout from "@/components/layout/Layout";
 
 const Newsflash = () => {
   const [likeCount, setLikeCount] = useState(120);
@@ -30,138 +32,142 @@ const Newsflash = () => {
   };
 
   return (
-    <div className="flex-basis-47 bg-gray-200">
-      <div className="w-full bg-white rounded p-5 text-gray-700">
-        <div className="flex items-center">
-          <img
-            src="/images/profile-pic.jpg"
-            className="w-12 h-12 rounded-full mr-2"
-          />
-          <div>
-            <p className="font-semibold mb-0 text-gray-700">Username</p>
-            <small className="text-xs">
-              Public <i className="fas fa-caret-down"></i>
-            </small>
-          </div>
-        </div>
-
-        <div className="pl-14 pt-2">
-          <textarea
-            rows="2"
-            placeholder="Share your thoughts, with your community"
-            className="w-full border-0 outline-none border-b border-gray-500  bg-transparent resize-none"></textarea>
-
-          <div className="add-post-links flex">
-            <label
-              for="video-upload"
-              className="flex items-center text-gray-700 mr-6 cursor-pointer">
-              <input
-                type="file"
-                id="video-upload"
-                className="hidden"
-                accept="video/*"
-              />
-              <PiVideoFill className="text-lg mr-2" />
-              <span className="text-lg mr-2">Videos</span>
-            </label>
-
-            <label
-              for="photo-upload"
-              className="flex items-center text-gray-700 mr-6 cursor-pointer">
-              <input
-                type="file"
-                id="photo-upload"
-                className="hidden"
-                accept="image/*"
-              />
-              <MdPhotoCamera className="text-lg mr-2" />
-              <span className="text-lg mr-2">Photos</span>
-            </label>
-
-            <label
-              for="document-upload"
-              className="flex items-center text-gray-700 cursor-pointer">
-              <input
-                type="file"
-                id="document-upload"
-                className="hidden"
-                accept=".pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx"
-              />
-              <HiMiniDocumentPlus className="text-lg mr-2" />
-              <span className="text-lg mr-2">Documents</span>
-            </label>
-            <button>Post</button>
-          </div>
-        </div>
-      </div>
-      <div className="bg-white rounded p-4 my-5">
-        <div className="flex items-center justify-between">
+    <Layout>
+      <div className="flex-basis-47 bg-gray-200">
+        <div className="w-full bg-white rounded p-5 text-gray-700">
           <div className="flex items-center">
             <img
               src="/images/profile-pic.jpg"
-              className="w-10 h-10 rounded-full mr-2"
+              className="w-12 h-12 rounded-full mr-2"
             />
             <div>
               <p className="font-semibold mb-0 text-gray-700">Username</p>
-              <span className="text-xs text-gray-500">
-                September 22, 2023, 23:19 pm
-              </span>
+              <small className="text-xs">
+                Public <i className="fas fa-caret-down"></i>
+              </small>
             </div>
           </div>
-          <a href="#" className="text-gray-700">
-            <i className="fas fa-ellipsis-v"></i>
-          </a>
+
+          <div className="pl-14 pt-2">
+            <textarea
+              rows="2"
+              placeholder="Share your thoughts, with your community"
+              className="w-full border-0 outline-none border-b border-gray-500  bg-transparent resize-none"></textarea>
+
+            <div className="add-post-links flex">
+              <label
+                for="video-upload"
+                className="flex items-center text-gray-700 mr-6 cursor-pointer">
+                <input
+                  type="file"
+                  id="video-upload"
+                  className="hidden"
+                  accept="video/*"
+                />
+                <PiVideoFill className="text-lg mr-2" />
+                <span className="text-lg mr-2">Videos</span>
+              </label>
+
+              <label
+                for="photo-upload"
+                className="flex items-center text-gray-700 mr-6 cursor-pointer">
+                <input
+                  type="file"
+                  id="photo-upload"
+                  className="hidden"
+                  accept="image/*"
+                />
+                <MdPhotoCamera className="text-lg mr-2" />
+                <span className="text-lg mr-2">Photos</span>
+              </label>
+
+              <label
+                for="document-upload"
+                className="flex items-center text-gray-700 cursor-pointer">
+                <input
+                  type="file"
+                  id="document-upload"
+                  className="hidden"
+                  accept=".pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx"
+                />
+                <HiMiniDocumentPlus className="text-lg mr-2" />
+                <span className="text-lg mr-2">Documents</span>
+              </label>
+              <button>Post</button>
+            </div>
+          </div>
         </div>
-        <p className="text-gray-500 text-lg mb-5">
-          Welcome to our open learning platform{" "}
-          <span className="text-gray-700 font-semibold">EduQuanta</span>
-          Spread your thoughts to our community.
-          <a href="#" className="text-blue-500">
-            #Easy Tutorials
-          </a>
-          <a href="#" className="text-blue-500">
-            #e-learning platform
-          </a>
-        </p>
-        <img src="/images/feed-image.png" className="w-full rounded mb-2" />
-        <div className=" flex items-center justify-between">
-          <div className="flex space-x-20 ">
-            <div className="flex items-center mr-5 mb-2" onClick={handleLike}>
-              <BiSolidLike className="text-lg mr-2" />
-              {likeCount}
+        <div className="bg-white rounded p-4 my-5">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <img
+                src="/images/profile-pic.jpg"
+                className="w-10 h-10 rounded-full mr-2"
+              />
+              <div>
+                <p className="font-semibold mb-0 text-gray-700">Username</p>
+                <span className="text-xs text-gray-500">
+                  September 22, 2023, 23:19 pm
+                </span>
+              </div>
             </div>
-            <div
-              className="flex items-center mr-5 mb-2"
-              onClick={handleDislike}>
-              <BiSolidDislike className="text-lg mr-2" />
-              {dislikeCount}
-            </div>
-            <div
-              className="flex items-center mr-5 mb-2"
-              onClick={handleComment}>
-              <FaCommentAlt className="text-lg mr-2" />
-              {commentCount}
-            </div>
-            <div className="flex items-center mr-5 mb-2" onClick={handleShare}>
-              <FaShare className="text-lg mr-2" />
-              {shareCount}
-            </div>
+            <a href="#" className="text-gray-700">
+              <i className="fas fa-ellipsis-v"></i>
+            </a>
           </div>
-          <div className="flex items-center">
-            <img
-              src="/images/profile-pic.jpg"
-              className="w-5 h-5 rounded-full mr-2"
-            />
-            <i className="fa-solid fa-caret-down"></i>
+          <p className="text-gray-500 text-lg mb-5">
+            Welcome to our open learning platform{" "}
+            <span className="text-gray-700 font-semibold">EduQuanta</span>
+            Spread your thoughts to our community.
+            <a href="#" className="text-blue-500">
+              #Easy Tutorials
+            </a>
+            <a href="#" className="text-blue-500">
+              #e-learning platform
+            </a>
+          </p>
+          <img src="/images/feed-image.png" className="w-full rounded mb-2" />
+          <div className=" flex items-center justify-between">
+            <div className="flex space-x-20 ">
+              <div className="flex items-center mr-5 mb-2" onClick={handleLike}>
+                <BiSolidLike className="text-lg mr-2" />
+                {likeCount}
+              </div>
+              <div
+                className="flex items-center mr-5 mb-2"
+                onClick={handleDislike}>
+                <BiSolidDislike className="text-lg mr-2" />
+                {dislikeCount}
+              </div>
+              <div
+                className="flex items-center mr-5 mb-2"
+                onClick={handleComment}>
+                <FaCommentAlt className="text-lg mr-2" />
+                {commentCount}
+              </div>
+              <div
+                className="flex items-center mr-5 mb-2"
+                onClick={handleShare}>
+                <FaShare className="text-lg mr-2" />
+                {shareCount}
+              </div>
+            </div>
+            <div className="flex items-center">
+              <img
+                src="/images/profile-pic.jpg"
+                className="w-5 h-5 rounded-full mr-2"
+              />
+              <i className="fa-solid fa-caret-down"></i>
+            </div>
           </div>
         </div>
+        <button
+          type="button"
+          className="load-more-btn bg-blue-500 text-white p-2 rounded">
+          Load More
+        </button>
       </div>
-      <button
-        type="button"
-        className="load-more-btn bg-blue-500 text-white p-2 rounded">
-        Load More
-      </button>
-    </div>
+    </Layout>
   );
 };
 
