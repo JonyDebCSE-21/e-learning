@@ -41,7 +41,7 @@ export default async function handler(req, res) {
         linkedIn: userDoc.linkedIn,
         profilePic: userDoc.profilePic,
         friends: userDoc.friends,
-        friendRequestSent: userDoc.friendRequests,
+        friendRequestSent: userDoc.friendRequestSent,
         friendRequestRecieved: userDoc.friendRequestRecieved,
       },
       message: "User created successfully",
