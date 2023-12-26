@@ -6,9 +6,9 @@ const ProductSchema = new Schema(
     description: { type: String },
     price: { type: Number, required: true },
     image: { type: String, required: true },
-    quantity: { type: Number, required: true },
+    quantity: { type: Number },
     totalOrders: { type: Number },
-    reviews: [{ type: String }],
+    opinions: [{ type: String }],
   },
   {
     timestamps: true,

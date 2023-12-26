@@ -1,5 +1,6 @@
 import { setCart } from "@/redux/slice/cartSlice/cartSlice";
 import axios from "axios";
+import Link from "next/link";
 import React, { useState } from "react";
 import { RxCrossCircled } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,12 +23,13 @@ const Course = ({ course, onAddToCart }) => {
 
   return (
     <div className="relative w-full max-w-[15rem] h-[20rem] rounded overflow-hidden shadow-lg ml-3">
-      <img
-        className="w-full h-40 object-cover mb-2 cursor-pointer"
-        src={course?.thumbnail}
-        alt={course?.title}
-        onClick={() => setModalOpen(true)}
-      />
+      <Link href={`/course/${course._id}`}>
+        <img
+          className="w-full h-40 object-cover mb-2 cursor-pointer"
+          src={course?.thumbnail}
+          alt={course?.title}
+        />
+      </Link>
       <div className="px-6 py-2 bg-gray-800 text-white transition duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-600">
         <div className="font-semibold text-center text-lg mb-2 truncate">
           {course?.title}

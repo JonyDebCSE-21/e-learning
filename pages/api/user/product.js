@@ -26,13 +26,27 @@ export default async function handler(req, res) {
   if (req?.method == "POST") {
     const { _id, opinion } = req.body;
 
-    const product = await Product.findById({ _id });
+    console.log(_id, opinion);
 
-    product.reviews.push(opinion);
-    await product.save();
-    return res.status(200).send({
-      error: false,
-      product: product,
-    });
+    try {
+      const product = await Product.findById({ _id });
+
+      console.log(product);
+
+      if (!product) {
+        return res.status(404).send({ error: "Product not found" });
+      }
+
+      console.log("reviews", typeof product.opinions);
+      product.opinions.push(opinion);
+      await product.save();
+      return res.status(200).send({
+        error: false,
+        product: product,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
   }
 }
