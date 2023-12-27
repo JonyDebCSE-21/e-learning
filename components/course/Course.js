@@ -1,6 +1,7 @@
 import { setCart } from "@/redux/slice/cartSlice/cartSlice";
 import axios from "axios";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { RxCrossCircled } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -17,7 +18,13 @@ const Course = ({ course, onAddToCart }) => {
         courseId: course._id,
         quantity: 1,
       })
-      .then((res) => dispatch(setCart(res.data.cart)));
+      .then((res) => {
+        toast.success(res.data.message);
+        dispatch(setCart(res.data.cart));
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
   };
 
   return (

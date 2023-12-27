@@ -1,5 +1,7 @@
+import CreateAlbumModal from "@/components/shared/CreateAlbumModal";
 import Header from "@/components/shared/Navbar/Header";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const JoinedCreatedCounts = ({ joinedCount, createdCount }) => {
   return (
@@ -18,6 +20,8 @@ const JoinedCreatedCounts = ({ joinedCount, createdCount }) => {
 
 const Classroom = () => {
   // Existing state variables
+  const user = useSelector((state) => state.userReducer.user);
+  const [openModal, setOpenModal] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [joinedClasses, setJoinedClasses] = useState(0);
   const [createdClasses, setCreatedClasses] = useState(0);
@@ -128,8 +132,8 @@ const Classroom = () => {
                 alt="User Profile"
               />
               <div>
-                <h3 className="text-2xl font-semibold">Username</h3>
-                <p className="text-sm">120 Friends</p>
+                <h3 className="text-2xl font-semibold">{user?.name}</h3>
+                <p className="text-sm">{user?.friends?.length} Friends</p>
               </div>
             </div>
           </div>
@@ -139,21 +143,21 @@ const Classroom = () => {
               <button
                 type="button"
                 className="bg-green-500 text-white border-0 outline-0 px-4 py-2 inline-flex items-center rounded-md cursor-pointer"
-                onClick={handleCreateClassroom}>
-                Create Classroom
+                onClick={() => setOpenModal(true)}>
+                Create Album
               </button>
-              <button
+              {/* <button
                 type="button"
                 className="bg-blue-500 text-white border-0 outline-0 px-4 py-2 inline-flex items-center rounded-md ml-3 cursor-pointer"
                 onClick={handleJoinClassroom}>
                 Join Classroom
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
 
         {/* Joined/Created Counts */}
-        <JoinedCreatedCounts
+        {/* <JoinedCreatedCounts
           joinedCount={joinedClasses}
           createdCount={createdClasses}
         />
@@ -170,7 +174,8 @@ const Classroom = () => {
             className="mt-1 p-2 border rounded-md bg-orange-500"
             onChange={handleFileChange}
           />
-        </div>
+        </div> */}
+        <CreateAlbumModal openModal={openModal} setOpenModal={setOpenModal} />
       </div>
     </>
   );
