@@ -16,6 +16,7 @@ import { MdPhotoCamera } from "react-icons/md";
 import { HiMiniDocumentPlus } from "react-icons/hi2";
 import { SiGoogleclassroom } from "react-icons/si";
 import { FaUserFriends } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
 import profilePic from "@/public/images/propic.jpg";
 import UpdateUserForm from "@/components/form/UpdateUserForm";
 import DashboardLayout from "@/components/layout/DashboardLayout";
@@ -116,11 +117,8 @@ const Profile = () => {
   }, [user]);
   return (
     <DashboardLayout>
-      <div className="bg-gray-200 top-0">
-        <h2 className="text-3xl font-bold text-primary text-center my-5">
-          Welcome to your Dashboard
-        </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-2 gap-8 p-8">
+      <div className=" top-0 w-full">
+        <div className="p-8 w-full">
           <div className="text-center bg-gray-100 p-8 rounded-lg">
             <div className="avatar mb-4">
               <div className="w-40 h-40 rounded-full overflow-hidden mx-auto">
@@ -159,9 +157,12 @@ const Profile = () => {
               <FaLinkedin className="text-lg mr-2" />
               <h2 className="text-lg mb-2">LinkedIn: {user?.linkedIn} </h2>
             </div>
-          </div>
-          <div className="bg-white p-8 rounded-lg shadow-md">
-            <UpdateUserForm />
+            <Link href={"/dashboard/settings&privacy"}>
+              <div className="flex items-center justify-center gap-5 bg-blue-600 px-12 py-2 w-[50%] mx-auto rounded-md text-white font-bold">
+                <FaEdit className="text-lg font-bold" />
+                <span>Edit your profile</span>
+              </div>
+            </Link>
           </div>
         </div>
 

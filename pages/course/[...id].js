@@ -1,5 +1,4 @@
 import Layout from "@/components/layout/Layout";
-import { setCart } from "@/redux/slice/cartSlice/cartSlice";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -8,16 +7,40 @@ import { useDispatch, useSelector } from "react-redux";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-const SignleProductPage = () => {
+const SingleCourseDetailsPage = () => {
   const user = useSelector((state) => state.userReducer.user);
   const dispatch = useDispatch();
-  const [rating, setRating] = useState(null);
-  const [opinion, setOpinion] = useState("");
-  const [product, setProduct] = useState({});
-  const ratings = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
-
   const router = useRouter();
+  const [course, setCourse] = useState({});
+  const [opinion, setOpinion] = useState("");
   const { id } = router.query;
+
+  const fetchCourse = () => {
+    if (id) {
+      axios
+        .get("/api/user/course?id=" + id)
+        .then((res) => setCourse(res.data.course));
+    } else {
+      return;
+    }
+  };
+
+  useEffect(() => {
+    fetchCourse();
+  }, [id]);
+
+  console.log(course);
+
+  const handleAddToCart = () => {
+    //
+    axios
+      .put("/api/user/cart", {
+        userId: user._id,
+        courseId: course._id,
+        quantity: 1,
+      })
+      .then((res) => dispatch(setCart(res.data.cart)));
+  };
 
   const responsive = {
     desktop: {
@@ -37,66 +60,47 @@ const SignleProductPage = () => {
     },
   };
 
-  const fetchProducts = () => {
-    if (id) {
-      axios
-        .get("/api/user/product?id=" + id)
-        .then((res) => setProduct(res.data.product));
-    } else {
-      return;
-    }
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, [id]);
-
   const updateProductWithReview = async () => {
     if (opinion == "") return;
     axios
-      .post("/api/user/product/", { _id: product._id, opinion })
+      .post("/api/user/course/", { _id: course._id, opinion })
       .then((res) => {
         if (res.data) {
           setOpinion("");
-          fetchProducts();
+          fetchCourse();
         }
       });
   };
-
-  const handleAddToCart = () => {
-    //
-    axios
-      .put("/api/user/cart", {
-        userId: user?._id,
-        productId: product._id,
-        quantity: 1,
-      })
-      .then((res) => dispatch(setCart(res.data.cart)));
-  };
-
-  console.log("hhe", product.opinions);
   return (
     <Layout>
-      <div className="p-10">
+      <div className="p-5">
         {/* Product Details Section start */}
         <div className="flex  items-center gap-10">
           {/* product image */}
           <div className=" w-[30%] flex flex-col gap-10">
-            <img src={product.image} alt="" />
+            <img src={course.thumbnail} alt="" />
           </div>
           {/* product details */}
           <div className="flex flex-col gap-4 self-start w-[60%] ">
             <h1 className="text-2xl font-bold tracking-wider">
-              {product.title}
+              {course.title}
             </h1>
+            <span>
+              Duration: <p>{course.duration}</p>{" "}
+            </span>
             <span className="bg-gray-400 px-2 py-2 w-[30%] rounded text-base">
-              Price: BDT {product.price}{" "}
+              Price: BDT {course.price}{" "}
             </span>
             <div className="w-[20%]">
               <h3 className="text-lg border-b-2 border-black font-bold">
                 Description
               </h3>
-              <p>{product.description}</p>
+              <p>{course.details}</p>
+            </div>
+
+            <div>
+              Course Instructor:{" "}
+              <span className="text-2xl font-bold">{course.instructor}</span>{" "}
             </div>
 
             <span
@@ -114,7 +118,7 @@ const SignleProductPage = () => {
           <div className="p-2">
             <span className="text-xl font-bold ">Product Review</span>
 
-            {product.opinions?.length > 0 ? (
+            {course.opinions?.length > 0 ? (
               <Carousel
                 swipeable={true}
                 draggable={true}
@@ -134,7 +138,7 @@ const SignleProductPage = () => {
                 dotListClass="custom-dot-list-style"
                 itemClass="carousel-item-padding-40-px"
                 className="mt-3">
-                {product.opinions.map((opinion) => (
+                {course.opinions.map((opinion) => (
                   <div
                     style={{
                       backgroundColor: "#DBDCD9",
@@ -172,7 +176,7 @@ const SignleProductPage = () => {
             </select>
           </div> */}
           <span className="text-xl font-bold block ">
-            Say something about this Product?
+            Say something about this Course?
           </span>
           <textarea
             className="mt-2 p-2 block w-[100%] md:w-[50%] resize-none"
@@ -204,4 +208,4 @@ const SignleProductPage = () => {
   );
 };
 
-export default SignleProductPage;
+export default SingleCourseDetailsPage;

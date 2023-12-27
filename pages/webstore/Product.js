@@ -49,20 +49,20 @@ const Product = ({ product, onAddToCart }) => {
           alt={product?.title}
           // onClick={() => setModalOpen(true)}
         />
-        <div className="px-6 py-2 bg-gray-800 text-white transition duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-600">
-          <div className="font-semibold text-center text-lg mb-2 truncate">
-            {product?.title}
-          </div>
-          <p className="text-center text-base h-12">
-            Price: {product?.price} BDT
-          </p>
-          <button
-            onClick={handleAddToCart}
-            className="w-full inline-flex justify-center rounded-lg text-sm font-semibold py-2.5 px-4 bg-white text-black hover:bg-blue-500">
-            Add To Cart
-          </button>
-        </div>
       </Link>
+      <div className="px-6 py-2 bg-gray-800 text-white transition duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-600">
+        <div className="font-semibold text-center text-lg mb-2 truncate">
+          {product?.title}
+        </div>
+        <p className="text-center text-base h-12">
+          Price: {product?.price} BDT
+        </p>
+        <button
+          onClick={handleAddToCart}
+          className="w-full inline-flex justify-center rounded-lg text-sm font-semibold py-2.5 px-4 bg-white text-black hover:bg-blue-500">
+          Add To Cart
+        </button>
+      </div>
 
       {modalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">

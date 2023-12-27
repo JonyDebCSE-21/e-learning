@@ -58,73 +58,77 @@ const UpdateUserForm = () => {
   };
   return (
     <form onSubmit={handleUpdateProfile}>
-      <div className="mb-2">
-        <label className="block text-sm font-medium text-gray-700">
-          Mobile Number
-        </label>
-        <input
-          type="number"
-          placeholder="Enter Your Number"
-          className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-          name="phone"
-          onChange={(e) => setMobileNumber(e.target.value)}
-        />
-      </div>
-      <div className="mb-2">
-        <label className="block text-sm font-medium text-gray-700">
-          Location
-        </label>
-        <input
-          type="text"
-          placeholder="Your Address"
-          className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-          name="address"
-          onChange={(e) => setLocation(e.target.value)}
-        />
-      </div>
-      <div className="mb-2">
-        <label className="block text-sm font-medium text-gray-700">
-          Education
-        </label>
-        <input
-          type="text"
-          placeholder="Your Last Education"
-          className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-          name="education"
-          onChange={(e) => setEducation(e.target.value)}
-        />
-      </div>
-      <div className="mb-2">
-        <label className="block text-sm font-medium text-gray-700">
-          Workplace
-        </label>
-        <input
-          type="text"
-          placeholder="Your Rcent Job"
-          className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-          name="Job"
-          onChange={(e) => setRecentJob(e.target.value)}
-        />
-      </div>
-      <div className="mb-2">
-        <label className="block text-sm font-medium text-gray-700">
-          LinkedIn
-        </label>
-        <input
-          type="text"
-          placeholder="Your LinkedIn ID Link"
-          className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-          name="linkedin"
-          onChange={(e) => setLinkedIn(e.target.value)}
-        />
-      </div>
-      <div className="mb-2">
-        <label className="block text-sm font-medium text-gray-700">Photo</label>
-        <input
-          type="file"
-          className="input input-bordered w-full max-w-xs mt-1 bg-black text-white"
-          name="images"
-        />
+      <div className="grid grid-cols-2 ">
+        <div className="mb-2">
+          <label className="block text-sm font-medium text-gray-700">
+            Mobile Number
+          </label>
+          <input
+            type="number"
+            placeholder="Enter Your Number"
+            className="outline-none px-3 py-2 rounded-sm w-full max-w-xs mt-1 bg-gray-400 text-black"
+            name="phone"
+            onChange={(e) => setMobileNumber(e.target.value)}
+          />
+        </div>
+        <div className="mb-2">
+          <label className="block text-sm font-medium text-gray-700">
+            Location
+          </label>
+          <input
+            type="text"
+            placeholder="Your Address"
+            className=" outline-none px-3 py-2 rounded-sm  w-full max-w-xs mt-1 bg-gray-400 text-black"
+            name="address"
+            onChange={(e) => setLocation(e.target.value)}
+          />
+        </div>
+        <div className="mb-2">
+          <label className="block text-sm font-medium text-gray-700">
+            Education
+          </label>
+          <input
+            type="text"
+            placeholder="Your Last Education"
+            className=" outline-none px-3 py-2 rounded-sm w-full max-w-xs mt-1 bg-gray-400 text-black"
+            name="education"
+            onChange={(e) => setEducation(e.target.value)}
+          />
+        </div>
+        <div className="mb-2">
+          <label className="block text-sm font-medium text-gray-700">
+            Workplace
+          </label>
+          <input
+            type="text"
+            placeholder="Your Rcent Job"
+            className="outline-none px-3 py-2 rounded-sm w-full max-w-xs mt-1 bg-gray-400 text-black"
+            name="Job"
+            onChange={(e) => setRecentJob(e.target.value)}
+          />
+        </div>
+        <div className="mb-2">
+          <label className="block text-sm font-medium text-gray-700">
+            LinkedIn
+          </label>
+          <input
+            type="text"
+            placeholder="Your LinkedIn ID Link"
+            className="outline-none px-3 py-2 rounded-sm w-full max-w-xs mt-1 bg-gray-400 text-black"
+            name="linkedin"
+            onChange={(e) => setLinkedIn(e.target.value)}
+          />
+        </div>
+        <div className="mb-2">
+          <label className="block text-sm font-medium text-gray-700">
+            Photo
+          </label>
+          <input
+            type="file"
+            className="outline-none px-3 py-2 rounded-sm w-full max-w-xs mt-1 bg-gray-400 text-black"
+            name="images"
+          />
+        </div>
       </div>
       <button
         className="btn w-full max-w-xs bg-blue-500 text-white hover:bg-blue-700"

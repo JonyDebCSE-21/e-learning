@@ -53,7 +53,7 @@ const DashboardLayout = ({ children }) => {
       <Header />
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col items-center justify-center">
+        <div className="drawer-content flex flex-col  p-12">
           {/* Page content here */}
           <label
             htmlFor="my-drawer-2"
@@ -96,7 +96,7 @@ const DashboardLayout = ({ children }) => {
             </Link>
             <Link
               className="hover:bg-common-button px-2 py-3"
-              href="/dashboard/settings&privacy">
+              href="/dashboard/userFeedback">
               User Feedback
             </Link>
           </ul>

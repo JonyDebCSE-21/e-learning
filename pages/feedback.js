@@ -1,7 +1,31 @@
 import Layout from "@/components/layout/Layout";
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const Feedback = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [feedback, setFeedback] = useState("");
+  const [rating, setRating] = useState(null);
+  const [hover, setHover] = useState(null);
+  const [totalStars, setTotalStars] = useState(5);
+
+  const handleFeedbackForm = (e) => {
+    e.preventDefault();
+    const data = { name, email, feedback, rating };
+    console.log(data);
+    axios.post("/api/user/feedback", data).then((res) => {
+      if (res.data) {
+        setName("");
+        setEmail("");
+        setFeedback("");
+        setRating(null);
+        toast.success("Feedback Sent");
+      }
+    });
+  };
+
   return (
     <Layout>
       <div className="container mx-auto my-8 p-8 bg-white shadow-md rounded-md">
@@ -9,7 +33,7 @@ const Feedback = () => {
           Give Feedbcak To EduQuanta
         </h1>
 
-        <form action="#" method="post" className="space-y-4">
+        <form onSubmit={handleFeedbackForm} className="space-y-4">
           <div className="mb-4">
             <label
               htmlFor="name"
@@ -18,8 +42,8 @@ const Feedback = () => {
             </label>
             <input
               type="text"
-              id="name"
-              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
               required
             />
@@ -33,8 +57,8 @@ const Feedback = () => {
             </label>
             <input
               type="email"
-              id="email"
-              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
               required
             />
@@ -47,9 +71,9 @@ const Feedback = () => {
               Your Feedback
             </label>
             <textarea
-              id="feedback"
-              name="feedback"
               rows="4"
+              value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
               className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
               required></textarea>
           </div>
@@ -58,63 +82,33 @@ const Feedback = () => {
             <label className="block text-sm font-medium text-gray-600">
               Rate Your Experience
             </label>
-            <div className="mt-1">
-              <input
-                type="radio"
-                id="star5"
-                name="rating"
-                value="5"
-                className="hidden"
-                required
-              />
-              <label htmlFor="star5" className="text-xl cursor-pointer">
-                &#9733;
-              </label>
+            {[...Array(totalStars)].map((star, index) => {
+              const currentRating = index + 1;
 
-              <input
-                type="radio"
-                id="star4"
-                name="rating"
-                value="4"
-                className="hidden"
-              />
-              <label htmlFor="star4" className="text-xl cursor-pointer">
-                &#9733;
-              </label>
-
-              <input
-                type="radio"
-                id="star3"
-                name="rating"
-                value="3"
-                className="hidden"
-              />
-              <label htmlFor="star3" className="text-xl cursor-pointer">
-                &#9733;
-              </label>
-
-              <input
-                type="radio"
-                id="star2"
-                name="rating"
-                value="2"
-                className="hidden"
-              />
-              <label htmlFor="star2" className="text-xl cursor-pointer">
-                &#9733;
-              </label>
-
-              <input
-                type="radio"
-                id="star1"
-                name="rating"
-                value="1"
-                className="hidden"
-              />
-              <label htmlFor="star1" className="text-xl cursor-pointer">
-                &#9733;
-              </label>
-            </div>
+              return (
+                <label key={index}>
+                  <input
+                    type="radio"
+                    name="rating"
+                    className="hidden"
+                    value={currentRating}
+                    onChange={() => setRating(currentRating)}
+                  />
+                  <span
+                    className="star text-2xl"
+                    style={{
+                      color:
+                        currentRating <= (hover || rating)
+                          ? "#ffc107"
+                          : "#e4e5e9",
+                    }}
+                    onMouseEnter={() => setHover(currentRating)}
+                    onMouseLeave={() => setHover(null)}>
+                    &#9733;
+                  </span>
+                </label>
+              );
+            })}
           </div>
 
           <div className="mb-4">

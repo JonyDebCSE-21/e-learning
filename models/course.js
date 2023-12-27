@@ -29,6 +29,7 @@ const courseSchema = new Schema({
     type: String,
     required: true,
   },
+  opinions: [{ type: String }],
 });
 
 export const Course = models?.Course || mongoose.model("Course", courseSchema);

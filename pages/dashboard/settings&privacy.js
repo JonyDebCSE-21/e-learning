@@ -1,14 +1,20 @@
+import UpdateUserForm from "@/components/form/UpdateUserForm";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import React from "react";
 
 const settingsandprivacy = () => {
   return (
     <DashboardLayout>
-      <div className="container mx-auto my-8 p-8 bg-white rounded shadow-md">
-        <h1 className="text-2xl font-bold mb-4">User Settings & Privacy</h1>
+      <div className="container mx-auto my-8 p-8 bg-white rounded ">
+        <h1 className="text-2xl mb-3 font-bold">Update Your Profile</h1>
+        <div className="bg-white p-8 rounded-lg shadow-md mb-5">
+          <UpdateUserForm />
+        </div>
+
+        {/* <h1 className="text-2xl font-bold mb-4">User Settings & Privacy</h1> */}
 
         {/* User Account Settings */}
-        <section className="mb-4">
+        {/* <section className="mb-4">
           <h2 className="text-lg font-semibold mb-4">Account Settings</h2>
           <form action="#" method="POST">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -79,10 +85,10 @@ const settingsandprivacy = () => {
               </div>
             </div>
           </form>
-        </section>
+        </section> */}
 
         {/* Privacy Settings */}
-        <section>
+        {/* <section>
           <h2 className="text-lg font-semibold mb-4">Privacy Settings</h2>
           <form action="#" method="POST">
             <div className="mb-4">
@@ -137,7 +143,7 @@ const settingsandprivacy = () => {
               </button>
             </div>
           </form>
-        </section>
+        </section> */}
       </div>
     </DashboardLayout>
   );
