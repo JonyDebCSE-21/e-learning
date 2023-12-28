@@ -1,4 +1,5 @@
 import { dbConnect } from "@/lib/mongoose";
+import { Course } from "@/models/course";
 import { Order } from "@/models/order";
 
 const stripe = require("stripe")(process.env.STRIPE_API_KEY);
@@ -7,12 +8,37 @@ export default async function handler(req, res) {
   await dbConnect();
 
   if (req.method == "GET") {
-    const courseDoc = await Order.find({});
+    const email = req.query.email;
+    if (email) {
+      const orders = await Order.find({ email: email });
+      const courses = await Course.find({});
+      const lineItems = [];
+      orders.map((order) => {
+        const item = order.line_items;
+        lineItems.push(...item);
+      });
+      let userCourse = [];
+      lineItems.map((item) => {
+        const itemId = item.price_data.product_data.name;
+        const course = courses.find((course) => course._id == itemId);
+        courses.map((item) => {
+          if (item._id == itemId) {
+            userCourse.push(course);
+          }
+        });
+      });
 
-    return res.status(200).send({
-      error: false,
-      course: courseDoc,
-    });
+      return res.status(200).send({
+        error: false,
+        courses: userCourse,
+      });
+    }
+    // const courseDoc = await Order.find({});
+
+    // return res.status(200).send({
+    //   error: false,
+    //   course: courseDoc,
+    // });
   }
 
   if (req.method == "POST") {

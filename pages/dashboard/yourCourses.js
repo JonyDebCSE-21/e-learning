@@ -1,31 +1,22 @@
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const YourCoursesPage = () => {
-  const [orderItems, setOrderItems] = useState([]);
-  const [courses, setCourses] = useState([]);
   const [yourCourses, setYourCourses] = useState([]);
+  const user = useSelector((state) => state.userReducer.user);
 
   useEffect(() => {
-    axios.get("/api/user/order").then((res) => {
-      const line_items = res.data.course[0]?.line_items || [];
-      let items = line_items.map(
-        (line_item) => line_item.price_data.product_data.name
-      );
-      setOrderItems(items);
-    });
-
-    axios.get("/api/user/course/").then((res) => {
-      setCourses(res.data.course);
-    });
+    axios
+      .get(`/api/user/order?email=${user.email}`)
+      .then((res) => {
+        setYourCourses(res.data.courses);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
-
-  useEffect(() => {
-    let newArray = courses.filter((obj) => orderItems.includes(obj._id));
-    setYourCourses(newArray);
-    console.log("new11", yourCourses);
-  }, [courses, orderItems]);
 
   return (
     <DashboardLayout>
