@@ -76,7 +76,7 @@ const DashboardLayout = ({ children }) => {
             </Link>
             <Link
               className="hover:bg-common-button px-2 py-3"
-              href="/dashboard/profile">
+              href="/dashboard/yourCourses">
               Your Course
             </Link>
             <Link

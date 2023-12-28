@@ -35,13 +35,13 @@ const Header = () => {
     dispatch(setUser(JSON.parse(user)));
   }, []);
 
-  // useEffect(() => {
-  //   if (user) {
-  //     axios.get(`/api/user/cart?id=${user._id}`).then((res) => {
-  //       dispatch(setCart(res.data.cart));
-  //     });
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (user) {
+      axios.get(`/api/user/cart?id=${user._id}`).then((res) => {
+        dispatch(setCart(res.data.cart));
+      });
+    }
+  }, []);
 
   // useEffect(() => {
   //   if (user) {
