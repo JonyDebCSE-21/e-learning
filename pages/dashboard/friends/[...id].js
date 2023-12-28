@@ -1,6 +1,7 @@
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import { setUser } from "@/redux/slice/userSlice/userSlice";
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -72,9 +73,16 @@ const Friends = () => {
                 return users.map((user) => {
                   if (user._id == friend) {
                     return (
-                      <p key={user._id} className="font-semibold">
-                        {user.name}
-                      </p>
+                      <div className="flex justify-between px-2 my-3">
+                        <p key={user._id} className="font-semibold">
+                          {user.name}
+                        </p>
+                        <Link
+                          href={`/Classroom/friendClassroom/${friend}`}
+                          className="bg-green-400 p-2 rounded-lg">
+                          Classroom
+                        </Link>
+                      </div>
                     );
                   }
                 });
@@ -114,26 +122,28 @@ const Friends = () => {
           {users.map((singleUser) => {
             return (
               <>
-                {singleUser._id !== user._id && (
-                  <div
-                    key={singleUser._id}
-                    className="bg-gray-200 p-3 rounded-lg w-full flex justify-between mb-2">
-                    <h2 className="text-xl font-bold">{singleUser.name}</h2>
-                    {!user?.friendRequestSent?.includes(singleUser._id) ? (
-                      <button
-                        onClick={() => handleAddFriend(singleUser._id)}
-                        className="bg-green-400 p-2 rounded-lg">
-                        Add Friend
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => handleAddFriend(singleUser._id)}
-                        className="bg-red-500 p-2 rounded-lg">
-                        Cancel Request
-                      </button>
-                    )}
-                  </div>
-                )}
+                {!user?.friends?.includes(singleUser._id) &&
+                  !user?.friendRequestRecieved?.includes(singleUser._id) &&
+                  singleUser._id !== user._id && (
+                    <div
+                      key={singleUser._id}
+                      className="bg-gray-200 p-3 rounded-lg w-full flex justify-between mb-2">
+                      <h2 className="text-xl font-bold">{singleUser.name}</h2>
+                      {!user?.friendRequestSent?.includes(singleUser._id) ? (
+                        <button
+                          onClick={() => handleAddFriend(singleUser._id)}
+                          className="bg-green-400 p-2 rounded-lg">
+                          Add Friend
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleAddFriend(singleUser._id)}
+                          className="bg-red-500 p-2 rounded-lg">
+                          Cancel Request
+                        </button>
+                      )}
+                    </div>
+                  )}
               </>
             );
           })}

@@ -29,8 +29,6 @@ const SingleCourseDetailsPage = () => {
     fetchCourse();
   }, [id]);
 
-  console.log(course);
-
   const handleAddToCart = () => {
     //
     axios

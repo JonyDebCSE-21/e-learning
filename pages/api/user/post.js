@@ -37,4 +37,8 @@ export default async function handeler(req, res) {
       message: "Post Created Successfull",
     });
   }
+
+  if (req.method === "PUT") {
+    const { userId, postId, comment } = req.body;
+  }
 }

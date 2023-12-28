@@ -19,3 +19,9 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+.react-multiple-carousel__arrow--right {
+  z-index: 50 !important;
+}
+.react-multiple-carousel__arrow--left {
+  z-index: 50 !important;
+}

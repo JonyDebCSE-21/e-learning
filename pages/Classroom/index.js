@@ -1,6 +1,9 @@
 import CreateAlbumModal from "@/components/shared/CreateAlbumModal";
 import Header from "@/components/shared/Navbar/Header";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 import { useSelector } from "react-redux";
 
 const JoinedCreatedCounts = ({ joinedCount, createdCount }) => {
@@ -19,9 +22,25 @@ const JoinedCreatedCounts = ({ joinedCount, createdCount }) => {
 };
 
 const Classroom = () => {
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 1,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
   // Existing state variables
   const user = useSelector((state) => state.userReducer.user);
   const [openModal, setOpenModal] = useState(false);
+  const [userAlbum, setUserAlbum] = useState([]);
+
   const [selectedFile, setSelectedFile] = useState(null);
   const [joinedClasses, setJoinedClasses] = useState(0);
   const [createdClasses, setCreatedClasses] = useState(0);
@@ -69,6 +88,20 @@ const Classroom = () => {
     setSelectedFile(null);
     setShowUploadOptions(false);
   };
+
+  useEffect(() => {
+    if (user) {
+      axios
+        .get(`/api/user/classroom?id=${user._id}`)
+        .then((res) => {
+          setUserAlbum(res.data.classroom);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [user]);
+
   return (
     <>
       <Header />
@@ -175,7 +208,55 @@ const Classroom = () => {
             onChange={handleFileChange}
           />
         </div> */}
-        <CreateAlbumModal openModal={openModal} setOpenModal={setOpenModal} />
+        <div>
+          {userAlbum.length > 0 ? (
+            <div className="flex flex-wrap gap-5 my-5">
+              {userAlbum.map((album) => {
+                return (
+                  <div className="w-[300px] bg-white">
+                    <Carousel
+                      swipeable={true}
+                      draggable={true}
+                      showDots={true}
+                      responsive={responsive}
+                      ssr={true} // means to render carousel on server-side.
+                      // autoPlay={this.props.deviceType !== "mobile" ? true : false}
+                      autoPlaySpeed={2000}
+                      keyBoardControl={true}
+                      customTransition="all .5"
+                      transitionDuration={500}
+                      containerClass="carousel-container"
+                      removeArrowOnDeviceType={["tablet", "mobile"]}
+                      // deviceType={this.props.deviceType}
+                      dotListClass="custom-dot-list-style"
+                      itemClass="carousel-item-padding-40-px"
+                      className="mt-3">
+                      {album.images.map((image) => {
+                        return (
+                          <img
+                            src={image}
+                            alt="Album Cover"
+                            className="h-[250px]"
+                          />
+                        );
+                      })}
+                    </Carousel>
+
+                    <p>{album.albumName}</p>
+                    <p>{album.notes}</p>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <p>No Album Found</p>
+          )}
+        </div>
+        <CreateAlbumModal
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          setUserAlbum={setUserAlbum}
+        />
       </div>
     </>
   );

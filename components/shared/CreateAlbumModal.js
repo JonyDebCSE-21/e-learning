@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 const imgStorageApi = "3f67787d6399449802b3d820607b790d";
 const imgUploadUrl = `https://api.imgbb.com/1/upload?key=${imgStorageApi}`;
 
-const CreateAlbumModal = ({ openModal, setOpenModal }) => {
+const CreateAlbumModal = ({ openModal, setOpenModal, setUserAlbum }) => {
   const {
     register,
     handleSubmit,
@@ -61,6 +61,7 @@ const CreateAlbumModal = ({ openModal, setOpenModal }) => {
           })
           .then((res) => {
             toast.success(res.data.message);
+            setUserAlbum((prev) => [...prev, res.data.album]);
           })
           .catch((err) => {
             console.log(err);

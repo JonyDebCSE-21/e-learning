@@ -28,17 +28,34 @@ const imgStorageApi = "3f67787d6399449802b3d820607b790d";
 const imgUploadUrl = `https://api.imgbb.com/1/upload?key=${imgStorageApi}`;
 
 const Profile = () => {
-  const [status, setStatus] = useState("");
   const [likeCount, setLikeCount] = useState(120);
   const [dislikeCount, setDislikeCount] = useState(20);
   const [commentCount, setCommentCount] = useState(80);
   const [shareCount, setShareCount] = useState(30);
   const [userProfile, setUserProfile] = useState({});
+
+  // -----------------------------------------------
+  const [status, setStatus] = useState("");
   const [file, setFile] = useState(null);
   const [filePreview, setFilePreview] = useState(null);
   const [userPosts, setUserPosts] = useState([]);
+  const [comment, setComment] = useState("");
 
   const user = useSelector((state) => state.userReducer.user);
+
+  const dateFormat = (inputDateTime) => {
+    const dateObject = new Date(inputDateTime);
+
+    // Format the date object as required
+    const formattedDateTime = dateObject.toLocaleString("en-US", {
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
+    return formattedDateTime;
+  };
 
   const handleLike = () => {
     setLikeCount((prevCount) => prevCount + 1);
@@ -48,9 +65,9 @@ const Profile = () => {
     setDislikeCount((prevCount) => prevCount + 1);
   };
 
-  const handleComment = () => {
-    setCommentCount((prevCount) => prevCount + 1);
-  };
+  // const handleComment = () => {
+  //   setCommentCount((prevCount) => prevCount + 1);
+  // };
 
   const handleShare = () => {
     setShareCount((prevCount) => prevCount + 1);
@@ -86,25 +103,29 @@ const Profile = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data?.data) {
-          axios
-            .post("/api/user/post", {
-              userId: user._id,
-              caption: status,
-              photos: data?.data.display_url,
-            })
-            .then((res) => {
-              setUserPosts([...userPosts, res.data.post]);
-              // dispatch(setUser(res.data.user));
-              // localStorage.setItem("user", JSON.stringify(res.data.user));
-              toast.success(res.data.message);
-              setFilePreview(null);
-              setStatus("");
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        }
+        console.log(data);
+        // if (data?.data) {
+        axios
+          .post("/api/user/post", {
+            userId: user._id,
+            caption: status,
+            photos: data?.data?.display_url ? data?.data.display_url : "",
+          })
+          .then((res) => {
+            setUserPosts([...userPosts, res.data.post]);
+            // dispatch(setUser(res.data.user));
+            // localStorage.setItem("user", JSON.stringify(res.data.user));
+            toast.success(res.data.message);
+            setFilePreview(null);
+            setStatus("");
+            setFile(null);
+          })
+          .catch((err) => {
+            console.log(err);
+            setStatus("");
+            setFile(null);
+          });
+        // }
       });
   };
 
@@ -115,9 +136,14 @@ const Profile = () => {
       });
     }
   }, [user]);
+
+  const handleComment = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <DashboardLayout>
-      <div className=" top-0 w-full">
+      <div className=" top-0 w-1/2 mx-auto">
         <div className="p-8 w-full">
           <div className="text-center bg-gray-100 p-8 rounded-lg">
             <div className="avatar mb-4">
@@ -225,6 +251,7 @@ const Profile = () => {
               <textarea
                 rows="2"
                 onChange={(e) => setStatus(e.target.value)}
+                value={status}
                 placeholder="Share your thoughts, with your community"
                 className="w-full border-0 outline-none border-b border-gray-500 bg-transparent resize-none"></textarea>
               {filePreview && (
@@ -313,8 +340,7 @@ const Profile = () => {
                             {user?.name}
                           </p>
                           <span className="text-xs text-gray-500">
-                            {/* September 22, 2023, 23:19 pm */}
-                            {post.createdAt}
+                            {dateFormat(post.createdAt)}
                           </span>
                         </div>
                       </div>
@@ -323,37 +349,30 @@ const Profile = () => {
                       </a>
                     </div>
                     <p className="text-gray-500 text-lg mb-5">{post.caption}</p>
-                    <img
-                      src={post.photos}
-                      className=" rounded mb-2 w-[300px]"
-                    />
-                    <div className=" flex items-center justify-between">
-                      <div className="flex space-x-20 ">
+                    <img src={post.photos} className=" rounded mb-2 w-full" />
+                    <div className=" flex items-center justify-between border-b py-2 border-t">
+                      <div className="flex items-center space-x-20 ">
                         <div
-                          className="flex items-center mr-5 mb-2"
+                          className="flex items-center "
                           onClick={handleLike}>
                           <BiSolidLike className="text-lg mr-2" />
                           {likeCount}
                         </div>
                         <div
-                          className="flex items-center mr-5 mb-2"
-                          onClick={handleDislike}>
-                          <BiSolidDislike className="text-lg mr-2" />
-                          {dislikeCount}
-                        </div>
-                        <div
-                          className="flex items-center mr-5 mb-2"
+                          className="flex items-center "
                           onClick={handleComment}>
                           <FaCommentAlt className="text-lg mr-2" />
                           {commentCount}
                         </div>
                         <div
-                          className="flex items-center mr-5 mb-2"
+                          className="flex items-center"
                           onClick={handleShare}>
                           <FaShare className="text-lg mr-2" />
                           {shareCount}
                         </div>
                       </div>
+                    </div>
+                    <div className="my-3 flex justify-between items-center py-2">
                       <div className="flex items-center">
                         <img
                           src={
@@ -361,10 +380,26 @@ const Profile = () => {
                               ? user.profilePic
                               : "/images/children.jpg"
                           }
-                          className="w-5 h-5 rounded-full mr-2"
+                          className="w-6 h-6 rounded-full mr-2"
                         />
                         <i className="fa-solid fa-caret-down"></i>
                       </div>
+                      <form className="flex flex-grow space-x-2">
+                        <input
+                          type="text"
+                          onChange={(e) => {
+                            setComment(e.target.value);
+                          }}
+                          value={comment}
+                          placeholder="Write a comment..."
+                          className="bg-gray-200 w-full outline-none py-1 px-2 rounded-2xl"
+                        />
+                        <input
+                          type="submit"
+                          value="Post"
+                          className="bg-blue-500 p-1 rounded-lg cursor-pointer"
+                        />
+                      </form>
                     </div>
                   </div>
                 );
