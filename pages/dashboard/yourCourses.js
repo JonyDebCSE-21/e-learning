@@ -25,7 +25,7 @@ const YourCoursesPage = () => {
     let newArray = courses.filter((obj) => orderItems.includes(obj._id));
     setYourCourses(newArray);
     console.log("new11", yourCourses);
-  }, [courses, orderItems]); // Add dependencies to avoid unnecessary re-renders
+  }, [courses, orderItems]);
 
   return (
     <DashboardLayout>
