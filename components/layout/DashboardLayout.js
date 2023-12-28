@@ -53,7 +53,7 @@ const DashboardLayout = ({ children }) => {
       <Header />
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col  p-12">
+        <div className="drawer-content flex flex-col  p-12 bg-[#030014]">
           {/* Page content here */}
           <label
             htmlFor="my-drawer-2"
@@ -62,7 +62,11 @@ const DashboardLayout = ({ children }) => {
           </label>
           {children}
         </div>
-        <div className="drawer-side bg-slate-400">
+        <div
+          style={{
+            boxShadow: " 5px 0 10px rgba(0, 0, 0, 0.1)",
+          }}
+          className="drawer-side bg-[#030014] text-[#D700E2] border-r py-2 border-[#D700E2]">
           <label
             htmlFor="my-drawer-2"
             aria-label="close sidebar"
@@ -70,7 +74,7 @@ const DashboardLayout = ({ children }) => {
           <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
             {/* Sidebar content here */}
             <Link
-              className="hover:bg-common-button px-2 py-3"
+              className="hover:bg-common-button hover:text-white text-base px-2 py-3"
               href="/dashboard/profile">
               Profile
             </Link>
