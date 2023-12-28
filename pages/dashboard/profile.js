@@ -137,8 +137,19 @@ const Profile = () => {
     }
   }, [user]);
 
-  const handleComment = (e) => {
+  const handleComment = (e, postId) => {
     e.preventDefault();
+    axios
+      .put("/api/user/post", { userId: user._id, postId, comment: comment })
+      .then((res) => {
+        console.log(res.data);
+        setComment("");
+        toast.success(res.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+        setComment("");
+      });
   };
 
   return (
@@ -362,7 +373,7 @@ const Profile = () => {
                           className="flex items-center "
                           onClick={handleComment}>
                           <FaCommentAlt className="text-lg mr-2" />
-                          {commentCount}
+                          {post.comments.length}
                         </div>
                         <div
                           className="flex items-center"
@@ -384,7 +395,9 @@ const Profile = () => {
                         />
                         <i className="fa-solid fa-caret-down"></i>
                       </div>
-                      <form className="flex flex-grow space-x-2">
+                      <form
+                        onSubmit={(e) => handleComment(e, post._id)}
+                        className="flex flex-grow space-x-2">
                         <input
                           type="text"
                           onChange={(e) => {

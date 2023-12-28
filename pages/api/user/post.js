@@ -28,7 +28,7 @@ export default async function handeler(req, res) {
       photos,
       like: [],
       unlike: [],
-      comment: [],
+      comments: [],
     });
 
     return res.status(200).send({
@@ -40,5 +40,27 @@ export default async function handeler(req, res) {
 
   if (req.method === "PUT") {
     const { userId, postId, comment } = req.body;
+    const post = await Post.findOne({ _id: postId });
+    if (post.comments.length > 0) {
+      const update = await Post.updateOne(
+        { _id: postId },
+        { comments: [...post.comments, { userId, comment }] }
+      );
+      return res.status(200).send({
+        error: false,
+        comment: update,
+        message: "Comment posted successfull",
+      });
+    } else {
+      const update = await Post.updateOne(
+        { _id: postId },
+        { comments: [{ userId, comment }] }
+      );
+      return res.status(200).send({
+        error: false,
+        comment: update,
+        message: "Comment posted successfull",
+      });
+    }
   }
 }
