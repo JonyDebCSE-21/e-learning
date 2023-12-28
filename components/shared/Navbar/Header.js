@@ -20,11 +20,14 @@ import { CgLogOut } from "react-icons/cg";
 import { MdNotificationImportant } from "react-icons/md";
 import { setCart } from "@/redux/slice/cartSlice/cartSlice";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userReducer.user);
   const cart = useSelector((state) => state.cartReducer.cart);
+
+  const router = useRouter();
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -52,7 +55,10 @@ const Header = () => {
   // }, []);
 
   return (
-    <div className="nav flex items-center justify-between bg-blue-700 px-5 py-1 sticky top-0 z-50">
+    <div
+      className={`nav flex items-center justify-between ${
+        router.pathname.includes("dashboard") && "bg-[#030014] text-white"
+      } bg-blue-700 px-5 py-1 sticky top-0 z-50`}>
       <div className="flex justify-between items-center container mx-auto">
         <div className="flex items-center">
           <Link href="/" className="flex items-center">

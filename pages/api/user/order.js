@@ -11,6 +11,12 @@ export default async function handler(req, res) {
     const email = req.query.email;
     if (email) {
       const orders = await Order.find({ email: email });
+      if (orders.length == 0) {
+        return res.status(200).send({
+          error: false,
+          courses: [],
+        });
+      }
       const courses = await Course.find({});
       const lineItems = [];
       orders.map((order) => {

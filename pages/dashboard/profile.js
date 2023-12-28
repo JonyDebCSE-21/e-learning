@@ -144,8 +144,8 @@ const Profile = () => {
   return (
     <DashboardLayout>
       <div className=" top-0 w-1/2 mx-auto">
-        <div className="p-8 w-full">
-          <div className="text-center bg-gray-100 p-8 rounded-lg">
+        <div className="mb-5 w-full">
+          <div className="text-center bg-[#160030] text-[#A300B0] p-8 rounded-lg">
             <div className="avatar mb-4">
               <div className="w-40 h-40 rounded-full overflow-hidden mx-auto">
                 <img
@@ -184,7 +184,7 @@ const Profile = () => {
               <h2 className="text-lg mb-2">LinkedIn: {user?.linkedIn} </h2>
             </div>
             <Link href={"/dashboard/settings&privacy"}>
-              <div className="flex items-center justify-center gap-5 bg-blue-600 px-12 py-2 w-[50%] mx-auto rounded-md text-white font-bold">
+              <div className="flex items-center justify-center gap-5 bg-[#A300B0] px-12 py-2 w-[50%] mx-auto rounded-md text-white font-bold">
                 <FaEdit className="text-lg font-bold" />
                 <span>Edit your profile</span>
               </div>
@@ -192,7 +192,7 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className=" bg-white p-2 rounded-md flex items-start justify-between">
+        <div className=" bg-[#160030] text-[#A300B0] p-2 rounded-md flex items-start justify-between">
           <div className="pd-left">
             <div className="pd-row flex justify-center items-center">
               <img
@@ -230,8 +230,8 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="flex-basis-47 bg-gray-200 mt-4">
-          <div className="w-full bg-white rounded p-5 text-gray-700">
+        <div className="flex-basis-47 ] mt-4">
+          <div className="w-full bg-[#160030] text-[#A300B0] rounded p-5 ">
             <div className="flex items-center">
               <img
                 src={
@@ -315,7 +315,7 @@ const Profile = () => {
               </div>
               <button
                 onClick={handleStatusPost}
-                className="bg-blue-700 px-5 py-2 mt-2 rounded text-white">
+                className="bg-[#A300B0] px-5 py-2 mt-2 rounded text-white">
                 Post
               </button>
             </form>
@@ -324,7 +324,7 @@ const Profile = () => {
           {userPosts.length > 0
             ? userPosts.map((post) => {
                 return (
-                  <div className="bg-white rounded p-4 my-5">
+                  <div className="bg-[#160030] text-[#A300B0] rounded p-4 my-5">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center">
                         <img
@@ -336,7 +336,7 @@ const Profile = () => {
                           className="w-10 h-10 rounded-full mr-2"
                         />
                         <div>
-                          <p className="font-semibold mb-0 text-gray-700">
+                          <p className="font-semibold mb-0 text-white">
                             {user?.name}
                           </p>
                           <span className="text-xs text-gray-500">
