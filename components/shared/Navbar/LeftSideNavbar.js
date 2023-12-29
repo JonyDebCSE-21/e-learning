@@ -27,10 +27,10 @@ const LeftSideNavbar = () => {
           className="flex items-center gap-4 cursor-pointer  px-[10px] py-[5px] h-10">
           <img
             className="w-10 h-10 rounded-full"
-            src={user.profilePic}
+            src={user?.profilePic}
             alt=""
           />{" "}
-          <span className="font-semibold">{user.name}</span>
+          <span className="font-semibold">{user?.name}</span>
         </div>
 
         <div className="p-2">
