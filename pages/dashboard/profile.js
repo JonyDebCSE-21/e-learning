@@ -154,7 +154,7 @@ const Profile = () => {
 
   return (
     <DashboardLayout>
-      <div className=" top-0 w-1/2 mx-auto">
+      <div className=" top-0 w-[80%] mx-auto">
         <div className="mb-5 w-full">
           <div className="text-center bg-[#160030] text-[#A300B0] p-8 rounded-lg">
             <div className="avatar mb-4">

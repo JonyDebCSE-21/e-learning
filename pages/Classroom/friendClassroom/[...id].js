@@ -36,13 +36,15 @@ const FriendClassroom = () => {
   }, []);
   return (
     <DashboardLayout>
-      <div>friend classrooom</div>
+      <div className="text-2xl text-[#A300B0] font-bold border-b border-[#A5009B] pb-4">
+        Friend Classroom
+      </div>
       <div>
         {userAlbum.length > 0 ? (
-          <div className="flex flex-wrap gap-5 my-5">
+          <div className="grid grid-cols-3 gap-5 my-5">
             {userAlbum.map((album) => {
               return (
-                <div className="w-[300px] bg-white">
+                <div className="w-[300px] border border-[#A5009B] p-2 text-white rounded-md">
                   <Carousel
                     swipeable={true}
                     draggable={true}

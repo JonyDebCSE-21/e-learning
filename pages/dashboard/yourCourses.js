@@ -39,7 +39,7 @@ const YourCoursesPage = () => {
                 {c?.title}
               </div>
               <div className="text-[#D400F7] text-[20px]">
-                <span className="text-base">Instructed By :</span>{" "}
+                <span className="text-base">Instructed By :</span>
                 {c?.instructor}
               </div>
               <div className="flex items-center justify-evenly self-start gap-10">

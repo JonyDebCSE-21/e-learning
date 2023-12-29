@@ -5,9 +5,11 @@ import React from "react";
 const settingsandprivacy = () => {
   return (
     <DashboardLayout>
-      <div className="container mx-auto my-8 p-8 bg-white rounded ">
-        <h1 className="text-2xl mb-3 font-bold">Update Your Profile</h1>
-        <div className="bg-white p-8 rounded-lg shadow-md mb-5">
+      <div className="container mx-auto my-8 p-8 bg-[#160030] rounded ">
+        <h1 className="text-2xl mb-3 font-bold text-white">
+          Update Your Profile
+        </h1>
+        <div className="bg-[#160030] p-8 rounded-lg shadow-md mb-5">
           <UpdateUserForm />
         </div>
 

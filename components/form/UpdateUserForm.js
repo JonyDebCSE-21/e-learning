@@ -59,7 +59,7 @@ const UpdateUserForm = () => {
   return (
     <form onSubmit={handleUpdateProfile}>
       <div className="grid grid-cols-2 ">
-        <div className="mb-2">
+        <div className="mb-2 text-white">
           <label className="block text-sm font-medium text-gray-700">
             Mobile Number
           </label>
