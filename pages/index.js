@@ -28,7 +28,7 @@ export default function Home() {
     <main>
       <Layout>
         <OverviewSlider></OverviewSlider>
-        <div className="mx-4 md:mx-0 bg-gray-200 grid grid-cols-2 md:grid-cols-3 gap-3">
+        <div className="mx-4 md:mx-0   grid grid-cols-2 md:grid-cols-3 gap-3">
           {courses.map((course) => (
             <div key={course.id}>
               <Course course={course} />

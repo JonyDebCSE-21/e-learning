@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { AiOutlineBars } from "react-icons/ai";
 import { IoLogoDropbox } from "react-icons/io";
+import { useSelector } from "react-redux";
+import { FaUserFriends } from "react-icons/fa";
+import { SiGoogleclassroom } from "react-icons/si";
+import { useRouter } from "next/router";
 
 const LeftSideNavbar = () => {
   const [showNav, setShowNav] = useState(true);
@@ -8,23 +12,34 @@ const LeftSideNavbar = () => {
   const [showSecondary, setShowSecondary] = useState(false);
   const [showSkills, setShowSkills] = useState(false);
   const [showLeftNav, setShowLeftNav] = useState(false);
+  const user = useSelector((state) => state.userReducer.user);
+
+  const router = useRouter();
   return (
     <>
       {/* <button onClick={() => setShowLeftNav(!showLeftNav)}>Show</button>
       {showLeftNav && ( */}
-      <div className="sticky top-0 bg-gray-800 h-full text-white mt-0.5 overflow-y-visible ">
-        <div className="flex items-center gap-4 cursor-pointer hover:bg-blue-700 px-[10px] py-[5px] h-10">
-          <AiOutlineBars /> <span className="font-semibold">All Courses</span>
+      <div className="sticky top-0  h-full text-black mt-0.5 overflow-y-visible pt-3">
+        <div
+          onClick={() => {
+            router.push("/dashboard/profile");
+          }}
+          className="flex items-center gap-4 cursor-pointer  px-[10px] py-[5px] h-10">
+          <img
+            className="w-10 h-10 rounded-full"
+            src={user.profilePic}
+            alt=""
+          />{" "}
+          <span className="font-semibold">{user.name}</span>
         </div>
 
-        <>
+        <div className="p-2">
           <div
-            onClick={() => setShowPrimary(!showPrimary)}
+            // onClick={() => router.push("/Classroom")}
             className="flex items-center gap-4 cursor-pointer hover:bg-blue-700 px-4 py-2">
-            <IoLogoDropbox />{" "}
-            <span className="font-semibold">Primary Education</span>
+            <FaUserFriends /> <span className="font-semibold">Friends</span>
           </div>
-          {showPrimary && (
+          {/* {showPrimary && (
             <div className="flex flex-col pl-4">
               <li className="flex items-center gap-3 cursor-pointer hover:bg-blue-400  px-[10px] py-[3px] h-6">
                 <a>Class-1</a>
@@ -42,14 +57,14 @@ const LeftSideNavbar = () => {
                 <a>Class-5</a>
               </li>
             </div>
-          )}
+          )} */}
           <div
-            onClick={() => setShowSecondary(!showSecondary)}
+            onClick={() => router.push("/Classroom")}
             className="flex items-center gap-4 cursor-pointer hover:bg-blue-700 px-4 py-2">
-            <IoLogoDropbox />{" "}
-            <span className="font-semibold">Secondary Education</span>
+            <SiGoogleclassroom />{" "}
+            <span className="font-semibold">Your Classroom</span>
           </div>
-          {showSecondary && (
+          {/* {showSecondary && (
             <div className="flex flex-col pl-4">
               <li className="flex items-center gap-3 cursor-pointer hover:bg-blue-400  px-[10px] py-[3px] h-6">
                 <a>Class-6</a>
@@ -67,8 +82,8 @@ const LeftSideNavbar = () => {
                 <a>Class-10</a>
               </li>
             </div>
-          )}
-          <div className="flex items-center gap-4 cursor-pointer hover:bg-blue-700 px-4 py-2">
+          )} */}
+          {/* <div className="flex items-center gap-4 cursor-pointer hover:bg-blue-700 px-4 py-2">
             <IoLogoDropbox />{" "}
             <span className="font-semibold">Higher Education</span>
           </div>
@@ -95,8 +110,8 @@ const LeftSideNavbar = () => {
                 <a>Python</a>
               </li>
             </div>
-          )}
-        </>
+          )} */}
+        </div>
       </div>
       {/* )} */}
     </>

@@ -44,7 +44,13 @@ const FriendClassroom = () => {
           <div className="grid grid-cols-3 gap-5 my-5">
             {userAlbum.map((album) => {
               return (
-                <div className="w-[300px] border border-[#A5009B] p-2 text-white rounded-md">
+                <div
+                  onClick={() => {
+                    router.push(
+                      `/Classroom/friendClassroom/albumDetails/${album._id}`
+                    );
+                  }}
+                  className="w-[300px] cursor-pointer border border-[#A5009B] p-2 text-white rounded-md">
                   <Carousel
                     swipeable={true}
                     draggable={true}

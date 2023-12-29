@@ -1,5 +1,6 @@
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import axios from "axios";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -43,9 +44,11 @@ const YourCoursesPage = () => {
                 {c?.instructor}
               </div>
               <div className="flex items-center justify-evenly self-start gap-10">
-                <span className="cursor-pointer bg-[#D700E2] px-5 py-2 text-white rounded-md font-semibold">
+                <Link
+                  href={`/dashboard/yourCourses/${c._id}`}
+                  className="cursor-pointer bg-[#D700E2] px-5 py-2 text-white rounded-md font-semibold">
                   Continue
-                </span>
+                </Link>
                 <span className="cursor-pointer border border-[#A5009B] px-5 py-2 text-white rounded-md font-semibold">
                   Outline
                 </span>

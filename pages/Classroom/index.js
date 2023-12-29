@@ -1,6 +1,8 @@
 import CreateAlbumModal from "@/components/shared/CreateAlbumModal";
 import Header from "@/components/shared/Navbar/Header";
 import axios from "axios";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -44,6 +46,8 @@ const Classroom = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [joinedClasses, setJoinedClasses] = useState(0);
   const [createdClasses, setCreatedClasses] = useState(0);
+
+  const router = useRouter();
 
   // New state variables for cover customization
   const colorOptions = ["#3498db", "#27ae60", "#f39c12", "#e74c3c", "#8e44ad"];
@@ -213,7 +217,13 @@ const Classroom = () => {
             <div className="flex flex-wrap gap-5 my-5">
               {userAlbum.map((album) => {
                 return (
-                  <div className="w-[300px] bg-white">
+                  <div
+                    onClick={() => {
+                      router.push(
+                        `/Classroom/friendClassroom/albumDetails/${album._id}`
+                      );
+                    }}
+                    className="w-[300px] bg-white cursor-pointer">
                     <Carousel
                       swipeable={true}
                       draggable={true}
