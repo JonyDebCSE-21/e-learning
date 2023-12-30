@@ -45,24 +45,29 @@ export default async function handeler(req, res) {
       const restComment = post.comments.filter(
         (comment) => comment._id != commentId
       );
+      console.log(restComment, "restComment");
       const update = await Post.updateOne(
         { _id: postId },
         { comments: [...restComment] }
       );
+      const updatedPost = await Post.findOne({ _id: postId });
+      const comments = updatedPost.comments;
       return res.status(200).send({
         error: false,
-        comment: update,
+        comments,
         message: "Comment posted successfull",
       });
     }
-    if (post.comments.length > 0) {
+    if (post.comments.length > 0 && !commentId) {
       const update = await Post.updateOne(
         { _id: postId },
         { comments: [...post.comments, { userId, comment }] }
       );
+      const updatedPost = await Post.findOne({ _id: postId });
+      const comments = updatedPost.comments;
       return res.status(200).send({
         error: false,
-        comment: update,
+        comments: comments,
         message: "Comment posted successfull",
       });
     } else {
@@ -70,9 +75,11 @@ export default async function handeler(req, res) {
         { _id: postId },
         { comments: [{ userId, comment }] }
       );
+      const updatedPost = await Post.findOne({ _id: postId });
+      const comments = updatedPost.comments;
       return res.status(200).send({
         error: false,
-        comment: update,
+        comments: comments,
         message: "Comment posted successfull",
       });
     }

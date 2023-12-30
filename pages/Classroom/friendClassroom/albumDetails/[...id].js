@@ -7,14 +7,22 @@ const albumDetailsPage = () => {
   const [album, setAlbum] = useState({});
   const router = useRouter();
   const { id } = router.query;
-  //   useEffect(() => {
-  //     if (id) {
-  //       axios
-  //         .get(`/api/user/classroom?id=${id[0]}`)
-  //         .then((res) => setAlbum(res.data.course));
-  //     }
-  //   }, [id]);
-  return <DashboardLayout></DashboardLayout>;
+  useEffect(() => {
+    if (id) {
+      axios
+        .get(`/api/user/classroom?albumId=${id[0]}`)
+        .then((res) => setAlbum(res.data.course))
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [id]);
+  console.log(album);
+  return (
+    <DashboardLayout>
+      <div>Hello</div>
+    </DashboardLayout>
+  );
 };
 
 export default albumDetailsPage;

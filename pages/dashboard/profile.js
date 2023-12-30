@@ -6,9 +6,7 @@ import { BiSolidPhoneCall } from "react-icons/bi";
 import { HiAcademicCap } from "react-icons/hi2";
 import { FaLinkedin } from "react-icons/fa6";
 import { GrUserWorker } from "react-icons/gr";
-
 import { BiSolidLike } from "react-icons/bi";
-import { BiSolidDislike } from "react-icons/bi";
 import { FaCommentAlt } from "react-icons/fa";
 import { FaShare } from "react-icons/fa6";
 import { PiVideoFill } from "react-icons/pi";
@@ -17,8 +15,6 @@ import { HiMiniDocumentPlus } from "react-icons/hi2";
 import { SiGoogleclassroom } from "react-icons/si";
 import { FaUserFriends } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
-import profilePic from "@/public/images/propic.jpg";
-import UpdateUserForm from "@/components/form/UpdateUserForm";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -29,18 +25,14 @@ const imgStorageApi = "3f67787d6399449802b3d820607b790d";
 const imgUploadUrl = `https://api.imgbb.com/1/upload?key=${imgStorageApi}`;
 
 const Profile = () => {
-  const [likeCount, setLikeCount] = useState(120);
-  const [dislikeCount, setDislikeCount] = useState(20);
-  const [commentCount, setCommentCount] = useState(80);
   const [shareCount, setShareCount] = useState(30);
-  const [userProfile, setUserProfile] = useState({});
 
   // -----------------------------------------------
   const [status, setStatus] = useState("");
   const [file, setFile] = useState(null);
   const [filePreview, setFilePreview] = useState(null);
   const [userPosts, setUserPosts] = useState([]);
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState({ id: null, value: "" });
   const [openModal, setOpenModal] = useState({ id: "", value: false });
   const [comments, setComments] = useState([]);
 
@@ -49,7 +41,6 @@ const Profile = () => {
   const dateFormat = (inputDateTime) => {
     const dateObject = new Date(inputDateTime);
 
-    // Format the date object as required
     const formattedDateTime = dateObject.toLocaleString("en-US", {
       month: "long",
       day: "numeric",
@@ -60,40 +51,12 @@ const Profile = () => {
     return formattedDateTime;
   };
 
-  const handleLike = () => {
-    setLikeCount((prevCount) => prevCount + 1);
-  };
-
-  const handleDislike = () => {
-    setDislikeCount((prevCount) => prevCount + 1);
-  };
-
-  // const handleComment = () => {
-  //   setCommentCount((prevCount) => prevCount + 1);
-  // };
-
-  const handleShare = () => {
-    setShareCount((prevCount) => prevCount + 1);
-  };
-
   useEffect(() => {
     const post = userPosts.find((post) => post._id == openModal.id);
     if (post) {
       setComments(post.comments);
     }
   }, [openModal]);
-  console.log(openModal);
-  const handleStatusPost = () => {
-    // const data = {
-    //   userEmail: user?.email,
-    //   posts: {
-    //     status: status,
-    //   },
-    // };
-    // axios
-    //   .put("api/user/userProfile", data)
-    //   .then((res) => console.log(res.data));
-  };
   const handlePostSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -105,8 +68,6 @@ const Profile = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        // if (data?.data) {
         axios
           .post("/api/user/post", {
             userId: user._id,
@@ -115,8 +76,6 @@ const Profile = () => {
           })
           .then((res) => {
             setUserPosts([...userPosts, res.data.post]);
-            // dispatch(setUser(res.data.user));
-            // localStorage.setItem("user", JSON.stringify(res.data.user));
             toast.success(res.data.message);
             setFilePreview(null);
             setStatus("");
@@ -127,7 +86,6 @@ const Profile = () => {
             setStatus("");
             setFile(null);
           });
-        // }
       });
   };
 
@@ -142,13 +100,16 @@ const Profile = () => {
   const handleComment = (e, postId) => {
     e.preventDefault();
     axios
-      .put("/api/user/post", { userId: user._id, postId, comment: comment })
+      .put("/api/user/post", {
+        userId: user._id,
+        postId,
+        comment: comment.value,
+      })
       .then((res) => {
-        console.log(res.data);
         setComment("");
         toast.success(res.data.message);
         const post = userPosts.find((post) => post._id == postId);
-        post.comments.push({ userId: user._id, comment, _id: 1 });
+        post.comments = res.data.comments;
       })
       .catch((err) => {
         console.log(err);
@@ -165,10 +126,8 @@ const Profile = () => {
           (comment) => comment._id != id
         );
         setComments(restComment);
-        console.log(post, "Post");
-        post.comments.push(...restComment);
+        post.comments = res.data.comments;
         toast.success("Comment deleted");
-        console.log(post, "Posttttt");
       })
       .catch((err) => console.log(err));
   };
@@ -345,9 +304,7 @@ const Profile = () => {
                   <span class="text-lg mr-2">Documents</span>
                 </label>
               </div>
-              <button
-                onClick={handleStatusPost}
-                className="bg-[#A300B0] px-5 py-2 mt-2 rounded text-white">
+              <button className="bg-[#A300B0] px-5 py-2 mt-2 rounded text-white">
                 Post
               </button>
             </form>
@@ -384,11 +341,9 @@ const Profile = () => {
                     <img src={post.photos} className=" rounded mb-2 w-full" />
                     <div className=" flex items-center justify-between border-b py-2 border-t">
                       <div className="flex items-center space-x-20 ">
-                        <div
-                          className="flex items-center "
-                          onClick={handleLike}>
+                        <div className="flex items-center ">
                           <BiSolidLike className="text-lg mr-2" />
-                          {likeCount}
+                          30
                         </div>
                         <button
                           className="flex items-center "
@@ -398,9 +353,7 @@ const Profile = () => {
                           <FaCommentAlt className="text-lg mr-2" />
                           {post.comments.length}
                         </button>
-                        <div
-                          className="flex items-center"
-                          onClick={handleShare}>
+                        <div className="flex items-center">
                           <FaShare className="text-lg mr-2" />
                           {shareCount}
                         </div>
@@ -424,8 +377,9 @@ const Profile = () => {
                         <input
                           type="text"
                           onChange={(e) => {
-                            setComment(e.target.value);
+                            setComment({ id: post._id, value: e.target.value });
                           }}
+                          value={comment.id == post._id ? comment.value : ""}
                           placeholder="Write a comment..."
                           className="bg-gray-200 w-full outline-none py-1 px-2 rounded-2xl"
                         />
