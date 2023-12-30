@@ -20,12 +20,13 @@ export default async function handeler(req, res) {
     }
   }
   if (req.method === "POST") {
-    const { userId, caption, photos } = req.body;
+    const { userId, caption, photos, videos } = req.body;
 
     const postDoc = await Post.create({
       userId,
       caption,
       photos,
+      videos,
       like: [],
       unlike: [],
       comments: [],

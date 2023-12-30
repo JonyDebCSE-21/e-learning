@@ -35,6 +35,8 @@ const Profile = () => {
   const [comment, setComment] = useState({ id: null, value: "" });
   const [openModal, setOpenModal] = useState({ id: "", value: false });
   const [comments, setComments] = useState([]);
+  const [videoInput, setVideoInput] = useState(false);
+  const [videoLink, setVideoLink] = useState(null);
 
   const user = useSelector((state) => state.userReducer.user);
 
@@ -72,6 +74,7 @@ const Profile = () => {
           .post("/api/user/post", {
             userId: user._id,
             caption: status,
+            videos: videoLink ? videoLink : "",
             photos: data?.data?.display_url ? data?.data.display_url : "",
           })
           .then((res) => {
@@ -80,11 +83,15 @@ const Profile = () => {
             setFilePreview(null);
             setStatus("");
             setFile(null);
+            setVideoLink(null);
+            setVideoInput(false);
           })
           .catch((err) => {
             console.log(err);
             setStatus("");
             setFile(null);
+            setVideoLink(null);
+            setVideoInput(false);
           });
       });
   };
@@ -259,27 +266,22 @@ const Profile = () => {
                   </button>
                 </div>
               )}
-              <div class="add-post-links flex">
-                <label
-                  for="video-upload"
-                  class="flex items-center text-gray-700 mr-6 cursor-pointer">
-                  <input
-                    type="file"
-                    id="video-upload"
-                    class="hidden"
-                    accept="video/*"
-                  />
+              <div className="add-post-links flex">
+                <button
+                  type="button"
+                  onClick={() => setVideoInput(!videoInput)}
+                  className="flex items-center text-gray-700 mr-6 cursor-pointer">
                   <PiVideoFill className="text-lg mr-2" />
-                  <span class="text-lg mr-2">Videos</span>
-                </label>
+                  <span className="text-lg mr-2">Videos</span>
+                </button>
 
                 <label
                   for="photo-upload"
-                  class="flex items-center text-gray-700 mr-6 cursor-pointer">
+                  className="flex items-center text-gray-700 mr-6 cursor-pointer">
                   <input
                     type="file"
                     id="photo-upload"
-                    class="hidden"
+                    className="hidden"
                     accept="image/*"
                     onChange={(e) => {
                       const url = URL.createObjectURL(e.target.files[0]);
@@ -288,22 +290,33 @@ const Profile = () => {
                     }}
                   />
                   <MdPhotoCamera className="text-lg mr-2" />
-                  <span class="text-lg mr-2">Photos</span>
+                  <span className="text-lg mr-2">Photos</span>
                 </label>
 
                 <label
                   for="document-upload"
-                  class="flex items-center text-gray-700 cursor-pointer">
+                  className="flex items-center text-gray-700 cursor-pointer">
                   <input
                     type="file"
                     id="document-upload"
-                    class="hidden"
+                    className="hidden"
                     accept=".pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx"
                   />
                   <HiMiniDocumentPlus className="text-lg mr-2" />
-                  <span class="text-lg mr-2">Documents</span>
+                  <span className="text-lg mr-2">Documents</span>
                 </label>
               </div>
+              {videoInput && (
+                <input
+                  type="text"
+                  onChange={(e) => {
+                    setVideoLink(e.target.value);
+                  }}
+                  value={videoLink}
+                  placeholder="Enter video link"
+                  className="outline-none px-3 py-2 rounded-lg bg-gray-500 block text-white my-3"
+                />
+              )}
               <button className="bg-[#A300B0] px-5 py-2 mt-2 rounded text-white">
                 Post
               </button>
@@ -338,7 +351,10 @@ const Profile = () => {
                       </a>
                     </div>
                     <p className="text-gray-500 text-lg mb-5">{post.caption}</p>
-                    <img src={post.photos} className=" rounded mb-2 w-full" />
+                    <img
+                      src={post.photos}
+                      className=" rounded mb-3 w-1/2 mx-auto h-[600px]"
+                    />
                     <div className=" flex items-center justify-between border-b py-2 border-t">
                       <div className="flex items-center space-x-20 ">
                         <div className="flex items-center ">
@@ -458,44 +474,44 @@ export default Profile;
 //             placeholder="Share your thoughts, with your community"
 //             className="w-full border-0 outline-none border-b border-gray-300 bg-transparent resize-none"></textarea>
 
-//           <div class="add-post-links mt-2 flex">
+//           <div className="add-post-links mt-2 flex">
 //             <label
 //               for="video-upload"
-//               class="flex items-center text-gray-700 mr-6 cursor-pointer">
+//               className="flex items-center text-gray-700 mr-6 cursor-pointer">
 //               <input
 //                 type="file"
 //                 id="video-upload"
-//                 class="hidden"
+//                 className="hidden"
 //                 accept="video/*"
 //               />
 //               <PiVideoFill className="text-lg mr-2" />
-//               <span class="text-lg mr-2">Videos</span>
+//               <span className="text-lg mr-2">Videos</span>
 //             </label>
 
 //             <label
 //               for="photo-upload"
-//               class="flex items-center text-gray-700 mr-6 cursor-pointer">
+//               className="flex items-center text-gray-700 mr-6 cursor-pointer">
 //               <input
 //                 type="file"
 //                 id="photo-upload"
-//                 class="hidden"
+//                 className="hidden"
 //                 accept="image/*"
 //               />
 //               <MdPhotoCamera className="text-lg mr-2" />
-//               <span class="text-lg mr-2">Photos</span>
+//               <span className="text-lg mr-2">Photos</span>
 //             </label>
 
 //             <label
 //               for="document-upload"
-//               class="flex items-center text-gray-700 cursor-pointer">
+//               className="flex items-center text-gray-700 cursor-pointer">
 //               <input
 //                 type="file"
 //                 id="document-upload"
-//                 class="hidden"
+//                 className="hidden"
 //                 accept=".pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx"
 //               />
 //               <HiMiniDocumentPlus className="text-lg mr-2" />
-//               <span class="text-lg mr-2">Documents</span>
+//               <span className="text-lg mr-2">Documents</span>
 //             </label>
 //           </div>
 //         </div>
