@@ -8,14 +8,14 @@ const Layout = ({ children }) => {
   return (
     <div>
       <Header />
-      <div className="grid grid-cols-12">
-        <div className="col-span-2">
+      <div className="grid grid-cols-12 gap-3 mb-2">
+        <div className="col-span-3">
           <LeftSideNavbar />
         </div>
-        <div className="col-span-8">{children}</div>
-        <div className="col-span-2">
+        <div className="col-span-9 my-1">{children}</div>
+        {/* <div className="col-span-4">
           <RightSideNavbar />
-        </div>
+        </div> */}
       </div>
       <Footer></Footer>
     </div>

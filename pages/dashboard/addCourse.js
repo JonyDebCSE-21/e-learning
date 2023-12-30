@@ -63,7 +63,7 @@ const AddCourse = () => {
   return (
     <DashboardLayout>
       <div>
-        <div className="bg-blue-900 p-5 m-1 rounded-sm">
+        <div className="border border-[#D700E2] rounded-md  p-5 m-1 ">
           <span className="text-2xl font-bolder text-white">
             Add Your Course
           </span>

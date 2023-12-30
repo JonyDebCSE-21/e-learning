@@ -66,15 +66,19 @@ const Friends = () => {
       <div className="px-3 w-full">
         <div>
           <div>
-            <p>Friends</p>
-            <div>{user?.friends?.length === 0 && <p>No friends</p>}</div>
+            <p className="text-[#A300B0] text-2xl my-2">Friends</p>
+            <div>
+              {user?.friends?.length === 0 && (
+                <p className="text-white">No friends</p>
+              )}
+            </div>
             <div>
               {user?.friends?.map((friend) => {
                 return users.map((user) => {
                   if (user._id == friend) {
                     return (
-                      <div className="flex justify-between px-2 my-3">
-                        <p key={user._id} className="font-semibold">
+                      <div className="flex justify-between items-center  px-2 py-2 rounded-md my-3 border border-[#A5009B]">
+                        <p key={user._id} className="font-semibold text-white">
                           {user.name}
                         </p>
                         <Link
@@ -89,14 +93,16 @@ const Friends = () => {
               })}
             </div>
           </div>
-          <p>Friend Request</p>
+          <p className="text-[#A300B0] text-2xl my-2">Friend Request</p>
           <div>
-            {user?.friendRequestRecieved?.length === 0 && <p>No request</p>}
+            {user?.friendRequestRecieved?.length === 0 && (
+              <p className="text-white">No request</p>
+            )}
             {user?.friendRequestRecieved?.map((req) => {
               return users?.map((singleUser) => {
                 if (singleUser._id == req) {
                   return (
-                    <div className="w-full flex justify-between bg-gray-200 p-3 rounded-lg">
+                    <div className="w-full flex justify-between border border-[#A5009B]  p-2 text-white rounded-lg">
                       <p>{singleUser.name}</p>
                       <div className="flex space-x-2">
                         <button
@@ -118,21 +124,22 @@ const Friends = () => {
           </div>
         </div>
         <div>
-          <p>Suggested Friends</p>
+          <p className="text-[#A300B0] text-2xl my-2">Suggested Friends</p>
           {users.map((singleUser) => {
             return (
-              <>
+              <div className="flex  gap-2">
                 {!user?.friends?.includes(singleUser._id) &&
                   !user?.friendRequestRecieved?.includes(singleUser._id) &&
                   singleUser._id !== user._id && (
                     <div
                       key={singleUser._id}
-                      className="bg-gray-200 p-3 rounded-lg w-full flex justify-between mb-2">
+                      // className="cursor-pointer flex flex-col gap-2 border border-[#A5009B] px-5 py-2 text-white rounded-md font-semibold"
+                      className="text-white w-full p-3 rounded-lg flex justify-between mb-2 border border-[#A5009B]">
                       <h2 className="text-xl font-bold">{singleUser.name}</h2>
                       {!user?.friendRequestSent?.includes(singleUser._id) ? (
                         <button
                           onClick={() => handleAddFriend(singleUser._id)}
-                          className="bg-green-400 p-2 rounded-lg">
+                          className="bg-green-400 text-black p-2 rounded-lg">
                           Add Friend
                         </button>
                       ) : (
@@ -144,7 +151,7 @@ const Friends = () => {
                       )}
                     </div>
                   )}
-              </>
+              </div>
             );
           })}
         </div>

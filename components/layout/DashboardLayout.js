@@ -74,32 +74,32 @@ const DashboardLayout = ({ children }) => {
           <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
             {/* Sidebar content here */}
             <Link
-              className="hover:bg-common-button hover:text-white text-base px-2 py-3"
+              className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md text-base px-2 py-3"
               href="/dashboard/profile">
               Profile
             </Link>
             <Link
-              className="hover:bg-common-button px-2 py-3"
+              className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3"
               href="/dashboard/yourCourses">
               Your Course
             </Link>
             <Link
-              className="hover:bg-common-button px-2 py-3"
+              className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3"
               href="/dashboard/addCourse">
               Add Course
             </Link>
             <Link
-              className="hover:bg-common-button px-2 py-3"
+              className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3"
               href="/dashboard/addProduct">
               Add Product
             </Link>
             <Link
-              className="hover:bg-common-button px-2 py-3"
+              className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3"
               href="/dashboard/settings&privacy">
               Settings & Privacy
             </Link>
             <Link
-              className="hover:bg-common-button px-2 py-3"
+              className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3"
               href="/dashboard/userFeedback">
               User Feedback
             </Link>
