@@ -1,5 +1,6 @@
 import { dbConnect } from "@/lib/mongoose";
 import { Post } from "@/models/post";
+import { User } from "@/models/user";
 
 export default async function handeler(req, res) {
   dbConnect();
@@ -12,10 +13,33 @@ export default async function handeler(req, res) {
         post,
       });
     } else {
-      const post = await Post.find({});
+      const posts = await Post.find({});
+      // posts.map(post=>{
+      //  const user= await User.find({_id:post.userId})
+      // })
+      let allPost = [];
+      await Promise.all(
+        posts.map(async (post) => {
+          const user = await User.findOne({ _id: post.userId });
+          const newPost = {
+            user: user,
+            _id: post._id,
+            userId: post.userId,
+            caption: post.caption,
+            photos: post.photos,
+            videos: post.videos,
+            like: post.like,
+            unlike: post.unlike,
+            comments: post.comments,
+            createdAt: post.createdAt,
+            updatedAt: post.updatedAt,
+          };
+          allPost.push(newPost);
+        })
+      );
       return res.status(200).send({
         error: false,
-        post,
+        post: allPost,
       });
     }
   }
