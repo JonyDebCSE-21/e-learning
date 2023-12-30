@@ -39,8 +39,22 @@ export default async function handeler(req, res) {
   }
 
   if (req.method === "PUT") {
-    const { userId, postId, comment } = req.body;
+    const { userId, postId, comment, commentId } = req.body;
     const post = await Post.findOne({ _id: postId });
+    if (commentId) {
+      const restComment = post.comments.filter(
+        (comment) => comment._id != commentId
+      );
+      const update = await Post.updateOne(
+        { _id: postId },
+        { comments: [...restComment] }
+      );
+      return res.status(200).send({
+        error: false,
+        comment: update,
+        message: "Comment posted successfull",
+      });
+    }
     if (post.comments.length > 0) {
       const update = await Post.updateOne(
         { _id: postId },
@@ -63,4 +77,17 @@ export default async function handeler(req, res) {
       });
     }
   }
+
+  // if (req.method === "DELETE") {
+  //   const { postId, commentId } = req.body;
+  //   if (commentId) {
+  //     const post = await Post.find({ _id: postId });
+  //   }
+  //   const post = await Post.deleteOne({ _id: postId });
+  //   return res.status(200).send({
+  //     error: false,
+  //     post,
+  //     message: "Post Deleted Successfully",
+  //   });
+  // }
 }

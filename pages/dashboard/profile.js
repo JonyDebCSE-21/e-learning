@@ -23,6 +23,7 @@ import DashboardLayout from "@/components/layout/DashboardLayout";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
+import CommentModal from "@/components/shared/CommentModal";
 
 const imgStorageApi = "3f67787d6399449802b3d820607b790d";
 const imgUploadUrl = `https://api.imgbb.com/1/upload?key=${imgStorageApi}`;
@@ -40,6 +41,8 @@ const Profile = () => {
   const [filePreview, setFilePreview] = useState(null);
   const [userPosts, setUserPosts] = useState([]);
   const [comment, setComment] = useState("");
+  const [openModal, setOpenModal] = useState({ id: "", value: false });
+  const [comments, setComments] = useState([]);
 
   const user = useSelector((state) => state.userReducer.user);
 
@@ -74,13 +77,12 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    // if (user?.email) {
-    //   axios
-    //     .get(`/api/user/userProfile?userEmail=${user.email}`)
-    //     .then((res) => setUserProfile(res.data.user));
-    // }
-  }, [user]);
-
+    const post = userPosts.find((post) => post._id == openModal.id);
+    if (post) {
+      setComments(post.comments);
+    }
+  }, [openModal]);
+  console.log(openModal);
   const handleStatusPost = () => {
     // const data = {
     //   userEmail: user?.email,
@@ -145,11 +147,30 @@ const Profile = () => {
         console.log(res.data);
         setComment("");
         toast.success(res.data.message);
+        const post = userPosts.find((post) => post._id == postId);
+        post.comments.push({ userId: user._id, comment, _id: 1 });
       })
       .catch((err) => {
         console.log(err);
         setComment("");
       });
+  };
+
+  const handleDeleteComment = (id, postId) => {
+    axios
+      .put(`/api/user/post`, { postId: openModal.id, commentId: id })
+      .then((res) => {
+        const post = userPosts.find((post) => post._id == postId);
+        const restComment = post.comments.filter(
+          (comment) => comment._id != id
+        );
+        setComments(restComment);
+        console.log(post, "Post");
+        post.comments.push(...restComment);
+        toast.success("Comment deleted");
+        console.log(post, "Posttttt");
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -369,12 +390,14 @@ const Profile = () => {
                           <BiSolidLike className="text-lg mr-2" />
                           {likeCount}
                         </div>
-                        <div
+                        <button
                           className="flex items-center "
-                          onClick={handleComment}>
+                          onClick={() =>
+                            setOpenModal({ id: post._id, value: true })
+                          }>
                           <FaCommentAlt className="text-lg mr-2" />
                           {post.comments.length}
-                        </div>
+                        </button>
                         <div
                           className="flex items-center"
                           onClick={handleShare}>
@@ -403,7 +426,6 @@ const Profile = () => {
                           onChange={(e) => {
                             setComment(e.target.value);
                           }}
-                          value={comment}
                           placeholder="Write a comment..."
                           className="bg-gray-200 w-full outline-none py-1 px-2 rounded-2xl"
                         />
@@ -424,6 +446,13 @@ const Profile = () => {
             Load More
           </button>
         </div>
+        <CommentModal
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          comments={comments}
+          setComments={setComments}
+          handleDeleteComment={handleDeleteComment}
+        />
       </div>
     </DashboardLayout>
   );
