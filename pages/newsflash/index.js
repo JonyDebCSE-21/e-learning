@@ -51,7 +51,7 @@ const Newsflash = () => {
               className="w-12 h-12 rounded-full mr-2"
             />
             <div>
-              <p className="font-semibold mb-0 text-gray-700">{user.name}</p>
+              <p className="font-semibold mb-0 text-gray-700">{user?.name}</p>
               <small className="text-xs">
                 Public <i className="fas fa-caret-down"></i>
               </small>
@@ -107,7 +107,7 @@ const Newsflash = () => {
             </div>
           </div>
         </div>
-        {posts.map((post) => (
+        {posts?.map((post) => (
           <div className="bg-white rounded p-4 my-5">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
