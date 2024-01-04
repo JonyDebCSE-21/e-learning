@@ -147,9 +147,7 @@ const Profile = () => {
             <div className="avatar mb-4">
               <div className="w-40 h-40 rounded-full overflow-hidden mx-auto">
                 <img
-                  src={
-                    user?.profilePic ? user.profilePic : "/images/children.jpg"
-                  }
+                  src={user?.profilePic ? user.profilePic : "/images/user.png"}
                   alt=""
                   className="w-full h-full object-cover"
                 />
@@ -194,9 +192,7 @@ const Profile = () => {
           <div className="pd-left">
             <div className="pd-row flex justify-center items-center">
               <img
-                src={
-                  user?.profilePic ? user.profilePic : "/images/children.jpg"
-                }
+                src={user?.profilePic ? user.profilePic : "/images/user.png"}
                 className=" pd-image w-20 mr-5 rounded-md"
                 alt="User Profile"
               />
@@ -232,9 +228,7 @@ const Profile = () => {
           <div className="w-full bg-[#160030] text-[#A300B0] rounded p-5 ">
             <div className="flex items-center">
               <img
-                src={
-                  user?.profilePic ? user.profilePic : "/images/children.jpg"
-                }
+                src={user?.profilePic ? user.profilePic : "/images/user.png"}
                 className="w-12 h-12 rounded-full mr-2"
               />
               <div>
@@ -333,7 +327,7 @@ const Profile = () => {
                           src={
                             user?.profilePic
                               ? user.profilePic
-                              : "/images/children.jpg"
+                              : "/images/user.png"
                           }
                           className="w-10 h-10 rounded-full mr-2"
                         />
@@ -381,7 +375,7 @@ const Profile = () => {
                           src={
                             user?.profilePic
                               ? user.profilePic
-                              : "/images/children.jpg"
+                              : "/images/user.png"
                           }
                           className="w-6 h-6 rounded-full mr-2"
                         />

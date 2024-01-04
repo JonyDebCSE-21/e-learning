@@ -81,6 +81,9 @@ const addProduct = () => {
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter Course Title"
                   />
+                  {errors.title && (
+                    <p className="text-red-500">{errors.title.message}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
@@ -97,6 +100,9 @@ const addProduct = () => {
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter Description"
                   />
+                  {errors.description && (
+                    <p className="text-red-500">{errors.description.message}</p>
+                  )}
                 </div>
 
                 <div>
@@ -116,7 +122,7 @@ const addProduct = () => {
                     Quantity
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     {...register("quantity", {
                       required: {
                         value: true,
@@ -126,22 +132,28 @@ const addProduct = () => {
                     placeholder="Enter course instructor name"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
+                  {errors.quantity && (
+                    <p className="text-red-500">{errors.quantity.message}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
                     Price
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     {...register("price", {
                       required: {
                         value: true,
-                        message: "Confirm password is required",
+                        message: "Price is required",
                       },
                     })}
                     placeholder="Enter course price"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
+                  {errors.price && (
+                    <p className="text-red-500">{errors.price.message}</p>
+                  )}
                 </div>
                 <input
                   type="submit"

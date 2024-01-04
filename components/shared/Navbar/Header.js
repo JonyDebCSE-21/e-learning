@@ -39,8 +39,11 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    if (user) {
-      axios.get(`/api/user/cart?id=${user._id}`).then((res) => {
+    const userL = localStorage.getItem("user");
+    const userParsed = JSON.parse(userL);
+
+    if (userL) {
+      axios.get(`/api/user/cart?id=${userParsed._id}`).then((res) => {
         dispatch(setCart(res.data.cart));
       });
     }

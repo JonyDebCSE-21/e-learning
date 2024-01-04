@@ -164,7 +164,7 @@ const Classroom = () => {
           <div className="pd-left">
             <div className="pd-row flex items-start">
               <img
-                src="/images/profile-pic.jpg"
+                src={user?.profilePic ? user?.profilePic : "/images/user.png"}
                 className=" pd-image w-20 mr-5 rounded-md"
                 alt="User Profile"
               />

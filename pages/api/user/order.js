@@ -1,6 +1,7 @@
 import { dbConnect } from "@/lib/mongoose";
 import { Course } from "@/models/course";
 import { Order } from "@/models/order";
+import { Product } from "@/models/product";
 
 const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 
@@ -9,6 +10,8 @@ export default async function handler(req, res) {
 
   if (req.method == "GET") {
     const email = req.query.email;
+    const course = req.query.course;
+    const product = req.query.product;
     if (email) {
       const orders = await Order.find({ email: email });
       if (orders.length == 0) {
@@ -17,27 +20,55 @@ export default async function handler(req, res) {
           courses: [],
         });
       }
-      const courses = await Course.find({});
-      const lineItems = [];
-      orders.map((order) => {
-        const item = order.line_items;
-        lineItems.push(...item);
-      });
-      let userCourse = [];
-      lineItems.map((item) => {
-        const itemId = item.price_data.product_data.name;
-        const course = courses.find((course) => course._id == itemId);
-        courses.map((item) => {
-          if (item._id == itemId) {
-            userCourse.push(course);
-          }
+      if (course) {
+        const courses = await Course.find({});
+        const lineItems = [];
+        orders.map((order) => {
+          const item = order.line_items;
+          lineItems.push(...item);
         });
-      });
+        let userCourse = [];
+        lineItems.map((item) => {
+          const itemId = item.price_data.product_data.name;
+          const course = courses.find((course) => course._id == itemId);
+          courses.map((item) => {
+            if (item._id == itemId) {
+              userCourse.push(course);
+            }
+          });
+        });
 
-      return res.status(200).send({
-        error: false,
-        courses: userCourse,
-      });
+        return res.status(200).send({
+          error: false,
+          courses: userCourse,
+        });
+      } else if (product) {
+        const products = await Product.find({});
+        const lineItems = [];
+        orders.map((order) => {
+          const item = order.line_items;
+          lineItems.push(...item);
+        });
+        let userProduct = [];
+        lineItems.map((item) => {
+          console.log(item);
+          const itemId = item.price_data.product_data.name;
+          const product = products.find((product) => product._id == itemId);
+          products.map((p) => {
+            if (p._id == itemId) {
+              userProduct.push({
+                quantity: item.quantity,
+                ...product._doc,
+              });
+            }
+          });
+        });
+
+        return res.status(200).send({
+          error: false,
+          products: userProduct,
+        });
+      }
     }
     // const courseDoc = await Order.find({});
 

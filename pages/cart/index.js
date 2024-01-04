@@ -21,17 +21,40 @@ const Cart = () => {
   } = useForm();
   const cart = useSelector((state) => state.cartReducer.cart);
   const user = useSelector((state) => state.userReducer.user);
-  const handleClearAll = () => {};
+
+  const handleClearAll = () => {
+    if (!user) return toast.error("Please login to continue", { id: "1" });
+    axios
+      .delete(`/api/user/cart?cartId=${cart[0]._id}`)
+      .then((res) => {
+        toast.success(res.data.message, { id: "1" });
+        dispatch(setCart(null));
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
 
   const handleIncreaseItem = (item) => {
     if (!user) return toast.error("Please login to continue");
     // setLoading(true);
-    axios
-      .put("/api/user/cart", {
+    let data;
+    const course = cart[0].courseList.find((course) => item._id === course._id);
+    if (course) {
+      data = {
+        userId: user?._id,
+        courseId: item._id,
+        quantity: 1,
+      };
+    } else {
+      data = {
         userId: user?._id,
         productId: item._id,
         quantity: 1,
-      })
+      };
+    }
+    axios
+      .put("/api/user/cart", data)
       .then((res) => {
         // setLoading(false);
         toast.success(res.data.message, { id: "1" });
@@ -44,6 +67,21 @@ const Cart = () => {
   const handleDecreaseItem = (item) => {
     if (!user) return toast.error("Please login to continue");
     // setLoading(true);
+    let data;
+    const course = cart[0].courseList.find((course) => item._id === course._id);
+    if (course) {
+      data = {
+        userId: user?._id,
+        courseId: item._id,
+        quantity: 1,
+      };
+    } else {
+      data = {
+        userId: user?._id,
+        productId: item._id,
+        quantity: 1,
+      };
+    }
     axios
       .put("/api/user/cart", {
         userId: user?._id,
@@ -53,6 +91,46 @@ const Cart = () => {
       .then((res) => {
         // setLoading(false);
         toast.success(res.data.message, { id: "1" });
+        dispatch(setCart(res.data.cart));
+      })
+      .catch((err) => {
+        // setLoading(false);
+      });
+  };
+
+  const handleCourseDelete = (item) => {
+    if (!user) return toast.error("Please login to continue");
+    // setLoading(true);
+    // const course = cart.productList.find((item) => item._id === id);
+    axios
+      .put("/api/user/cart", {
+        userId: user?._id,
+        courseId: item._id,
+        quantity: -1,
+      })
+      .then((res) => {
+        // setLoading(false);
+        toast.success("Course Removed", { id: "1" });
+        dispatch(setCart(res.data.cart));
+      })
+      .catch((err) => {
+        // setLoading(false);
+      });
+  };
+
+  const handleProductDelete = (item) => {
+    if (!user) return toast.error("Please login to continue");
+    // setLoading(true);
+    // const course = cart.productList.find((item) => item._id === id);
+    axios
+      .put("/api/user/cart", {
+        userId: user?._id,
+        productId: item._id,
+        quantity: -1,
+      })
+      .then((res) => {
+        // setLoading(false);
+        toast.success("Product Removed", { id: "1" });
         dispatch(setCart(res.data.cart));
       })
       .catch((err) => {
@@ -82,7 +160,7 @@ const Cart = () => {
   return (
     <Layout>
       <div className="container mx-auto grid grid-cols-2 gap-10 mt-10">
-        {cart && cart[0] ? (
+        {cart && cart[0] && !cart[0].totalQuantity == 0 ? (
           <>
             <div className="col-span-2 md:col-span-1">
               <div className="bg-white flex justify-between items-center px-3 py-2 mb-4">
@@ -125,44 +203,15 @@ const Cart = () => {
                           </div>
                           <div className="max-w-[200px]">
                             <div className="text-center">${item?.price}</div>
-                            {/* <div className="flex gap-4 my-2">
-                              <button
-                                onClick={() => item && handleDecreaseItem(item)}
-                                className="cursor-pointer px-2 bg-[#9e9e9e] text-base">
-                                -
-                              </button>
-                              <p>{item?.itemQuantity}</p>
-                              <button
-                                onClick={() => item && handleIncreaseItem(item)}
-                                className="cursor-pointer px-2 bg-[#9e9e9e] text-base">
-                                +
-                              </button>
-                            </div> */}
-
                             <div className="flex justify-between my-2">
                               <button
                                 type="button"
-                                // onClick={() => addToFavourite(item)}
-                                className="text-2xl text-common-gray-text hover:text-secondary">
-                                {/* {favouriteItem.find((element) => element._id === item._id) ? (
-                  // ) : ( */}
-                                {/* <MdOutlineFavorite /> */}
-                                <MdOutlineFavoriteBorder />
-                                {/* )} */}
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => handleDelete(item._id)}
+                                onClick={() => handleCourseDelete(item)}
                                 className="text-2xl text-common-gray-text hover:text-danger">
                                 <RiDeleteBin6Line />
                               </button>
                             </div>
                           </div>
-                          {/* <Button
-                          onClick={() => handleDelete(item._id)}
-                          className="absolute right-0 top-0 px-3 py-2 bg-[#c51919] text-white">
-                          X
-                        </Button> */}
                         </div>
                       );
                     })}
@@ -215,27 +264,12 @@ const Cart = () => {
                             <div className="flex justify-between my-2">
                               <button
                                 type="button"
-                                // onClick={() => addToFavourite(item)}
-                                className="text-2xl text-common-gray-text hover:text-secondary">
-                                {/* {favouriteItem.find((element) => element._id === item._id) ? (
-                  // ) : ( */}
-                                {/* <MdOutlineFavorite /> */}
-                                <MdOutlineFavoriteBorder />
-                                {/* )} */}
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => handleDelete(item._id)}
+                                onClick={() => handleProductDelete(item)}
                                 className="text-2xl text-common-gray-text hover:text-danger">
                                 <RiDeleteBin6Line />
                               </button>
                             </div>
                           </div>
-                          {/* <Button
-                          onClick={() => handleDelete(item._id)}
-                          className="absolute right-0 top-0 px-3 py-2 bg-[#c51919] text-white">
-                          X
-                        </Button> */}
                         </div>
                       );
                     })}

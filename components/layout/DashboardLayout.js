@@ -85,6 +85,11 @@ const DashboardLayout = ({ children }) => {
             </Link>
             <Link
               className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3"
+              href="/dashboard/yourProduct">
+              Your Product
+            </Link>
+            <Link
+              className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3"
               href="/dashboard/addCourse">
               Add Course
             </Link>

@@ -79,12 +79,15 @@ const AddCourse = () => {
                   </label>
                   <input
                     {...register("title", {
-                      required: { value: true, message: "Name is required" },
+                      required: { value: true, message: "Title is required" },
                     })}
                     type="text"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter Course Title"
                   />
+                  {errors.title && (
+                    <p className="text-red-500">{errors.title.message}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
@@ -92,12 +95,18 @@ const AddCourse = () => {
                   </label>
                   <input
                     {...register("duration", {
-                      required: { value: true, message: "Email is required" },
+                      required: {
+                        value: true,
+                        message: "Duration is required",
+                      },
                     })}
                     type="text"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Enter COurse Duration"
+                    placeholder="Enter Course Duration"
                   />
+                  {errors.duration && (
+                    <p className="text-red-500">{errors.duration.message}</p>
+                  )}
                 </div>
 
                 <div>
@@ -121,28 +130,34 @@ const AddCourse = () => {
                     {...register("instructor", {
                       required: {
                         value: true,
-                        message: "Confirm password is required",
+                        message: "Instructor is required",
                       },
                     })}
                     placeholder="Enter course instructor name"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
+                  {errors.instructor && (
+                    <p className="text-red-500">{errors.instructor.message}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
                     Price
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     {...register("price", {
                       required: {
                         value: true,
-                        message: "Confirm password is required",
+                        message: "Price is required",
                       },
                     })}
                     placeholder="Enter course price"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
+                  {errors.price && (
+                    <p className="text-red-500">{errors.price.message}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
@@ -153,12 +168,15 @@ const AddCourse = () => {
                     {...register("details", {
                       required: {
                         value: true,
-                        message: "Confirm password is required",
+                        message: "Details is required",
                       },
                     })}
                     placeholder="Enter course details"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
+                  {errors.details && (
+                    <p className="text-red-500">{errors.details.message}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
@@ -169,12 +187,15 @@ const AddCourse = () => {
                     {...register("video", {
                       required: {
                         value: true,
-                        message: "Confirm password is required",
+                        message: "Video is required",
                       },
                     })}
                     placeholder="Enter course video link"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
+                  {errors.video && (
+                    <p className="text-red-500">{errors.video.message}</p>
+                  )}
                 </div>
 
                 <input

@@ -11,7 +11,7 @@ const YourCoursesPage = () => {
   useEffect(() => {
     if (user) {
       axios
-        .get(`/api/user/order?email=${user.email}`)
+        .get(`/api/user/order?email=${user.email}&&course=true`)
         .then((res) => {
           setYourCourses(res.data.courses);
         })
