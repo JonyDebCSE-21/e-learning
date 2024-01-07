@@ -13,7 +13,7 @@ const YourCoursesPage = () => {
       axios
         .get(`/api/user/order?email=${user.email}&&course=true`)
         .then((res) => {
-          setYourCourses(res.data.courses);
+          setYourCourses(res.data.orders);
         })
         .catch((err) => {
           console.log(err);

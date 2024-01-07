@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       if (orders.length == 0) {
         return res.status(200).send({
           error: false,
-          courses: [],
+          orders: [],
         });
       }
       if (course) {
@@ -40,7 +40,7 @@ export default async function handler(req, res) {
 
         return res.status(200).send({
           error: false,
-          courses: userCourse,
+          orders: userCourse,
         });
       } else if (product) {
         const products = await Product.find({});
@@ -51,14 +51,17 @@ export default async function handler(req, res) {
         });
         let userProduct = [];
         lineItems.map((item) => {
-          console.log(item);
           const itemId = item.price_data.product_data.name;
-          const product = products.find((product) => product._id == itemId);
           products.map((p) => {
             if (p._id == itemId) {
               userProduct.push({
+                _id: p._id,
                 quantity: item.quantity,
-                ...product._doc,
+                title: p.title,
+                description: p.description,
+                image: p.image,
+                price: p.price * item.quantity,
+                opinions: p.opinions,
               });
             }
           });
@@ -66,7 +69,7 @@ export default async function handler(req, res) {
 
         return res.status(200).send({
           error: false,
-          products: userProduct,
+          orders: userProduct,
         });
       }
     }
