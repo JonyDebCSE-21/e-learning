@@ -1,8 +1,11 @@
 import Layout from "@/components/layout/Layout";
+import CommentModal from "@/components/shared/CommentModal";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { BiSolidLike } from "react-icons/bi";
 import { FaCommentAlt, FaShare } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const Watch = () => {
   const dateFormat = (inputDateTime) => {
@@ -19,6 +22,10 @@ const Watch = () => {
   };
 
   const [videoLinks, setVideoLinks] = useState([]);
+  const [openModal, setOpenModal] = useState({ id: "", value: false });
+  const [comments, setComments] = useState([]);
+  const [comment, setComment] = useState({ id: null, value: "" });
+  const user = useSelector((state) => state.userReducer.user);
 
   useEffect(() => {
     axios
@@ -37,6 +44,69 @@ const Watch = () => {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    const post = videoLinks.find((post) => post._id == openModal.id);
+    if (post) {
+      setComments(post.comments);
+    }
+  }, [openModal]);
+
+  const handleComment = (e, postId) => {
+    e.preventDefault();
+    axios
+      .put("/api/user/post", {
+        userId: user._id,
+        postId,
+        comment: comment.value,
+      })
+      .then((res) => {
+        setComment("");
+        toast.success(res.data.message);
+        const post = videoLinks.find((post) => post._id == postId);
+        post.comments = res.data.comments;
+        setVideoLinks([...videoLinks]);
+      })
+      .catch((err) => {
+        console.log(err);
+        setComment("");
+      });
+  };
+
+  const handleDeleteComment = (id, postId) => {
+    axios
+      .put(`/api/user/post`, { postId: openModal.id, commentId: id })
+      .then((res) => {
+        const post = videoLinks.find((post) => post._id == postId);
+        const restComment = post.comments.filter(
+          (comment) => comment._id != id
+        );
+        setComments(restComment);
+        post.comments = res.data.comments;
+        toast.success("Comment deleted");
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleLike = (id) => {
+    axios
+      .put("/api/user/post", { userId: user._id, postId: id, like: true })
+      .then((res) => {
+        let post = videoLinks.find((post) => post._id == id);
+        const liked = post.like.includes(user._id);
+        if (liked) {
+          const restLike = post.like.filter((l) => l != user._id);
+          post.like = [...restLike];
+          setVideoLinks([...videoLinks]);
+        } else {
+          post.like.push(user._id);
+          setVideoLinks([...videoLinks]);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <Layout>
@@ -73,21 +143,30 @@ const Watch = () => {
                   src={post.photos}
                   className=" rounded mb-3 w-1/2 mx-auto h-[600px]"
                 /> */}
-                <iframe
-                  width="560"
-                  height="315"
-                  src={post.videos}
-                  title="YouTube video player"
-                  className="my-3"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen></iframe>
+                <div className="flex justify-center">
+                  <iframe
+                    width="460"
+                    height="315"
+                    src={post.videos}
+                    title="YouTube video player"
+                    className="my-3"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+                </div>
                 <div className=" flex items-center justify-between border-b py-2 border-t">
                   <div className="flex items-center space-x-20 ">
-                    <div className="flex items-center ">
-                      <BiSolidLike className="text-lg mr-2" />
-                      30
-                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleLike(post._id)}
+                      className="flex items-center ">
+                      <BiSolidLike
+                        className={`text-lg mr-2 ${
+                          post.like.includes(user._id) ? "text-white" : ""
+                        } `}
+                      />
+                      {post.like.length}
+                    </button>
                     <button
                       className="flex items-center "
                       onClick={() =>
@@ -119,10 +198,10 @@ const Watch = () => {
                     className="flex flex-grow space-x-2">
                     <input
                       type="text"
-                      // onChange={(e) => {
-                      //   setComment({ id: post._id, value: e.target.value });
-                      // }}
-                      // value={comment.id == post._id ? comment.value : ""}
+                      onChange={(e) => {
+                        setComment({ id: post._id, value: e.target.value });
+                      }}
+                      value={comment.id == post._id ? comment.value : ""}
                       placeholder="Write a comment..."
                       className="bg-gray-200 w-full outline-none py-1 px-2 rounded-2xl"
                     />
@@ -137,6 +216,13 @@ const Watch = () => {
             </div>
           );
         })}
+        <CommentModal
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          comments={comments}
+          setComments={setComments}
+          handleDeleteComment={handleDeleteComment}
+        />
       </div>
     </Layout>
   );

@@ -88,26 +88,41 @@ const DashboardLayout = ({ children }) => {
               href="/dashboard/yourProduct">
               Your Product
             </Link>
-            <Link
-              className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3"
-              href="/dashboard/addCourse">
-              Add Course
-            </Link>
-            <Link
-              className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3"
-              href="/dashboard/addProduct">
-              Add Product
-            </Link>
+
             <Link
               className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3"
               href="/dashboard/settings&privacy">
               Settings & Privacy
             </Link>
-            <Link
-              className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3"
-              href="/dashboard/userFeedback">
-              User Feedback
-            </Link>
+            {user && user.role == "admin" && (
+              <>
+                <Link
+                  className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3"
+                  href="/dashboard/userFeedback">
+                  User Feedback
+                </Link>
+                <Link
+                  className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3"
+                  href="/dashboard/addCourse">
+                  Add Course
+                </Link>
+                <Link
+                  className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3"
+                  href="/dashboard/addProduct">
+                  Add Product
+                </Link>
+                <Link
+                  className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3"
+                  href="/dashboard/allProduct">
+                  All Product
+                </Link>
+                <Link
+                  className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3"
+                  href="/dashboard/allCourse">
+                  All Course
+                </Link>
+              </>
+            )}
           </ul>
         </div>
       </div>

@@ -79,7 +79,7 @@ const addProduct = () => {
                     })}
                     type="text"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Enter Course Title"
+                    placeholder="Enter Product Title"
                   />
                   {errors.title && (
                     <p className="text-red-500">{errors.title.message}</p>
@@ -129,7 +129,7 @@ const addProduct = () => {
                         message: "Quantity is required",
                       },
                     })}
-                    placeholder="Enter course instructor name"
+                    placeholder="Enter product quantity"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
                   {errors.quantity && (
@@ -148,7 +148,7 @@ const addProduct = () => {
                         message: "Price is required",
                       },
                     })}
-                    placeholder="Enter course price"
+                    placeholder="Enter product price"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
                   {errors.price && (

@@ -20,6 +20,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
 import CommentModal from "@/components/shared/CommentModal";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const imgStorageApi = "3f67787d6399449802b3d820607b790d";
 const imgUploadUrl = `https://api.imgbb.com/1/upload?key=${imgStorageApi}`;
@@ -135,6 +136,36 @@ const Profile = () => {
         setComments(restComment);
         post.comments = res.data.comments;
         toast.success("Comment deleted");
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleLike = (id) => {
+    axios
+      .put("/api/user/post", { userId: user._id, postId: id, like: true })
+      .then((res) => {
+        let post = userPosts.find((post) => post._id == id);
+        const liked = post.like.includes(user._id);
+        if (liked) {
+          const restLike = post.like.filter((l) => l != user._id);
+          post.like = [...restLike];
+          setUserPosts([...userPosts]);
+        } else {
+          post.like.push(user._id);
+          setUserPosts([...userPosts]);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handlePostDelete = (id) => {
+    axios
+      .delete(`/api/user/post?id=${id}`)
+      .then((res) => {
+        setUserPosts(userPosts.filter((post) => post._id != id));
+        toast.success(res.data.message);
       })
       .catch((err) => console.log(err));
   };
@@ -320,7 +351,7 @@ const Profile = () => {
           {userPosts.length > 0
             ? userPosts.map((post) => {
                 return (
-                  <div className="bg-[#160030] text-[#A300B0] rounded p-4 my-5">
+                  <div className="relative bg-[#160030] text-[#A300B0] rounded p-4 my-5">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center">
                         <img
@@ -345,16 +376,41 @@ const Profile = () => {
                       </a>
                     </div>
                     <p className="text-gray-500 text-lg mb-5">{post.caption}</p>
-                    <img
-                      src={post.photos}
-                      className=" rounded mb-3 w-1/2 mx-auto h-[600px]"
-                    />
+                    {post.photos && (
+                      <img
+                        src={post.photos}
+                        className=" rounded mb-3 w-1/2 mx-auto h-[600px]"
+                      />
+                    )}
+                    {post.videos && post.photos && (
+                      <div className="border-b border-[#A5009B]"></div>
+                    )}
+                    {post.videos && (
+                      <div className="flex justify-center my-5">
+                        <iframe
+                          width="560"
+                          height="315"
+                          src={post.videos}
+                          title="YouTube video player"
+                          className="my-3"
+                          frameborder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowfullscreen></iframe>
+                      </div>
+                    )}
                     <div className=" flex items-center justify-between border-b py-2 border-t">
                       <div className="flex items-center space-x-20 ">
-                        <div className="flex items-center ">
-                          <BiSolidLike className="text-lg mr-2" />
-                          30
-                        </div>
+                        <button
+                          type="button"
+                          onClick={() => handleLike(post._id)}
+                          className="flex items-center ">
+                          <BiSolidLike
+                            className={`text-lg mr-2 ${
+                              post.like.includes(user._id) ? "text-white" : ""
+                            } `}
+                          />
+                          {post.like.length}
+                        </button>
                         <button
                           className="flex items-center "
                           onClick={() =>
@@ -400,6 +456,12 @@ const Profile = () => {
                         />
                       </form>
                     </div>
+                    <button
+                      type="button"
+                      onClick={() => handlePostDelete(post._id)}
+                      className="absolute right-5 top-5 text-2xl text-red-500">
+                      <RiDeleteBin6Line />
+                    </button>
                   </div>
                 );
               })

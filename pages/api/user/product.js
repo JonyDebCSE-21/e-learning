@@ -31,13 +31,10 @@ export default async function handler(req, res) {
     try {
       const product = await Product.findById({ _id });
 
-      console.log(product);
-
       if (!product) {
         return res.status(404).send({ error: "Product not found" });
       }
 
-      console.log("reviews", typeof product.opinions);
       product.opinions.push(opinion);
       await product.save();
       return res.status(200).send({

@@ -14,9 +14,7 @@ export default async function handeler(req, res) {
       });
     } else {
       const posts = await Post.find({});
-      // posts.map(post=>{
-      //  const user= await User.find({_id:post.userId})
-      // })
+
       let allPost = [];
       await Promise.all(
         posts.map(async (post) => {
@@ -64,13 +62,34 @@ export default async function handeler(req, res) {
   }
 
   if (req.method === "PUT") {
-    const { userId, postId, comment, commentId } = req.body;
+    const { userId, postId, comment, commentId, like } = req.body;
     const post = await Post.findOne({ _id: postId });
+    if (like) {
+      const liked = post.like.includes(userId);
+      if (liked) {
+        const restLike = post.like.filter((l) => l != userId);
+        const update = await Post.updateOne(
+          { _id: postId },
+          { like: [...restLike] }
+        );
+        return res.status(200).send({
+          error: false,
+          message: "unliked successfull",
+        });
+      }
+      const update = await Post.updateOne(
+        { _id: postId },
+        { like: [...post.like, userId] }
+      );
+      return res.status(200).send({
+        error: false,
+        message: "liked successfull",
+      });
+    }
     if (commentId) {
       const restComment = post.comments.filter(
         (comment) => comment._id != commentId
       );
-      console.log(restComment, "restComment");
       const update = await Post.updateOne(
         { _id: postId },
         { comments: [...restComment] }
@@ -110,16 +129,12 @@ export default async function handeler(req, res) {
     }
   }
 
-  // if (req.method === "DELETE") {
-  //   const { postId, commentId } = req.body;
-  //   if (commentId) {
-  //     const post = await Post.find({ _id: postId });
-  //   }
-  //   const post = await Post.deleteOne({ _id: postId });
-  //   return res.status(200).send({
-  //     error: false,
-  //     post,
-  //     message: "Post Deleted Successfully",
-  //   });
-  // }
+  if (req.method === "DELETE") {
+    const { id } = req.query;
+    const course = await Post.deleteOne({ _id: id });
+    return res.status(200).send({
+      error: false,
+      message: "Post Deleted Successful",
+    });
+  }
 }

@@ -6,12 +6,7 @@ const postSchema = new Schema(
     caption: String,
     videos: String,
     photos: String,
-    like: [
-      {
-        userId: { type: mongoose.Schema.Types.ObjectId },
-        like: Number,
-      },
-    ],
+    like: [{ type: String }],
     unlike: [
       {
         userId: { type: mongoose.Schema.Types.ObjectId },
