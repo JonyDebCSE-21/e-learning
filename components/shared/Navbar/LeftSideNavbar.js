@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { FaUserFriends } from "react-icons/fa";
 import { SiGoogleclassroom } from "react-icons/si";
 import { useRouter } from "next/router";
+import Events from "@/components/Events";
+import Link from "next/link";
 
 const LeftSideNavbar = () => {
   const [showNav, setShowNav] = useState(true);
@@ -34,11 +36,12 @@ const LeftSideNavbar = () => {
         </div>
 
         <div className="p-2">
-          <div
+          <Link
+            href={`/dashboard/friends/${user?._id}`}
             // onClick={() => router.push("/Classroom")}
             className="flex items-center gap-4 cursor-pointer hover:bg-blue-700 px-4 py-2">
             <FaUserFriends /> <span className="font-semibold">Friends</span>
-          </div>
+          </Link>
           {/* {showPrimary && (
             <div className="flex flex-col pl-4">
               <li className="flex items-center gap-3 cursor-pointer hover:bg-blue-400  px-[10px] py-[3px] h-6">
@@ -111,6 +114,11 @@ const LeftSideNavbar = () => {
               </li>
             </div>
           )} */}
+
+          {/* events */}
+          <div>
+            <Events />
+          </div>
         </div>
       </div>
       {/* )} */}

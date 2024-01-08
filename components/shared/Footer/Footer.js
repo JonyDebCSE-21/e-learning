@@ -17,7 +17,7 @@ const Footer = () => {
   const router = useRouter();
   const user = useSelector((state) => state.userReducer.user);
 
-  console.log("user from footer", user);
+  // console.log("user from footer", user);
 
   // useEffect(() => {
   //   const ws = new WebSocket("ws://localhost:5001");
@@ -44,6 +44,7 @@ const Footer = () => {
     // }, 1000);
   };
 
+  // console.log(isChatBoxShow);
   const pairs = [];
   if (names && texts) {
     for (let i = 0; i < Math.min(names?.length, texts?.length); i++) {
@@ -53,7 +54,7 @@ const Footer = () => {
 
   const messages = pairs.reverse();
 
-  console.log("pairs", messages);
+  // console.log("pairs", messages);
 
   const sendMessage = (e) => {
     // console.log(message);
@@ -238,7 +239,7 @@ const Footer = () => {
             boxShadow:
               " rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px",
           }}
-          className=" absolute -top-96 right-20 flex flex-col justify-between bg-[#353241] w-[30%] h-[500px] p-3 rounded-md">
+          className=" absolute -top-[550px] right-16 flex flex-col justify-between bg-[#353241] w-[30%] h-[500px] p-3 rounded-md">
           <div className="flex justify-between items-center">
             <span className="text-xl text-green-200 font-bold">Chat</span>
             <span

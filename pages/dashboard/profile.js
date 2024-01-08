@@ -229,7 +229,7 @@ const Profile = () => {
               />
               <div>
                 <h3 className="text-lg mt-4 font-semibold">{user?.name}</h3>
-                <p className="text-sm">120 Friends</p>
+                <p className="text-sm">{user?.friends?.length}</p>
               </div>
             </div>
           </div>

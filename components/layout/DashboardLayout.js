@@ -121,6 +121,16 @@ const DashboardLayout = ({ children }) => {
                   href="/dashboard/allCourse">
                   All Course
                 </Link>
+                <Link
+                  className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3"
+                  href="/dashboard/createEvent">
+                  Create Events
+                </Link>
+                <Link
+                  className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3"
+                  href="/dashboard/events">
+                  All Events
+                </Link>
               </>
             )}
           </ul>
