@@ -28,7 +28,7 @@ const index = () => {
   }, [id]);
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     // const file = data.thumbnail[0];
     // console.log(file);
     if (data.thumbnail[0]) {

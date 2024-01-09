@@ -74,7 +74,7 @@ const SignleProductPage = () => {
       .then((res) => dispatch(setCart(res.data.cart)));
   };
 
-  console.log("hhe", product.opinions);
+  // console.log("hhe", product.opinions);
   return (
     <Layout>
       <div className="p-10">

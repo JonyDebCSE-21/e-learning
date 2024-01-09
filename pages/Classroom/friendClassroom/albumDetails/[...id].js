@@ -20,7 +20,7 @@ const albumDetailsPage = () => {
         });
     }
   }, [id]);
-  console.log(album);
+  // console.log(album);
   return (
     <DashboardLayout>
       <div className="text-white">

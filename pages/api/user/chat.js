@@ -23,7 +23,7 @@ export default async function handler(req, res) {
         existingChat.text.unshift(text);
         await existingChat.save();
 
-        console.log("Updated chat:", existingChat);
+        // console.log("Updated chat:", existingChat);
         res
           .status(200)
           .json({ message: "Chat updated successfully", chats: existingChat });
@@ -34,7 +34,7 @@ export default async function handler(req, res) {
           text: [text],
         });
 
-        console.log("Created new chat:", chatDoc);
+        // console.log("Created new chat:", chatDoc);
         res
           .status(201)
           .json({ message: "Chat created successfully", chats: chatDoc });

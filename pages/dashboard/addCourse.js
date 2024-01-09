@@ -42,7 +42,7 @@ const AddCourse = () => {
               video: data.video,
             })
             .then((res) => {
-              console.log(res.data);
+              // console.log(res.data);
               reset();
               toast.success("Succesfully added course", {
                 duration: 3000,

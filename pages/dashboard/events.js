@@ -27,12 +27,12 @@ const Events = () => {
       });
   };
 
-  console.log("in", interested);
+  // console.log("in", interested);
 
-  console.log(events);
+  // console.log(events);
 
   const deleteEvent = (id) => {
-    console.log(id);
+    // console.log(id);
     axios.delete(`/api/admin/event?id=${id}`).then((res) => {
       if (res.data) {
         setEvents(events.filter((e) => e._id != id));

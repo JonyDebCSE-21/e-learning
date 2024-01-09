@@ -153,7 +153,7 @@ const Cart = () => {
         if (res.data.url) {
           window.location = res.data.url;
         }
-        console.log(res.data);
+        // console.log(res.data);
       });
   };
 

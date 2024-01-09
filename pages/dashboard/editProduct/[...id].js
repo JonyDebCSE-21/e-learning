@@ -37,7 +37,7 @@ const index = () => {
 
     // console.log(file);
 
-    console.log(data);
+    // console.log(data);
     const formData = new FormData();
     formData.append("image", data.image[0]);
     if (data.image[0]) {

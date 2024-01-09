@@ -26,7 +26,7 @@ export default async function handler(req, res) {
   if (req?.method == "POST") {
     const { _id, opinion } = req.body;
 
-    console.log(_id, opinion);
+    // console.log(_id, opinion);
 
     try {
       const product = await Product.findById({ _id });

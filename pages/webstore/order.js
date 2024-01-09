@@ -19,7 +19,7 @@ const OrderPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Order submitted:", formData);
+    // console.log("Order submitted:", formData);
   };
 
   return (

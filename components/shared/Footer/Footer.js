@@ -39,9 +39,9 @@ const Footer = () => {
       }
     });
 
-    // setTimeout(() => {
-    //   showMessage();
-    // }, 1000);
+    setTimeout(() => {
+      showMessage();
+    }, 1000);
   };
 
   // console.log(isChatBoxShow);

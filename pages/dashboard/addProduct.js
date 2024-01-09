@@ -37,7 +37,7 @@ const addProduct = () => {
               quantity: data.quantity,
             })
             .then((res) => {
-              console.log(res.data);
+              // console.log(res.data);
               reset();
               toast.success("Succesfully added product", {
                 duration: 3000,

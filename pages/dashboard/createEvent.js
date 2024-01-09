@@ -17,7 +17,7 @@ const createEvent = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
 
     if (data.thumbnail[0]) {
       const formData = new FormData();
@@ -32,7 +32,7 @@ const createEvent = () => {
               image: res.data.data.display_url,
             })
             .then((res) => {
-              console.log(res.data);
+              // console.log(res.data);
               reset();
               toast.success("Succesfully added Event", {
                 duration: 3000,
