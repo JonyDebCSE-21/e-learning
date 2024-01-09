@@ -163,7 +163,9 @@ const Header = () => {
                   </li>
                   <hr />
                   <li className="hover:bg-blue-700">
-                    <Link href="#" className="text-white flex items-center">
+                    <Link
+                      href="/events"
+                      className="text-white flex items-center">
                       <MdEventRepeat className="text-lg mr-1" />
                       <h2 className="text-sm mb-0">Events</h2>
                     </Link>
