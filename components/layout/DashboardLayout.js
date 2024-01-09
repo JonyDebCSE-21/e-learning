@@ -4,49 +4,23 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/redux/slice/userSlice/userSlice";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const DashboardLayout = ({ children }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userReducer.user);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/auth/Signin");
+    }
+  }, []);
 
   useEffect(() => {
     const user = localStorage.getItem("user");
     dispatch(setUser(JSON.parse(user)));
   }, []);
-
-  // useEffect(() => {
-  //   // const user = localStorage.getItem("user");
-  //   // console.log(user);
-  //   // if (user) {
-  //   //   axios.get(`/api/user/user?id=${user._id}`).then((res) => {
-  //   //     dispatch(setUser(res.data.user));
-  //   //   });
-  //   // }
-  //   const fetchData = async () => {
-  //     axios.get(`/api/user/user?id=${user._id}`).then((res) => {
-  //       dispatch(setUser(res.data.user));
-  //     });
-  //   };
-  //   // if (user) {
-  //   //   setInterval(function () {
-  //   //     axios.get(`/api/user/user?id=${user._id}`).then((res) => {
-  //   //       dispatch(setUser(res.data.user));
-  //   //     });
-  //   //   }, 5000);
-  //   // }
-  //   fetchData();
-  //   const intervalId = setInterval(fetchData, 10000);
-
-  //   // Clean up the interval when the component unmounts
-  //   return () => clearInterval(intervalId);
-  // }, []);
-  // if (user) {
-  //   setInterval(function () {
-  //     axios.get(`/api/user/user?id=${user._id}`).then((res) => {
-  //       dispatch(setUser(res.data.user));
-  //     });
-  //   }, 5000);
-  // }
 
   return (
     <>
@@ -130,6 +104,11 @@ const DashboardLayout = ({ children }) => {
                   className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3"
                   href="/dashboard/events">
                   All Events
+                </Link>
+                <Link
+                  className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3"
+                  href="/dashboard/allUser">
+                  All User
                 </Link>
               </>
             )}

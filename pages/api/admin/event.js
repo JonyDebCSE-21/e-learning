@@ -30,16 +30,25 @@ export default async function handler(req, res) {
   }
 
   if (method === "PUT") {
-    const { id, interested } = req.body;
+    const { id, userId } = req.body;
 
-    // console.log(id, interested);
+    const event = await Event.findOne({ _id: id });
+    const alreadyInterested = event.interested.includes(userId);
+    if (alreadyInterested) {
+      const restInterested = event.interested.filter((item) => item !== userId);
+      const updatedEvent = await Event.updateOne(
+        { _id: id },
+        { interested: [...restInterested] }
+      );
+    } else {
+      const updatedEvent = await Event.updateOne(
+        { _id: id },
+        {
+          interested: [...event.interested, userId],
+        }
+      );
+    }
 
-    const updatedEvent = await Event.updateOne(
-      { _id: id },
-      {
-        interested,
-      }
-    );
     // updatedEvent.save();
     // console.log(updatedEvent);
 

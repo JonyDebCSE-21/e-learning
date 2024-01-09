@@ -34,6 +34,7 @@ const createEvent = () => {
               title: data.title,
               date: data.date,
               image: res.data.data.display_url,
+              description: data.description,
             })
             .then((res) => {
               // console.log(res.data);
@@ -96,8 +97,27 @@ const createEvent = () => {
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter Event Date"
                   />
-                  {errors.duration && (
-                    <p className="text-red-500">{errors.duration.message}</p>
+                  {errors.date && (
+                    <p className="text-red-500">{errors.date.message}</p>
+                  )}
+                </div>
+                <div>
+                  <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                    Description
+                  </label>
+                  <input
+                    {...register("description", {
+                      required: {
+                        value: true,
+                        message: "Description is required",
+                      },
+                    })}
+                    type="text"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Enter description"
+                  />
+                  {errors.description && (
+                    <p className="text-red-500">{errors.description.message}</p>
                   )}
                 </div>
 

@@ -94,6 +94,12 @@ const Classroom = () => {
   };
 
   useEffect(() => {
+    if (!user) {
+      router.push("/auth/Signin");
+    }
+  }, []);
+
+  useEffect(() => {
     if (user) {
       axios
         .get(`/api/user/classroom?id=${user._id}`)

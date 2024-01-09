@@ -4,6 +4,7 @@ import Link from "next/link";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setCart } from "@/redux/slice/cartSlice/cartSlice";
+import toast from "react-hot-toast";
 
 const Product = ({ product, onAddToCart }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -14,13 +15,20 @@ const Product = ({ product, onAddToCart }) => {
 
   const handleAddToCart = () => {
     //
+    if (!user) return toast.error("Please Login");
     axios
       .put("/api/user/cart", {
         userId: user._id,
         productId: product._id,
         quantity: 1,
       })
-      .then((res) => dispatch(setCart(res.data.cart)));
+      .then((res) => {
+        toast.success("Product added to cart");
+        dispatch(setCart(res.data.cart));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const incrementQuantity = () => {

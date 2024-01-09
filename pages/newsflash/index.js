@@ -12,6 +12,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import CommentModal from "@/components/shared/CommentModal";
 import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 const imgStorageApi = "3f67787d6399449802b3d820607b790d";
 const imgUploadUrl = `https://api.imgbb.com/1/upload?key=${imgStorageApi}`;
@@ -27,6 +28,7 @@ const Newsflash = () => {
   const [filePreview, setFilePreview] = useState(null);
   const [videoInput, setVideoInput] = useState(false);
   const [videoLink, setVideoLink] = useState(null);
+  const router = useRouter();
 
   const user = useSelector((state) => state.userReducer.user);
 
@@ -42,6 +44,12 @@ const Newsflash = () => {
     });
     return formattedDateTime;
   };
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/auth/Signin");
+    }
+  }, []);
 
   useEffect(() => {
     axios
@@ -309,7 +317,7 @@ const Newsflash = () => {
                   className="flex items-center ">
                   <BiSolidLike
                     className={`text-lg mr-2 ${
-                      post.like.includes(user._id) ? "text-[#A5009B]" : ""
+                      post.like.includes(user?._id) ? "text-[#A5009B]" : ""
                     } `}
                   />
                   {post.like.length}

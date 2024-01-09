@@ -12,6 +12,7 @@ const Course = ({ course, onAddToCart }) => {
   const user = useSelector((state) => state.userReducer.user);
 
   const handleAddToCart = () => {
+    if (!user) return toast.error("Please Login");
     //
     axios
       .put("/api/user/cart", {

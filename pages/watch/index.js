@@ -1,7 +1,8 @@
 import Layout from "@/components/layout/Layout";
 import CommentModal from "@/components/shared/CommentModal";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { BiSolidLike } from "react-icons/bi";
 import { FaCommentAlt, FaShare } from "react-icons/fa";
@@ -26,6 +27,13 @@ const Watch = () => {
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState({ id: null, value: "" });
   const user = useSelector((state) => state.userReducer.user);
+  const router = useRouter();
+
+  useLayoutEffect(() => {
+    if (!user) {
+      router.push("/auth/Signin");
+    }
+  }, []);
 
   useEffect(() => {
     axios
