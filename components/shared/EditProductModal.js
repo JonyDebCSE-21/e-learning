@@ -21,7 +21,7 @@ const EditProductModal = ({ openModal, setOpenModal, product, setProduct }) => {
 
     // console.log(file);
 
-    console.log(data);
+    // console.log(data);
     if (data.image[0]) {
       //   const formData = new FormData();
       //   formData.append("image", data.image[0]);

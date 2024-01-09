@@ -14,7 +14,7 @@ const Feedback = () => {
   const handleFeedbackForm = (e) => {
     e.preventDefault();
     const data = { name, email, feedback, rating };
-    console.log(data);
+    // console.log(data);
     axios.post("/api/user/feedback", data).then((res) => {
       if (res.data) {
         setName("");

@@ -1,7 +1,9 @@
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import axios from "axios";
+import { useRouter } from "next/router";
 import React from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const imgStorageApi = "3f67787d6399449802b3d820607b790d";
 const imgUploadUrl = `https://api.imgbb.com/1/upload?key=${imgStorageApi}`;
@@ -15,6 +17,8 @@ const createEvent = () => {
     reset,
     formState: { errors },
   } = useForm();
+
+  const router = useRouter();
 
   const onSubmit = (data) => {
     // console.log(data);
@@ -33,10 +37,12 @@ const createEvent = () => {
             })
             .then((res) => {
               // console.log(res.data);
+
               reset();
               toast.success("Succesfully added Event", {
                 duration: 3000,
               });
+              router.push("/dashboard/events");
             })
             .catch((err) => {
               console.log(err);

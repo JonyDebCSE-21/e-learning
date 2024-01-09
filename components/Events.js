@@ -26,9 +26,9 @@ const Events = () => {
       });
   };
 
-  console.log("in", interested);
+  // console.log("in", interested);
 
-  console.log(events);
+  // console.log(events);
   return (
     <div>
       <h1 className="my-5 border-b-2 border-blue-700 mb-3">Events</h1>

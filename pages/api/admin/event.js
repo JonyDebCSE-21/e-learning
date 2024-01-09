@@ -32,7 +32,7 @@ export default async function handler(req, res) {
   if (method === "PUT") {
     const { id, interested } = req.body;
 
-    console.log(id, interested);
+    // console.log(id, interested);
 
     const updatedEvent = await Event.updateOne(
       { _id: id },
@@ -41,7 +41,7 @@ export default async function handler(req, res) {
       }
     );
     // updatedEvent.save();
-    console.log(updatedEvent);
+    // console.log(updatedEvent);
 
     return res.status(200).send({
       error: false,
@@ -52,7 +52,7 @@ export default async function handler(req, res) {
   if (method === "DELETE") {
     const { id } = req.query;
 
-    console.log(id);
+    // console.log(id);
 
     const deletedEvent = await Event.deleteOne({ _id: id });
 
