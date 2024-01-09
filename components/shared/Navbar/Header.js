@@ -61,7 +61,7 @@ const Header = () => {
     <div
       className={`nav flex items-center justify-between ${
         router.pathname.includes("dashboard") && "bg-[#030014] text-white"
-      } bg-blue-700 px-5 py-1 sticky top-0 z-50`}>
+      } bg-blue-700 px-5 py-3 sticky top-0 z-50`}>
       <div className="flex justify-between items-center container mx-auto">
         <div className="flex items-center">
           <Link href="/" className="flex items-center">
@@ -77,7 +77,7 @@ const Header = () => {
           </Link>
         </div>
 
-        <Input />
+        {/* <Input /> */}
 
         <div className="flex items-center mb-2">
           <Link href="/cart" className="text-white flex items-center">

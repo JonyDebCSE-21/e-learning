@@ -4,6 +4,8 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useSelector } from "react-redux";
@@ -111,6 +113,17 @@ const Classroom = () => {
         });
     }
   }, [user]);
+
+  const handleAlbumDelete = (id) => {
+    axios
+      .delete(`/api/user/classroom?id=${id}`)
+      .then((res) => {
+        console.log(res.data.message);
+        setUserAlbum(userAlbum.filter((album) => album._id != id));
+        toast.success("Album Deleted");
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <>
@@ -223,13 +236,7 @@ const Classroom = () => {
             <div className="flex flex-wrap gap-5 my-5">
               {userAlbum.map((album) => {
                 return (
-                  <div
-                    onClick={() => {
-                      router.push(
-                        `/Classroom/friendClassroom/albumDetails/${album._id}`
-                      );
-                    }}
-                    className="w-[300px] bg-white cursor-pointer">
+                  <div className="relative w-[300px] bg-white cursor-pointer">
                     <Carousel
                       swipeable={true}
                       draggable={true}
@@ -250,6 +257,11 @@ const Classroom = () => {
                       {album.images.map((image) => {
                         return (
                           <img
+                            onClick={() => {
+                              router.push(
+                                `/Classroom/friendClassroom/albumDetails/${album._id}`
+                              );
+                            }}
                             src={image}
                             alt="Album Cover"
                             className="h-[250px]"
@@ -260,12 +272,18 @@ const Classroom = () => {
 
                     <p>{album.albumName}</p>
                     <p>{album.notes}</p>
+                    <button
+                      type="button"
+                      onClick={() => handleAlbumDelete(album._id)}
+                      className="absolute right-5 top-5 text-2xl text-red-500">
+                      <RiDeleteBin6Line />
+                    </button>
                   </div>
                 );
               })}
             </div>
           ) : (
-            <p>No Album Found</p>
+            <p className="my-5 text-center">No Album Found</p>
           )}
         </div>
         <CreateAlbumModal

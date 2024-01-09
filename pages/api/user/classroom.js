@@ -42,4 +42,13 @@ export default async function handler(req, res) {
       message: "Album created successfully",
     });
   }
+
+  if (req.method === "DELETE") {
+    const { id } = req.query;
+    const album = await Classroom.deleteOne({ _id: id });
+    return res.status(200).send({
+      error: false,
+      message: "Album Deleted",
+    });
+  }
 }

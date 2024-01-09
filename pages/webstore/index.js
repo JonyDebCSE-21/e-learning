@@ -79,20 +79,45 @@ import { setUser } from "@/redux/slice/userSlice/userSlice";
 // ];
 export default function WebStore() {
   const [products, setProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
   const dispatch = useDispatch();
   useEffect(() => {
     const user = localStorage.getItem("user");
     dispatch(setUser(JSON.parse(user)));
   }, []);
   useEffect(() => {
-    axios
-      .get("/api/user/product")
-      .then((res) => setProducts(res.data.products));
+    axios.get("/api/user/product").then((res) => {
+      setAllProducts(res.data.products);
+      setProducts(res.data.products);
+    });
   }, []);
+
+  const handleSearch = (e) => {
+    const search = e.target.value.trim();
+    if (search == "") {
+      setProducts(allProducts);
+    } else {
+      const filtered = products.filter((product) => {
+        const title = product.title.toLowerCase();
+        if (title.includes(search.toLocaleLowerCase())) {
+          return product;
+        }
+      });
+      setProducts(filtered);
+    }
+  };
+
   return (
     <Layout>
       <OverviewSlider></OverviewSlider>
-
+      <div className="w-full flex justify-center my-4">
+        <input
+          type="text"
+          placeholder="Search here"
+          onChange={(e) => handleSearch(e)}
+          className="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 my-4">
         {products.map((product) => {
           return (
