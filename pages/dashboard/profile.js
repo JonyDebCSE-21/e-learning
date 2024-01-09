@@ -406,7 +406,7 @@ const Profile = () => {
                           className="flex items-center ">
                           <BiSolidLike
                             className={`text-lg mr-2 ${
-                              post.like.includes(user._id) ? "text-white" : ""
+                              post.like.includes(user?._id) ? "text-white" : ""
                             } `}
                           />
                           {post.like.length}

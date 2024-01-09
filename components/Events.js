@@ -48,7 +48,7 @@ const Events = () => {
                     addInterestedEvent(event._id);
                   }}
                   className="bg-blue-600 px-3 py-1 block cursor-pointer rounded-md text-white font-bold">
-                  {event?.interested?.includes(user._id)
+                  {event?.interested?.includes(user?._id)
                     ? "Not Interested"
                     : "Interested"}
                 </span>{" "}

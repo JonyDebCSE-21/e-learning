@@ -15,7 +15,7 @@ const DashboardLayout = ({ children }) => {
     if (!user) {
       router.push("/auth/Signin");
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     const user = localStorage.getItem("user");
