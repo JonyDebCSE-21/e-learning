@@ -65,7 +65,7 @@ const Events = () => {
                       Interested
                     </span>{" "}
                     <span className="text-green-600 ml-2 font-bold">
-                      {event.interested ? event.interested : 0} person
+                      {event?.interested?.length} person
                     </span>
                   </div>
                 </div>
