@@ -44,7 +44,7 @@ export default async function handler(req, res) {
         friendRequestSent: userDoc.friendRequestSent,
         friendRequestRecieved: userDoc.friendRequestRecieved,
       },
-      message: "User created successfully",
+      message: "Account creation successful",
     });
   }
 }

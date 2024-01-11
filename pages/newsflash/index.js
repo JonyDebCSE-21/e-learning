@@ -163,15 +163,15 @@ const Newsflash = () => {
 
   return (
     <Layout>
-      <div className="flex-basis-47 bg-gray-200  w-3/5 mx-auto">
-        <div className="w-full bg-white rounded p-5 text-gray-700">
+      <div className="flex-basis-47 bg-gray-200  w-4/6 mx-auto">
+        <div className="w-full bg-[#160030] text-[#A300B0] rounded p-4 my-5">
           <div className="flex items-center">
             <img
               src={user?.profilePic ? user.profilePic : "/images/children.jpg"}
               className="w-12 h-12 rounded-full mr-2"
             />
             <div>
-              <p className="font-semibold mb-0 text-gray-700">{user?.name}</p>
+              <p className="font-semibold mb-0 text-yellow-300">{user?.name}</p>
               <small className="text-xs">
                 Public <i className="fas fa-caret-down"></i>
               </small>
@@ -252,7 +252,7 @@ const Newsflash = () => {
           </form>
         </div>
         {posts?.map((post) => (
-          <div className="bg-white rounded p-4 my-5">
+          <div className="bg-[#160030] text-[#A300B0] rounded p-4 my-5">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <img
@@ -264,10 +264,10 @@ const Newsflash = () => {
                   className="w-10 h-10 rounded-full mr-2"
                 />
                 <div>
-                  <p className="font-semibold mb-0 text-gray-700">
+                  <p className="font-semibold mb-0 text-yellow-300">
                     {post?.user?.name}
                   </p>
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-white">
                     {dateFormat(post?.createdAt)}
                   </span>
                 </div>
@@ -276,17 +276,7 @@ const Newsflash = () => {
                 <i className="fas fa-ellipsis-v"></i>
               </a>
             </div>
-            <p className="text-gray-500 text-lg mb-5">
-              {post?.caption}
-              {/* <span className="text-gray-700 font-semibold">EduQuanta</span>
-              Spread your thoughts to our community.
-              <a href="#" className="text-blue-500">
-                #Easy Tutorials
-              </a>
-              <a href="#" className="text-blue-500">
-                #e-learning platform
-              </a> */}
-            </p>
+            <p className="text-gray-500 text-lg mb-5">{post?.caption}</p>
             {post.photos && (
               <img
                 src={post.photos}
@@ -314,19 +304,23 @@ const Newsflash = () => {
                 <button
                   type="button"
                   onClick={() => handleLike(post._id)}
-                  className="flex items-center ">
+                  className="flex items-center">
                   <BiSolidLike
                     className={`text-lg mr-2 ${
-                      post.like.includes(user?._id) ? "text-[#A5009B]" : ""
+                      post.like.includes(user._id) ? "text-yellow-300" : ""
                     } `}
                   />
-                  {post.like.length}
+                  <p className="Like">Like</p>
+                  <span className="ml-1">{post.like.length}</span>
                 </button>
 
                 <button
-                  className="flex items-center "
+                  className="flex items-center"
                   onClick={() => setOpenModal({ id: post._id, value: true })}>
                   <FaCommentAlt className="text-lg mr-2" />
+                  <p className="comment" style={{ marginRight: "8px" }}>
+                    Comment
+                  </p>
                   {post.comments.length}
                 </button>
                 <div className="flex items-center mr-5 mb-2">
@@ -360,7 +354,7 @@ const Newsflash = () => {
                   <input
                     type="submit"
                     value="Post"
-                    className="bg-blue-500 p-1 rounded-lg cursor-pointer"
+                    className="bg-[#A5009B] text-white p-1 rounded-lg cursor-pointer"
                   />
                 </form>
               </div>

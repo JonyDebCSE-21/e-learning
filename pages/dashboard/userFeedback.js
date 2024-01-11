@@ -15,7 +15,7 @@ const userFeedback = () => {
       <h1 className="text-2xl font-bold text-[#A300B0]">Users Experiences:</h1>
       <div className="relative overflow-x-auto max-h-screen overflow-y-auto mt-5">
         <table className="w-full text-sm text-left rtl:text-right text-white dark:text-gray-400">
-          <thead className="text-xs sticky top-0 text-white uppercase bg-[#1F82BA] dark:bg-gray-700 dark:text-gray-400">
+          <thead className="textarea-xl sticky top-0 text-white uppercase bg-[#1F82BA] dark:bg-blue-600 dark:text-white">
             <tr>
               <th scope="col" className="px-6 py-3 text-center">
                 User Name

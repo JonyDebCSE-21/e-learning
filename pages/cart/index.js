@@ -357,7 +357,7 @@ const Cart = () => {
           </>
         ) : (
           <p className="text-secondary text-2xl text-center col-span-2">
-            Add Something to Cart
+            Your cart is empty. Add something to your cart.
           </p>
         )}
       </div>

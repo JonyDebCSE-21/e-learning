@@ -48,7 +48,7 @@ export default async function handler(req, res) {
               friendRequestSent: user.friendRequestSent,
               friendRequestRecieved: user.friendRequestRecieved,
             },
-            message: "Log in successfull",
+            message: "Login successful",
           });
       }
       return res.status(400).send({ error: true, message: "User not found" });

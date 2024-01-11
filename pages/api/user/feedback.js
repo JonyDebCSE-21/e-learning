@@ -26,6 +26,7 @@ export default async function handler(req, res) {
     return res.status(200).send({
       error: false,
       feedbacks: feedbackDoc,
+      message: "Thanks for your feedback",
     });
   }
 }

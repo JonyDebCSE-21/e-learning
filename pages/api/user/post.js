@@ -112,7 +112,7 @@ export default async function handeler(req, res) {
       return res.status(200).send({
         error: false,
         comments: comments,
-        message: "Comment posted successfull",
+        message: "Comment posted",
       });
     } else {
       const update = await Post.updateOne(
@@ -124,7 +124,7 @@ export default async function handeler(req, res) {
       return res.status(200).send({
         error: false,
         comments: comments,
-        message: "Comment posted successfull",
+        message: "Comment posted",
       });
     }
   }
@@ -134,7 +134,7 @@ export default async function handeler(req, res) {
     const course = await Post.deleteOne({ _id: id });
     return res.status(200).send({
       error: false,
-      message: "Post Deleted Successful",
+      message: "Post Deleted",
     });
   }
 }

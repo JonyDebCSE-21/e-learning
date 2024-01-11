@@ -21,7 +21,7 @@ const LeftSideNavbar = () => {
     <>
       {/* <button onClick={() => setShowLeftNav(!showLeftNav)}>Show</button>
       {showLeftNav && ( */}
-      <div className="sticky top-0  h-full text-black mt-0.5 overflow-y-visible pt-3">
+      <div className="sticky top-0 bg-gray-800 h-full text-white mt-0.5 overflow-y-visible pt-3">
         <div
           onClick={() => {
             router.push("/dashboard/profile");
