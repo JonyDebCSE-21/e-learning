@@ -2,10 +2,10 @@ import React from "react";
 
 const OverviewSlider = () => {
   return (
-    <div className="carousel h-60 w-full mb-30 rounded-md">
+    <div className="carousel h-60 w-full mb-4 rounded-md relative">
       <div id="slide1" className="carousel-item relative w-full">
-        <img src="/images/Carousel1.gif" className="w-full" />
-        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+        <img src="/images/Carousel1.gif" className="w-full" alt="Slide 1" />
+        <div className="absolute left-5 right-5 top-0 bottom-0 flex items-center justify-between">
           <a href="#slide5" className="btn btn-circle hover:bg-white">
             ❮
           </a>
@@ -17,8 +17,8 @@ const OverviewSlider = () => {
         </div>
       </div>
       <div id="slide2" className="carousel-item relative w-full">
-        <img src="/images/Carousel2.jpg" className="w-full" />
-        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+        <img src="/images/Carousel2.jpg" className="w-full" alt="Slide 2" />
+        <div className="absolute left-5 right-5 top-0 bottom-0 flex items-center justify-between">
           <a href="#slide1" className="btn btn-circle hover:bg-white">
             ❮
           </a>
@@ -30,8 +30,8 @@ const OverviewSlider = () => {
         </div>
       </div>
       <div id="slide3" className="carousel-item relative w-full">
-        <img src="/images/Carousel3.jpg" className="w-full" />
-        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+        <img src="/images/Carousel3.jpg" className="w-full" alt="Slide 3" />
+        <div className="absolute left-5 right-5 top-0 bottom-0 flex items-center justify-between">
           <a href="#slide2" className="btn btn-circle hover:bg-white">
             ❮
           </a>
@@ -43,8 +43,8 @@ const OverviewSlider = () => {
         </div>
       </div>
       <div id="slide4" className="carousel-item relative w-full">
-        <img src="/images/Carousel4.jpg" className="w-full" />
-        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+        <img src="/images/Carousel4.jpg" className="w-full" alt="Slide 4" />
+        <div className="absolute left-5 right-5 top-0 bottom-0 flex items-center justify-between">
           <a href="#slide3" className="btn btn-circle hover:bg-white">
             ❮
           </a>
@@ -56,8 +56,8 @@ const OverviewSlider = () => {
         </div>
       </div>
       <div id="slide5" className="carousel-item relative w-full">
-        <img src="/images/Carousel5.jpg" className="w-full" />
-        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+        <img src="/images/Carousel5.jpg" className="w-full" alt="Slide 5" />
+        <div className="absolute left-5 right-5 top-0 bottom-0 flex items-center justify-between">
           <a href="#slide4" className="btn btn-circle hover:bg-white">
             ❮
           </a>
