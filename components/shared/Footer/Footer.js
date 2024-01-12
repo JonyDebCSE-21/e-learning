@@ -106,7 +106,8 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    // href="/footerPage/joinasteacher"
+                    href="https://docs.google.com/forms/d/1kxv03iyfi0RphwjA1EPOpOQcz8Ql0j_mCMFkEkLlZ8o/edit"
                     className="text-sm font-medium hover:text-green transition-all duration-300 ease-in-out">
                     Join as a Teacher
                   </a>

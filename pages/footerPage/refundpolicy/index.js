@@ -33,12 +33,12 @@ const refund = () => {
       <h2 className="text-2xl font-bold mb-6"> 4. Refund Process </h2>
       <p className="text-justify mb-4">
         4.1 E-Learning: Customers requesting a refund for an e-learning course
-        must contact our customer support team at onlineworkhour24@gmail.com
-        within the specified refund period. Refunds will be processed using the
+        must contact our customer support team at elearningpciu@gmail.com within
+        the specified refund period. Refunds will be processed using the
         original payment method within 5 business days after approval.
         <br /> 4.2 E-Commerce: Customers must initiate a refund request through
         their [user account/order history] or contact our customer support team
-        at onlineworkhour24@gmail.com within the specified refund period. For
+        at elearningpciu@gmail.com within the specified refund period. For
         physical products, the customer is responsible for return shipping costs
         unless the product is defective or the return is due to an error on our
         part. Refunds will be processed using the original payment method within
@@ -52,7 +52,7 @@ const refund = () => {
       <h2 className="text-2xl font-bold mb-6">6. Contact Information</h2>
       <p className="text-justify mb-4">
         For any questions or concerns regarding our refund policy, please
-        contact our customer support team at onlineworkhour24@gmail.com.
+        contact our customer support team at elearningpciu@gmail.com.
       </p>
       <h2 className="text-2xl font-bold mb-6">
         {" "}

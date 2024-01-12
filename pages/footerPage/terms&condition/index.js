@@ -86,8 +86,8 @@ const condition = () => {
 
       <p className="text-justify mb-4">
         a. For any questions about these Terms and Conditions, please contact us
-        at onlineworkhour24@gmail.com . By using the Website, you acknowledge
-        that you have read, understood, and agree to be bound by these Terms and
+        at elearningpciu@gmail.com. By using the Website, you acknowledge that
+        you have read, understood, and agree to be bound by these Terms and
         Conditions.
       </p>
     </div>

@@ -79,14 +79,14 @@ const Header = () => {
         </div>
 
         {/* <Input /> */}
-
-        <div className="flex items-center mb-2">
+        <div className="flex items-center mb-2 transition-all duration-300 ease-in-out transform hover:scale-105">
           <Link href="/webstore" className="text-white flex items-center">
             <PiShoppingBagOpenFill className="text-lg mr-1" />
             <h2 className="text-lg mb-0">Webstore</h2>
           </Link>
         </div>
-        <div className="flex items-center mb-2">
+
+        <div className="flex items-center mb-2 transition-all duration-300 ease-in-out transform hover:scale-105">
           <Link href="/cart" className="text-white flex items-center">
             <FaShoppingCart className="text-lg mr-1" />
             <div className="relative ">
@@ -98,7 +98,7 @@ const Header = () => {
           </Link>
         </div>
 
-        <div className="flex items-center mb-2">
+        <div className="flex items-center mb-2 transition-all duration-300 ease-in-out transform hover:scale-105">
           <Link href="/events" className="text-white flex items-center">
             <MdEventRepeat className="text-lg mr-1" />
             <h2 className="text-lg mb-0">Events</h2>
@@ -283,12 +283,6 @@ const Header = () => {
                       </li>
                     </>
                   )}
-                  {/* <li className="hover:bg-blue-700">
-                    <Link href="#" className="text-white flex items-center">
-                      <CgLogOut className="text-lg mr-1" />
-                      <h2 className="text-sm mb-0">Log Out</h2>
-                    </Link>
-                  </li> */}
                   {user && (
                     <>
                       <hr />

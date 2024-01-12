@@ -10,7 +10,7 @@ const privacy = () => {
         are committed to protecting your personal information and your right to
         privacy. If you have any questions or concerns about our policy, or our
         practices with regards to your personal information, please contact us
-        at onlineworkhour24@gmail.com.
+        at elearningpciu@gmail.com.
       </p>
       <h2 className="text-2xl font-bold mt-6 mb-4">Information We Collect</h2>
       <p className="text-justify  mb-4">
@@ -71,7 +71,7 @@ const privacy = () => {
         You havethe right to access, correct, or delete your personal
         information. You can also choose to opt-out of certain communications or
         withdraw your consent for data processing. Please contact us at
-        onlineworkhour24@gmail.com for assistance with these requests.
+        elearningpciu@gmail.com for assistance with these requests.
       </p>
       <h2 className="text-2xl font-bold mt-6 mb-4">
         Updates to This Privacy Policy
@@ -85,9 +85,9 @@ const privacy = () => {
       <p className="text-justify  mb-4">
         If you have any questions or concerns about our privacy policy, please
         contact us at onlineworkhour24@gmail.com. Thank you for choosing
-        onlineworkhour24@gmail.com for your educational needs. We are dedicated
-        to providing a secure and enriching online experience. Please remember
-        that this is a general template, and it's important to adapt it to your
+        elearningpciu@gmail.com for your educational needs. We are dedicated to
+        providing a secure and enriching online experience. Please remember that
+        this is a general template, and it's important to adapt it to your
         specific business practices and legal requirements. Additionally,
         consulting with legal professionals is recommended to ensure compliance
         with applicable privacy laws.
