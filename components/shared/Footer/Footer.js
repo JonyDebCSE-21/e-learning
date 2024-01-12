@@ -1,6 +1,8 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { SiMessenger } from "react-icons/si";
+import { MdEmail } from "react-icons/md";
+import { BiSolidPhoneCall } from "react-icons/bi";
 import { IoSend } from "react-icons/io5";
 import { FaRegWindowClose } from "react-icons/fa";
 import { useRouter } from "next/router";
@@ -155,9 +157,10 @@ const Footer = () => {
             <h3 className="mb-3 text-lg font-semibold text-blue-500 hover:text-green-500 transition-all duration-300 ease-in-out">
               Contact with us
             </h3>
-            <p className="mb-2 text-base font-normal">
-              Mobile:{" "}
-              <span>
+            <p className="mb-2 text-base font-normal flex items-center">
+              <BiSolidPhoneCall className="text-2xl mr-2 align-middle" />
+              <span className="align-middle">
+                Mobile:{" "}
                 <a
                   className="text-green hover:underline"
                   href="tel:+8801740925374">
@@ -165,7 +168,8 @@ const Footer = () => {
                 </a>
               </span>
             </p>
-            <p className="mb-2 text-base font-normal">
+            <p className="mb-2 text-base font-normal flex items-center">
+              <MdEmail className="text-2xl mr-2" />
               Email:{" "}
               <span className="text-green">onlineworkhour24@gmail.com</span>
             </p>

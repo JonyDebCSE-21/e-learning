@@ -15,6 +15,7 @@ import { CgProfile } from "react-icons/cg";
 import { IoSettingsSharp } from "react-icons/io5";
 import { MdOutlineFeedback } from "react-icons/md";
 import { PiSignInBold } from "react-icons/pi";
+import { PiShoppingBagOpenFill } from "react-icons/pi";
 import { IoIosCreate } from "react-icons/io";
 import { CgLogOut } from "react-icons/cg";
 import { MdNotificationImportant } from "react-icons/md";
@@ -80,6 +81,12 @@ const Header = () => {
         {/* <Input /> */}
 
         <div className="flex items-center mb-2">
+          <Link href="/webstore" className="text-white flex items-center">
+            <PiShoppingBagOpenFill className="text-lg mr-1" />
+            <h2 className="text-lg mb-0">Webstore</h2>
+          </Link>
+        </div>
+        <div className="flex items-center mb-2">
           <Link href="/cart" className="text-white flex items-center">
             <FaShoppingCart className="text-lg mr-1" />
             <div className="relative ">
@@ -90,17 +97,11 @@ const Header = () => {
             </div>
           </Link>
         </div>
-        <div className="flex items-center mb-2">
-          <Link href="/webstore" className="text-white flex items-center">
-            <FaShoppingCart className="text-lg mr-1" />
-            <h2 className="text-lg mb-0">Webstore</h2>
-          </Link>
-        </div>
 
         <div className="flex items-center mb-2">
-          <Link href="/Classroom" className="text-white flex items-center">
-            <SiGoogleclassroom className="text-lg mr-1" />
-            <h2 className="text-lg mb-0">Classroom</h2>
+          <Link href="/events" className="text-white flex items-center">
+            <MdEventRepeat className="text-lg mr-1" />
+            <h2 className="text-lg mb-0">Events</h2>
           </Link>
         </div>
         {/* <div className="flex items-center mb-2">
@@ -164,10 +165,10 @@ const Header = () => {
                   <hr />
                   <li className="hover:bg-blue-700">
                     <Link
-                      href="/events"
+                      href="/Classroom"
                       className="text-white flex items-center">
-                      <MdEventRepeat className="text-lg mr-1" />
-                      <h2 className="text-sm mb-0">Events</h2>
+                      <SiGoogleclassroom className="text-lg mr-1" />
+                      <h2 className="text-lg mb-0">Classroom</h2>
                     </Link>
                   </li>
                 </div>

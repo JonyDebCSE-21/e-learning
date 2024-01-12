@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
+import { HiEmojiSad } from "react-icons/hi";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { setCart } from "@/redux/slice/cartSlice/cartSlice";
@@ -357,6 +358,7 @@ const Cart = () => {
           </>
         ) : (
           <p className="text-secondary text-2xl text-center col-span-2">
+            <HiEmojiSad className="inline-block mr-2 text-9xl" /> <hr />
             Your cart is empty. Add something to your cart.
           </p>
         )}
