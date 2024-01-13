@@ -134,7 +134,7 @@ const Classroom = () => {
             style={{ backgroundColor: coverColor }}
             className="w-full h-48 rounded-md mb- relative">
             <img
-              src="/images/feed-image.png"
+              src="/images/classroom.gif"
               className="w-full h-full object-cover rounded-md"
               alt="Classroom Cover"
             />
