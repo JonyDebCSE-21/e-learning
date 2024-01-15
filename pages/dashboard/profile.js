@@ -110,6 +110,10 @@ const Profile = () => {
 
   const handleComment = (e, postId) => {
     e.preventDefault();
+    if (comment.value == "") {
+      toast.error("Please enter a comment");
+      return;
+    }
     axios
       .put("/api/user/post", {
         userId: user._id,

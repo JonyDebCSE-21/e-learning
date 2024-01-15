@@ -56,12 +56,16 @@ const Watch = () => {
   useEffect(() => {
     const post = videoLinks.find((post) => post._id == openModal.id);
     if (post) {
-      setComments(post.comments);
+      setComments(post);
     }
   }, [openModal]);
 
   const handleComment = (e, postId) => {
     e.preventDefault();
+    if (comment.value == "") {
+      toast.error("Please enter a comment");
+      return;
+    }
     axios
       .put("/api/user/post", {
         userId: user._id,
