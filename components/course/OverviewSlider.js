@@ -2,7 +2,7 @@ import React from "react";
 
 const OverviewSlider = () => {
   return (
-    <div className="carousel h-60 w-full mb-4 rounded-md relative">
+    <div className="carousel h-60 w-[90%] mx-auto mb-4 rounded-md relative">
       <div id="slide1" className="carousel-item relative w-full">
         <img src="/images/Carousel1.gif" className="w-full" alt="Slide 1" />
         <div className="absolute left-5 right-5 top-0 bottom-0 flex items-center justify-between">
