@@ -6,12 +6,13 @@ export default async function handler(req, res) {
   await dbConnect();
 
   if (method === "POST") {
-    const { title, date, image } = req.body;
+    const { title, date, image, description } = req.body;
 
     const eventDoc = await Event.create({
       title,
       date,
       image,
+      description,
     });
 
     return res.status(200).send({

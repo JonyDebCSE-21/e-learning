@@ -1,10 +1,14 @@
 import Course from "@/components/course/Course";
 import OverviewSlider from "@/components/course/OverviewSlider";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { setUser } from "@/redux/slice/userSlice/userSlice";
 import axios from "axios";
 import Layout from "@/components/layout/Layout";
+import { useRouter } from "next/router";
+import { SiMessenger } from "react-icons/si";
+import { FaRegWindowClose } from "react-icons/fa";
+import { IoSend } from "react-icons/io5";
 
 export default function Home() {
   const [courses, setCourses] = useState([]);

@@ -29,7 +29,7 @@ const Profile = () => {
   const [shareCount, setShareCount] = useState(30);
 
   // -----------------------------------------------
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState(null);
   const [file, setFile] = useState(null);
   const [filePreview, setFilePreview] = useState(null);
   const [userPosts, setUserPosts] = useState([]);
@@ -57,14 +57,17 @@ const Profile = () => {
   useEffect(() => {
     const post = userPosts.find((post) => post._id == openModal.id);
     if (post) {
-      setComments(post.comments);
+      setComments(post);
     }
   }, [openModal]);
   const handlePostSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("image", file);
-
+    if (!status && !file && !videoLink) {
+      console.log("Error");
+      return toast.error("Please enter a status or a video or a photo");
+    }
     fetch(imgUploadUrl, {
       method: "POST",
       body: formData,
@@ -79,7 +82,7 @@ const Profile = () => {
             photos: data?.data?.display_url ? data?.data.display_url : "",
           })
           .then((res) => {
-            setUserPosts([...userPosts, res.data.post]);
+            setUserPosts([res.data.post, ...userPosts]);
             toast.success(res.data.message);
             setFilePreview(null);
             setStatus("");
@@ -89,7 +92,7 @@ const Profile = () => {
           })
           .catch((err) => {
             console.log(err);
-            setStatus("");
+            setStatus(null);
             setFile(null);
             setVideoLink(null);
             setVideoInput(false);
@@ -100,7 +103,7 @@ const Profile = () => {
   useEffect(() => {
     if (user) {
       axios.get(`/api/user/post?id=${user._id}`).then((res) => {
-        setUserPosts(res.data.post);
+        setUserPosts(res.data.post.reverse());
       });
     }
   }, [user]);

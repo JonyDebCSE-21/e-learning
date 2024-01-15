@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../shared/Navbar/Header";
 import Link from "next/link";
 import { AiFillPlusCircle } from "react-icons/ai";
@@ -20,17 +20,30 @@ const DashboardLayout = ({ children }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userReducer.user);
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!user) {
-      router.push("/auth/Signin");
+    if (loading) {
+      if (!user) {
+        router.push("/auth/Signin");
+      }
     }
   }, [user]);
 
   useEffect(() => {
+    setLoading(true);
     const user = localStorage.getItem("user");
     dispatch(setUser(JSON.parse(user)));
+    setLoading(false);
   }, []);
+
+  if (loading) {
+    return (
+      <div className="h-screen w-full flex justify-center items-center">
+        <h1 className="text-white text-3xl">Loading...</h1>
+      </div>
+    );
+  }
 
   return (
     <>

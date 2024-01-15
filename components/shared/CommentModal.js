@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { useSelector } from "react-redux";
 
 const CommentModal = ({
   openModal,
@@ -11,6 +12,7 @@ const CommentModal = ({
   handleDeleteComment,
 }) => {
   const [users, setUsers] = useState([]);
+  const user = useSelector((state) => state.userReducer.user);
 
   useEffect(() => {
     axios
@@ -24,7 +26,7 @@ const CommentModal = ({
       {openModal.id && (
         <div
           onClick={(e) => {
-            setOpenModal(false);
+            setOpenModal({ id: null, value: false });
           }}
           className={`fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-40 transition-opacity duration-700 ease-in-out ${
             openModal.id ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -32,8 +34,8 @@ const CommentModal = ({
           <div
             onClick={(e) => e.stopPropagation()}
             className=" bg-[#F8F5FA] h-auto border-none rounded-[20px] py-4 px-6">
-            {comments.length > 0 ? (
-              comments.map((comment) => {
+            {comments?.comments?.length > 0 ? (
+              comments?.comments?.map((comment) => {
                 return (
                   <div
                     key={comment._id}
@@ -45,7 +47,11 @@ const CommentModal = ({
                             key={user._id}
                             className="flex space-x-4 items-center ">
                             <img
-                              src={user.profilePic}
+                              src={
+                                user?.profilePic
+                                  ? user.profilePic
+                                  : "/images/user.png"
+                              }
                               alt=""
                               className="w-10 h-10 rounded-full"
                             />
@@ -57,13 +63,16 @@ const CommentModal = ({
                         );
                       }
                     })}
-                    <button
-                      onClick={() =>
-                        handleDeleteComment(comment._id, openModal.id)
-                      }
-                      className="text-red-500">
-                      <RiDeleteBin6Line />
-                    </button>
+                    {(comment.userId == user._id ||
+                      comments?.user?._id == user._id) && (
+                      <button
+                        onClick={() =>
+                          handleDeleteComment(comment._id, openModal.id)
+                        }
+                        className="text-red-500">
+                        <RiDeleteBin6Line />
+                      </button>
+                    )}
                   </div>
                 );
               })

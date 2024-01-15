@@ -23,7 +23,7 @@ const Newsflash = () => {
   const [openModal, setOpenModal] = useState({ id: "", value: false });
   const [comments, setComments] = useState([]);
 
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState(null);
   const [file, setFile] = useState(null);
   const [filePreview, setFilePreview] = useState(null);
   const [videoInput, setVideoInput] = useState(false);
@@ -55,7 +55,7 @@ const Newsflash = () => {
     axios
       .get("/api/user/post")
       .then((res) => {
-        setPosts(res.data.post);
+        setPosts(res.data.post.reverse());
       })
       .catch((err) => {
         console.log(err);
@@ -65,7 +65,7 @@ const Newsflash = () => {
   useEffect(() => {
     const post = posts.find((post) => post._id == openModal.id);
     if (post) {
-      setComments(post.comments);
+      setComments(post);
     }
   }, [openModal]);
 
@@ -73,6 +73,10 @@ const Newsflash = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("image", file);
+    if (!status && !file && !videoLink) {
+      console.log("Error");
+      return toast.error("Please enter a status or a video or a photo");
+    }
 
     fetch(imgUploadUrl, {
       method: "POST",
@@ -88,7 +92,8 @@ const Newsflash = () => {
             photos: data?.data?.display_url ? data?.data.display_url : "",
           })
           .then((res) => {
-            setPosts([...posts, res.data.post]);
+            const newPost = { user: user, ...res.data.post };
+            setPosts([newPost, ...posts]);
             toast.success(res.data.message);
             setFilePreview(null);
             setStatus("");
@@ -167,7 +172,7 @@ const Newsflash = () => {
         <div className="w-full bg-[#160030] text-[#A300B0] rounded p-4 my-5">
           <div className="flex items-center">
             <img
-              src={user?.profilePic ? user.profilePic : "/images/children.jpg"}
+              src={user?.profilePic ? user.profilePic : "/images/user.png"}
               className="w-12 h-12 rounded-full mr-2"
             />
             <div>
@@ -259,7 +264,7 @@ const Newsflash = () => {
                   src={
                     post?.user?.profilePic
                       ? post?.user?.profilePic
-                      : "/images/children.jpg"
+                      : "/images/user.png"
                   }
                   className="w-10 h-10 rounded-full mr-2"
                 />

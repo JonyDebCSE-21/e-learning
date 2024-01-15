@@ -7,10 +7,30 @@ export default async function handeler(req, res) {
   if (req.method === "GET") {
     const { id } = req.query;
     if (id) {
-      const post = await Post.find({ userId: id });
+      const user = await User.findOne({ _id: id });
+      const posts = await Post.find({ userId: id });
+      let allPost = [];
+      await Promise.all(
+        posts.map(async (post) => {
+          const newPost = {
+            user: user,
+            _id: post._id,
+            userId: post.userId,
+            caption: post.caption,
+            photos: post.photos,
+            videos: post.videos,
+            like: post.like,
+            unlike: post.unlike,
+            comments: post.comments,
+            createdAt: post.createdAt,
+            updatedAt: post.updatedAt,
+          };
+          allPost.push(newPost);
+        })
+      );
       return res.status(200).send({
         error: false,
-        post,
+        post: allPost,
       });
     } else {
       const posts = await Post.find({});

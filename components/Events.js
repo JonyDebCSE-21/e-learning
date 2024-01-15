@@ -45,6 +45,7 @@ const Events = () => {
             </div>
             <div className="flex flex-col gap-2 justify-evenly">
               <div className="text-lg">Event: {event?.title}</div>
+              <div className="text-lg">{event?.description}</div>
               <div>Date: {new Date(event?.date).toLocaleDateString()}</div>
               <div>
                 <span

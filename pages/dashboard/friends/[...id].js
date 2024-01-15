@@ -4,6 +4,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { unmountComponentAtNode } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 const Friends = () => {
@@ -60,7 +61,6 @@ const Friends = () => {
       })
       .catch((err) => console.log(err));
   };
-
   return (
     <DashboardLayout>
       <div className="px-3 w-full">
@@ -74,13 +74,13 @@ const Friends = () => {
             </div>
             <div>
               {user?.friends?.map((friend) => {
-                return users.map((user) => {
-                  if (user._id == friend) {
+                return users.map((u) => {
+                  if (u._id == friend) {
                     return (
-                      <div className="flex justify-between items-center  px-2 py-2 rounded-md my-3 border border-[#A5009B]">
-                        <p key={user._id} className="font-semibold text-white">
-                          {user.name}
-                        </p>
+                      <div
+                        key={u._id}
+                        className="flex justify-between items-center  px-2 py-2 rounded-md my-3 border border-[#A5009B]">
+                        <p className="font-semibold text-white">{u.name}</p>
                         <Link
                           href={`/Classroom/friendClassroom/${friend}`}
                           className="bg-green-400 p-2 rounded-lg">
