@@ -69,11 +69,11 @@ const Layout = ({ children }) => {
     }
   }, [isChatBoxShow, userChatBox]);
 
-  useEffect(() => {
-    if (chatBoxRef.current) {
-      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
-    }
-  }, [userChatBox?.conversation]);
+  // useEffect(() => {
+  //   if (chatBoxRef.current) {
+  //     chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+  //   }
+  // }, [userChatBox?.conversation]);
 
   const sendMessage = (e) => {
     setMessage("");
@@ -144,12 +144,13 @@ const Layout = ({ children }) => {
               }}
               className=" absolute -top-[550px] right-16 flex flex-col justify-between bg-[#353241] w-full h-[500px] p-3 rounded-md">
               <div className="flex justify-between items-center">
-                <span className="text-xl text-green-200 font-bold">Chat</span>
-                <span
+                <p className="text-xl text-green-200 font-bold">Chat</p>
+                <button
+                  type="button"
                   onClick={() => setIsChatBoxShow(false)}
                   className="text-xl text-white bg-black px-2 py-1 cursor-pointer">
                   <FaRegWindowClose className="text-green-200" />
-                </span>
+                </button>
               </div>
 
               {user?.role == "user" && (
@@ -158,15 +159,15 @@ const Layout = ({ children }) => {
                     chat?.conversation?.map((message) => (
                       <div className="p-2">
                         {message.sender ? (
-                          <div className="text-[10px] text-gray-300">
+                          <p className="text-[10px] text-gray-300">
                             {chat.sender.name}
-                          </div>
+                          </p>
                         ) : (
                           <p className="text-[10px] text-gray-300">Admin</p>
                         )}
-                        <div className="bg-blue-200 px-3 py-1 rounded-lg mt-1">
+                        <p className="bg-blue-200 px-3 py-1 rounded-lg mt-1">
                           {message.message}
-                        </div>
+                        </p>
                       </div>
                     ))}
                 </div>
@@ -198,17 +199,17 @@ const Layout = ({ children }) => {
                           userChatBox?.conversation.map((message) => (
                             <div key={message?._id} className="p-2 ">
                               {message?.sender ? (
-                                <div className="text-[10px] text-gray-300">
+                                <p className="text-[10px] text-gray-300">
                                   {userChatBox?.sender?.name}
-                                </div>
+                                </p>
                               ) : (
                                 <p className="text-[10px] text-gray-300">
                                   Admin
                                 </p>
                               )}
-                              <div className="bg-blue-200 px-3 py-1 rounded-lg mt-1">
+                              <p className="bg-blue-200 px-3 py-1 rounded-lg mt-1">
                                 {message?.message}
-                              </div>
+                              </p>
                             </div>
                           ))}
                       </div>

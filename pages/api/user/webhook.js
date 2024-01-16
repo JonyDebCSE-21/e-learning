@@ -48,11 +48,13 @@ export default async function handler(req, res) {
       const orderId = data.metadata.orderId;
       const cartId = data.metadata.cartId;
       const paid = data.payment_status === "paid";
+      console.log(orderId, "Order id");
+      console.log(cartId, "Cart id");
       if (orderId && paid) {
         await Order.findByIdAndUpdate(orderId, {
           paid: true,
         });
-        await Cart.findByIdAndDelete({ _id: cartId });
+        await Cart.deleteOne({ _id: cartId });
       }
       break;
 
