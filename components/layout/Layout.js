@@ -44,29 +44,45 @@ const Layout = ({ children }) => {
       const showMessage = () => {
         axios.get(url).then((res) => {
           if (user.role == "user") {
+            console.log("first");
             setChat(res.data.chat);
           } else {
             setAllChat(res.data.chat);
           }
-          // setChat(res.data.chat);
-          // setMessages(res.data.chats);
-          // if (res.data) {
-          //   setNames(res.data?.chats[0]?.name);
-          //   setTexts(res.data?.chats[0]?.text);
-          // }
         });
-
-        // setTimeout(() => {
-        //   if (user) {
-        //     showMessage();
-        //   }
-        // }, 1000);
       };
       showMessage();
       const intervalId = setInterval(showMessage, 2000);
       return () => clearInterval(intervalId);
     }
   }, [isChatBoxShow]);
+
+  useEffect(() => {
+    // console.log(userChatBox, "User chat box");
+    if (isChatBoxShow && userChatBox) {
+      // const url =
+      //   user.role == "user"
+      //     ? `/api/user/adminChat?id=${userChatBox._id}`
+      //     : `/api/user/adminChat`;
+      const showMessage = () => {
+        axios.get(`/api/user/adminChat?id=${userChatBox._id}`).then((res) => {
+          if (user.role == "admin") {
+            const updatedChat =
+              res?.data?.chat?.conversation[
+                res.data.chat.conversation.length - 1
+              ];
+            userChatBox.conversation.push(updatedChat);
+            setUserChatBox(userChatBox);
+            // setUserChatBox(res.data.chat.conversation[res.data.chat.conversation.length-1]);
+          }
+        });
+      };
+      showMessage();
+      const intervalId = setInterval(showMessage, 2000);
+      return () => clearInterval(intervalId);
+    }
+  }, [isChatBoxShow, userChatBox]);
+  console.log(userChatBox, "User chat box");
   console.log(chat, "Chat");
 
   // console.log(isChatBoxShow);
@@ -150,7 +166,7 @@ const Layout = ({ children }) => {
     });
   };
 
-  console.log(userChatBox, "Chat");
+  // console.log(userChatBox, "Chat");
   return (
     <div className="relative">
       <Header />
@@ -233,12 +249,12 @@ const Layout = ({ children }) => {
                       <div
                         key={userChatBox._id}
                         className="border-2 h-[350px] overflow-scroll w-full m-3 scrollable-container rounded-md">
-                        {userChatBox.conversation?.length > 0 &&
-                          userChatBox.conversation.map((message) => (
-                            <div key={message._id} className="p-2">
-                              {message.sender ? (
+                        {userChatBox?.conversation?.length > 0 &&
+                          userChatBox?.conversation.map((message) => (
+                            <div key={message?._id} className="p-2">
+                              {message?.sender ? (
                                 <div className="text-[10px] text-gray-300">
-                                  {userChatBox.sender.name}
+                                  {userChatBox?.sender?.name}
                                 </div>
                               ) : (
                                 <p className="text-[10px] text-gray-300">
@@ -246,7 +262,7 @@ const Layout = ({ children }) => {
                                 </p>
                               )}
                               <div className="bg-blue-200 px-3 py-1 rounded-lg mt-1">
-                                {message.message}
+                                {message?.message}
                               </div>
                             </div>
                           ))}
