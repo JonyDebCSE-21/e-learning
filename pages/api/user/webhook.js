@@ -23,7 +23,8 @@ const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 // const endpointSecret =
 //   "whsec_2e9640b4df87e26b0b14e3ac4718ade9fd243f68f6e2b159b27b685b182e7235";
 
-const endpointSecret = "whsec_U6UJW3GdrrYpTlP8dZ7qiayiSgRm3deD";
+const endpointSecret = "whsec_Pzjahb369c3VcrLg7jK8NlGLXn6aL3eK";
+// const endpointSecret = "we_1OOOdoAhkEtg26q45u58Xp6T";
 
 export default async function handler(req, res) {
   await dbConnect();
