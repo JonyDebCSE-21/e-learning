@@ -4,7 +4,14 @@ import { AdminChat } from "@/models/AdminChat";
 export default async function handler(req, res) {
   dbConnect();
   if (req.method === "GET") {
-    const { id } = req.query;
+    const { id, chatId } = req.query;
+    if (chatId) {
+      const chat = await AdminChat.findOne({ _id: chatId });
+      return res.status(200).send({
+        error: false,
+        chat: chat,
+      });
+    }
     if (id) {
       const chat = await AdminChat.findOne({ "sender._id": id });
       if (chat) {
