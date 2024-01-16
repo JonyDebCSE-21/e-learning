@@ -20,8 +20,10 @@ import { buffer } from "micro";
 const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
-const endpointSecret =
-  "whsec_2e9640b4df87e26b0b14e3ac4718ade9fd243f68f6e2b159b27b685b182e7235";
+// const endpointSecret =
+//   "whsec_2e9640b4df87e26b0b14e3ac4718ade9fd243f68f6e2b159b27b685b182e7235";
+
+const endpointSecret = "whsec_U6UJW3GdrrYpTlP8dZ7qiayiSgRm3deD";
 
 export default async function handler(req, res) {
   await dbConnect();
@@ -48,8 +50,6 @@ export default async function handler(req, res) {
       const orderId = data.metadata.orderId;
       const cartId = data.metadata.cartId;
       const paid = data.payment_status === "paid";
-      console.log(orderId, "Order id");
-      console.log(cartId, "Cart id");
       if (orderId && paid) {
         await Order.findByIdAndUpdate(orderId, {
           paid: true,
