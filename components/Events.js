@@ -37,36 +37,53 @@ const Events = () => {
       {events.length > 0 &&
         events.map((event) => (
           <div
-            className="flex items-center justify-evenly mb-3 gap-5 border-2 border-blue-600 p-2 rounded-md"
+            className="flex flex-col md:flex-row items-start justify-evenly mb-2 gap-1 border-2 border-blue-600 p-1 rounded-2xl"
             key={event._id} // Add a unique key for each event
           >
-            <div className="w-[70px] h-[70px] rounded-full overflow-hidden">
-              <img className="w-full" src={event?.image} alt="" />
+            <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-full overflow-hidden">
+              <img
+                className="w-full h-full object-cover"
+                src={event?.image}
+                alt=""
+              />
             </div>
-            <div className="flex flex-col gap-2 justify-evenly">
-              <div className="text-lg">Event: {event?.title}</div>
-              <div className="text-lg">{event?.description}</div>
-              <div>Date: {new Date(event?.date).toLocaleDateString()}</div>
+
+            <div className="flex flex-col gap-1 justify-evenly md:ml-4">
+              {/* Set a fixed width for the title container */}
+              <div className="text-base font-bold md:w-55">{event?.title}</div>
+              <div className="text-sm font-medium ">
+                Date: {new Date(event?.date).toLocaleDateString()}
+              </div>
+              <div className="text-xs md:mt-auto">{event?.description}</div>
+
+              {/* Move the description under the image */}
+
               <div>
                 <span
                   onClick={() => {
                     setInterested(interested + 1);
                     addInterestedEvent(event._id);
                   }}
-                  className={`px-3 py-1 block cursor-pointer rounded-md font-bold ${
+                  className={`px-3 py-1 inline-block cursor-pointer rounded-md font-bold ${
                     event?.interested?.includes(user?._id)
-                      ? "bg-red-500 text-white" // Change the style for "Not Interested"
-                      : "bg-blue-600 text-white" // Change the style for "Interested"
+                      ? "bg-orange-600 text-white"
+                      : "bg-blue-600 text-white"
                   }`}>
                   {event?.interested?.includes(user?._id)
                     ? "Not Interested"
-                    : "Interested"}
-                </span>{" "}
-                <span className="text-green-600 ml-2 font-bold">
-                  {event?.interested?.length} person
+                    : "Interested"}{" "}
+                  <span
+                    className={`text-black font-bold ${
+                      event?.interested?.length > 0 ? "" : ""
+                    }`}>
+                    {event?.interested?.length}
+                  </span>
                 </span>
               </div>
+              {/* <div className="text-lg md:mt-auto">{event?.description}</div> */}
             </div>
+
+            {/* Move the description to the bottom */}
           </div>
         ))}
     </div>
