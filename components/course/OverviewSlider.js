@@ -2,9 +2,9 @@ import React from "react";
 
 const OverviewSlider = () => {
   return (
-    <div className="carousel h-48 w-[95%] ml-6 mb-1 rounded-md relative">
+    <div className="carousel h-60 w-[95%] ml-6 mb-1 rounded-md relative">
       <div id="slide1" className="carousel-item relative w-full">
-        <img src="/images/Carousel1.gif" className="w-full" alt="Slide 1" />
+        <img src="/images/Carousel1.jpg" className="w-full" alt="Slide 1" />
         <div className="absolute left-5 right-5 top-0 bottom-0 flex items-center justify-between">
           <a href="#slide5" className="btn btn-circle hover:bg-white">
             ❮

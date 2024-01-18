@@ -132,10 +132,10 @@ const Classroom = () => {
         <div className="cover photo">
           <div
             style={{ backgroundColor: coverColor }}
-            className="w-full h-48 rounded-md mb- relative">
+            className="w-full h-52 rounded-md mb- relative">
             <img
-              src="/images/classroom.gif"
-              className="w-full h-full object-cover rounded-md"
+              src="/images/classroom.jpg"
+              className="w-full h-52 object-cover rounded-md"
               alt="Classroom Cover"
             />
             {/* Customization Button */}

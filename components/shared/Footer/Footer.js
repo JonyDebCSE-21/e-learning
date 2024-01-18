@@ -11,7 +11,7 @@ import axios from "axios";
 
 const Footer = () => {
   return (
-    <div className="bg-[#000099] relative">
+    <div className="bg-[#0000CD] relative">
       <footer className="container mx-auto footer footer-center p-5 text-base-content rounded flex flex-col pt-5 md:flex-row">
         <div className="text-center">
           <a href="/" className="mb-4 flex items-center justify-left">
