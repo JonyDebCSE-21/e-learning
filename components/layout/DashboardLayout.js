@@ -86,7 +86,7 @@ const DashboardLayout = ({ children }) => {
               className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3 flex items-center"
               href="/dashboard/yourProduct">
               <MdOutlineProductionQuantityLimits className="ml-1 text-xl mr-2" />
-              Your Product
+              Your Tools
             </Link>
 
             {user && user.role == "admin" && (
@@ -107,13 +107,13 @@ const DashboardLayout = ({ children }) => {
                   className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3 flex items-center"
                   href="/dashboard/addProduct">
                   <AiFillPlusCircle className="ml-1 text-xl mr-2" />
-                  Add Product
+                  Add Tools
                 </Link>
                 <Link
                   className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3 flex items-center"
                   href="/dashboard/allProduct">
                   <FaProductHunt className="ml-1 text-xl mr-2" />
-                  All Product
+                  All Tools
                 </Link>
 
                 <Link
