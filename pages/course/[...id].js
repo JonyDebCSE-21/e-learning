@@ -89,7 +89,7 @@ const SingleCourseDetailsPage = () => {
             <span className="bg-gray-400 px-2 py-2 w-[30%] rounded text-base">
               Price: BDT {course.price}{" "}
             </span>
-            <div className="w-[20%]">
+            <div className="w-[70%] text-justify">
               <h3 className="text-lg border-b-2 border-black font-bold">
                 Description
               </h3>

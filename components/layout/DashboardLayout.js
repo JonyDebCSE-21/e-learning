@@ -88,12 +88,7 @@ const DashboardLayout = ({ children }) => {
               <MdOutlineProductionQuantityLimits className="ml-1 text-xl mr-2" />
               Your Product
             </Link>
-            <Link
-              className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3 flex items-center"
-              href="/dashboard/settings&privacy">
-              <IoSettingsSharp className="ml-1 text-xl mr-2" />
-              Settings & Privacy
-            </Link>
+
             {user && user.role == "admin" && (
               <>
                 <Link
@@ -145,14 +140,14 @@ const DashboardLayout = ({ children }) => {
                   <VscFeedback className="ml-1 text-xl mr-2" />
                   User Feedback
                 </Link>
-                <Link
-                  className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3 flex items-center"
-                  href="/dashboard/settings&privacy">
-                  <IoSettingsSharp className="ml-1 text-xl mr-2" />
-                  Settings & Privacy
-                </Link>
               </>
             )}
+            <Link
+              className="hover:border hover:border-[#D700E2] hover:p-2 hover:rounded-md px-2 py-3 flex items-center"
+              href="/dashboard/settings&privacy">
+              <IoSettingsSharp className="ml-1 text-xl mr-2" />
+              Settings & Privacy
+            </Link>
           </ul>
         </div>
       </div>
