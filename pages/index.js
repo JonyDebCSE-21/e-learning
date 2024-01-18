@@ -59,9 +59,9 @@ export default function Home() {
             className="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
-        <div className="mx-4 md:mx-0   grid grid-cols-2 md:grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 w-[95%] mx-auto">
           {courses.map((course) => (
-            <div key={course?._id}>
+            <div key={course?._id} className="flex justify-center">
               <Course course={course} />
             </div>
           ))}

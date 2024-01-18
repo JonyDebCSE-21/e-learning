@@ -37,18 +37,14 @@ const Events = () => {
       {events.length > 0 &&
         events.map((event) => (
           <div
-            className="flex flex-col md:flex-row items-start justify-evenly mb-2 gap-1 border-2 border-blue-600 p-1 rounded-2xl"
+            className="grid grid-cols-12 mb-2 gap-1 border-2 border-blue-600 p-1 rounded-2xl"
             key={event._id} // Add a unique key for each event
           >
-            <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-full overflow-hidden">
-              <img
-                className="w-full h-full object-cover"
-                src={event?.image}
-                alt=""
-              />
+            <div className="col-span-4 overflow-hidden flex justify-center items-center">
+              <img className=" w-[100px] h-[100px]" src={event?.image} alt="" />
             </div>
 
-            <div className="flex flex-col gap-1 justify-evenly md:ml-4">
+            <div className="col-span-8 flex flex-col gap-1 justify-evenly md:ml-4">
               {/* Set a fixed width for the title container */}
               <div className="text-base font-bold md:w-55">{event?.title}</div>
               <div className="text-sm font-medium ">

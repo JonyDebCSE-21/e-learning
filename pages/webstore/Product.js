@@ -49,7 +49,7 @@ const Product = ({ product, onAddToCart }) => {
     }
   };
   return (
-    <div className="relative w-[80%] h-[20rem] rounded overflow-hidden shadow-lg ml-3">
+    <div className="relative w-full max-w-[15rem] h-[20rem] rounded overflow-hidden shadow-lg ml-3">
       <Link href={`webstore/product/${product?._id}`}>
         <img
           className="w-full h-40 object-cover mb-2 cursor-pointer"
