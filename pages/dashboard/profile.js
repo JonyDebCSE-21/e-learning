@@ -210,7 +210,6 @@ const Profile = () => {
               <h2 className="text-lg mb-2">Education: {user?.education} </h2>
             </div>
             <div className="flex items-center mb-2">
-              {/* <GrUserWorker className="text-lg mr-2 text-[#A300B0]" /> */}
               <MdOutlineWorkOutline className="text-lg mr-2" />
               <h2 className="text-lg mb-2">Workplace: {user?.recentJob} </h2>
             </div>
