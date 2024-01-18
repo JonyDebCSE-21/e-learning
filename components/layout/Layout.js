@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Header from "../shared/Navbar/Header";
 import LeftSideNavbar from "../shared/Navbar/LeftSideNavbar";
-import RightSideNavbar from "../shared/Navbar/RightSideNavbar";
 import Footer from "../shared/Footer/Footer";
 import { SiMessenger } from "react-icons/si";
 import { FaRegWindowClose } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
-import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
@@ -15,25 +13,9 @@ const Layout = ({ children }) => {
   const [chat, setChat] = useState(null);
   const [allChat, setAllChat] = useState([]);
   const [userChatBox, setUserChatBox] = useState(null);
-  const [wsConnection, setWsConnection] = useState(null);
   const [message, setMessage] = useState("");
-  const [names, setNames] = useState([]);
-  const [texts, setTexts] = useState([]);
-  // const [messages, setMessages] = useState([]);
-  const router = useRouter();
   const user = useSelector((state) => state.userReducer.user);
-
-  // console.log("user from footer", user);
-
-  // useEffect(() => {
-  //   const ws = new WebSocket("ws://localhost:5001");
-  //   setWsConnection(ws);
-  //   ws.addEventListener("message", handleMessage);
-  // }, []);
-
-  // const handleMessage = (e) => {
-  //   console.log("message", e.data);
-  // };
+  const chatBoxRef = useRef(null);
 
   useEffect(() => {
     if (isChatBoxShow) {
@@ -58,82 +40,45 @@ const Layout = ({ children }) => {
   }, [isChatBoxShow]);
 
   useEffect(() => {
-    // console.log(userChatBox, "User chat box");
     if (isChatBoxShow && userChatBox) {
-      // const url =
-      //   user.role == "user"
-      //     ? `/api/user/adminChat?id=${userChatBox._id}`
-      //     : `/api/user/adminChat`;
       const showMessage = () => {
-        axios.get(`/api/user/adminChat?id=${userChatBox._id}`).then((res) => {
-          if (user.role == "admin") {
-            const updatedChat =
-              res?.data?.chat?.conversation[
-                res.data.chat.conversation.length - 1
-              ];
-            userChatBox.conversation.push(updatedChat);
-            setUserChatBox(userChatBox);
-            // setUserChatBox(res.data.chat.conversation[res.data.chat.conversation.length-1]);
-          }
-        });
+        axios
+          .get(`/api/user/adminChat?chatId=${userChatBox._id}`)
+          .then((res) => {
+            if (user.role == "admin") {
+              const updatedChat =
+                res?.data?.chat?.conversation[
+                  res.data.chat.conversation.length - 1
+                ];
+
+              const foundedChat = userChatBox.conversation.find(
+                (chat) => chat._id == updatedChat._id
+              );
+              if (foundedChat) {
+                return;
+              } else {
+                userChatBox.conversation.push(updatedChat);
+                setUserChatBox(userChatBox);
+              }
+            }
+          });
       };
       showMessage();
       const intervalId = setInterval(showMessage, 2000);
       return () => clearInterval(intervalId);
     }
   }, [isChatBoxShow, userChatBox]);
-  console.log(userChatBox, "User chat box");
-  console.log(chat, "Chat");
 
-  // console.log(isChatBoxShow);
-  const pairs = [];
-  if (names && texts) {
-    for (let i = 0; i < Math.min(names?.length, texts?.length); i++) {
-      pairs.push({ name: names[i], text: texts[i] });
-    }
-  }
-
-  const messages = pairs.reverse();
-
-  // console.log("pairs", messages);
+  // useEffect(() => {
+  //   if (chatBoxRef.current) {
+  //     chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+  //   }
+  // }, [userChatBox?.conversation]);
 
   const sendMessage = (e) => {
-    // console.log(message);
     setMessage("");
     let data;
 
-    // console.log(data);
-    // if (chat._id) {
-    //   if (user.role == "user") {
-    //     data = {
-    //       _id: chat._id,
-    //       userId: user._id,
-    //       userName: user.name,
-    //       message: message,
-    //       userChat: true,
-    //     };
-    //   } else if (user.role == "admin") {
-    //     data = {
-    //       _id: chat._id,
-    //       message: message,
-    //       adminChat: true,
-    //     };
-    //   }
-    // } else {
-    //   if (user.role == "user") {
-    //     data = {
-    //       userId: user._id,
-    //       userName: user.name,
-    //       message: message,
-    //       userChat: true,
-    //     };
-    //   } else if (user.role == "admin") {
-    //     data = {
-    //       message: message,
-    //       adminChat: true,
-    //     };
-    //   }
-    // }
     if (chat && user.role == "user") {
       data = {
         _id: chat._id,
@@ -166,7 +111,6 @@ const Layout = ({ children }) => {
     });
   };
 
-  // console.log(userChatBox, "Chat");
   return (
     <div className="relative">
       <Header />
@@ -200,12 +144,13 @@ const Layout = ({ children }) => {
               }}
               className=" absolute -top-[550px] right-16 flex flex-col justify-between bg-[#353241] w-full h-[500px] p-3 rounded-md">
               <div className="flex justify-between items-center">
-                <span className="text-xl text-green-200 font-bold">Chat</span>
-                <span
+                <p className="text-xl text-green-200 font-bold">Chat</p>
+                <button
+                  type="button"
                   onClick={() => setIsChatBoxShow(false)}
                   className="text-xl text-white bg-black px-2 py-1 cursor-pointer">
                   <FaRegWindowClose className="text-green-200" />
-                </span>
+                </button>
               </div>
 
               {user?.role == "user" && (
@@ -214,15 +159,15 @@ const Layout = ({ children }) => {
                     chat?.conversation?.map((message) => (
                       <div className="p-2">
                         {message.sender ? (
-                          <div className="text-[10px] text-gray-300">
+                          <p className="text-[10px] text-gray-300">
                             {chat.sender.name}
-                          </div>
+                          </p>
                         ) : (
                           <p className="text-[10px] text-gray-300">Admin</p>
                         )}
-                        <div className="bg-blue-200 px-3 py-1 rounded-lg mt-1">
+                        <p className="bg-blue-200 px-3 py-1 rounded-lg mt-1">
                           {message.message}
-                        </div>
+                        </p>
                       </div>
                     ))}
                 </div>
@@ -247,23 +192,24 @@ const Layout = ({ children }) => {
                   <div className="col-span-8">
                     {userChatBox && (
                       <div
+                        ref={chatBoxRef}
                         key={userChatBox._id}
                         className="border-2 h-[350px] overflow-scroll w-full m-3 scrollable-container rounded-md">
                         {userChatBox?.conversation?.length > 0 &&
                           userChatBox?.conversation.map((message) => (
-                            <div key={message?._id} className="p-2">
+                            <div key={message?._id} className="p-2 ">
                               {message?.sender ? (
-                                <div className="text-[10px] text-gray-300">
+                                <p className="text-[10px] text-gray-300">
                                   {userChatBox?.sender?.name}
-                                </div>
+                                </p>
                               ) : (
                                 <p className="text-[10px] text-gray-300">
                                   Admin
                                 </p>
                               )}
-                              <div className="bg-blue-200 px-3 py-1 rounded-lg mt-1">
+                              <p className="bg-blue-200 px-3 py-1 rounded-lg mt-1">
                                 {message?.message}
-                              </div>
+                              </p>
                             </div>
                           ))}
                       </div>
