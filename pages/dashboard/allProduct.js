@@ -26,7 +26,7 @@ const allProduct = () => {
     <DashboardLayout>
       <div>
         <h1 className="text-2xl text-[#D700E2] font-semibold mb-3 border-b border-[#A5009B] pb-4">
-          All Product
+          All Tools List
         </h1>
         <table className="w-full text-sm text-left rtl:text-right text-white dark:text-gray-400">
           <thead className="textarea-xl sticky top-0 text-white uppercase bg-[#1F82BA] dark:bg-blue-600 dark:text-white">

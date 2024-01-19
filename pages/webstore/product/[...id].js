@@ -140,7 +140,7 @@ const SignleProductPage = () => {
                       backgroundColor: "#DBDCD9",
                       boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
                     }}
-                    className="text-black min-h-[300px] mx-2 p-3 mb-10">
+                    className="text-black min-h-[100px] mx-2 p-3 mb-10">
                     <div className="flex justify-center items-center">
                       <img
                         className="w-[150px]"

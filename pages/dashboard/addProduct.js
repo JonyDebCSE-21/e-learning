@@ -61,7 +61,7 @@ const addProduct = () => {
       <div>
         <div className="border border-[#D700E2] rounded-md  p-5 m-1 ">
           <span className="text-2xl font-bolder text-white">
-            Add Your Product
+            Add Your Educational Tools
           </span>
 
           <div className="">
@@ -107,7 +107,7 @@ const addProduct = () => {
 
                 <div>
                   <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
-                    Product Photo
+                    Tools Photo
                   </label>
                   <input
                     type="file"

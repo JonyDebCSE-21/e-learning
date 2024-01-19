@@ -49,9 +49,14 @@ const Events = () => {
           {events.length > 0 &&
             events.map((event) => (
               <div className="flex items-center justify-evenly mb-3 gap-5 border-2 border-blue-600 p-2 rounded-md">
-                <div className="w-[70px] h-[70px] rounded-full overflow-hidden">
-                  <img className="w-full" src={event.image} alt="" />
+                <div className="col-span-4 overflow-hidden flex justify-center items-center">
+                  <img
+                    className=" w-[100px] h-[100px]"
+                    src={event.image}
+                    alt=""
+                  />
                 </div>
+
                 <div className="flex flex-col gap-2 justify-evenly text-white">
                   <div className="text-lg ">Event: {event.title}</div>
                   <div>Date: {event.date}</div>

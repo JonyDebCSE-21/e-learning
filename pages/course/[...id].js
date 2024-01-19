@@ -112,7 +112,7 @@ const SingleCourseDetailsPage = () => {
 
         {/* Review add section start */}
 
-        <div className="mt-5 p-2">
+        <div className="mt-2 p-2">
           <div className="p-2">
             <span className="text-xl font-bold ">Product Review</span>
 
@@ -135,14 +135,14 @@ const SingleCourseDetailsPage = () => {
                 // deviceType={this.props.deviceType}
                 dotListClass="custom-dot-list-style"
                 itemClass="carousel-item-padding-40-px"
-                className="mt-3">
+                className="mt-2">
                 {course.opinions.map((opinion) => (
                   <div
                     style={{
                       backgroundColor: "#DBDCD9",
                       boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
                     }}
-                    className="text-black min-h-[300px] mx-2 p-3 mb-10">
+                    className="text-black min-h-[100px] mx-2 p-3 mb-6">
                     <div className="flex justify-center items-center">
                       <img
                         className="w-[150px]"
@@ -156,7 +156,7 @@ const SingleCourseDetailsPage = () => {
                 ))}
               </Carousel>
             ) : (
-              <div>No reviews availableee</div>
+              <div>No reviews available</div>
             )}
           </div>
           {/* <div className="flex items-center gap-3">

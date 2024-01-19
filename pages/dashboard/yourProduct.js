@@ -25,7 +25,7 @@ const yourProduct = () => {
       <div className="text-white">
         <h1 className="text-2xl text-[#D700E2] font-semibold mb-3 border-b border-[#A5009B] pb-4">
           {" "}
-          Your Purchased Product
+          Your Purchased Tools
         </h1>
         <div className="flex flex-wrap justify-center gap-5">
           {products.map((product, index) => {
